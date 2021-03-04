@@ -1,5 +1,6 @@
 settings.xml
-logs
+/logs/
+*.log
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
