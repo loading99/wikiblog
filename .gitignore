@@ -1,5 +1,5 @@
 settings.xml
-/logs
+/logs/spring-boot-logger.log
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
