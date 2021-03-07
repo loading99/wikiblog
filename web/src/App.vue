@@ -1,35 +1,26 @@
 <template>
   <a-layout>
-    <a-layout-header class="header">
-      <div class="logo" />
-      <a-menu
-          theme="dark"
-          mode="horizontal"
-          v-model:selectedKeys="selectedKeys1"
-          :style="{ lineHeight: '64px' }"
-      >
-        <a-menu-item key="1">nav 10</a-menu-item>
-        <a-menu-item key="2">nav 20</a-menu-item>
-        <a-menu-item key="3">nav 30</a-menu-item>
-      </a-menu>
-    </a-layout-header>
+    <TheHeader></TheHeader>
     <a-layout-content style="padding: 0 0px">
-
       <router-view/>
     </a-layout-content>
-    <a-layout-footer style="text-align: center">
-      Ant Design ©2018 Created by Ant UED
-    </a-layout-footer>
+    <TheFooter></TheFooter>
   </a-layout>
 </template>
+
 <script lang="ts">
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons-vue';
 import { defineComponent, ref } from 'vue';
+import TheHeader from '@/components/TheHeader.vue';
+import TheFooter from '@/components/TheFooter.vue';
 export default defineComponent({
+  name:"app",
   components: {
     UserOutlined,
     LaptopOutlined,
     NotificationOutlined,
+    TheHeader,
+    TheFooter,
   },
   setup() {
     return {
