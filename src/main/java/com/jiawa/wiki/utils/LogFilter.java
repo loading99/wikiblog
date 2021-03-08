@@ -1,4 +1,4 @@
- package com.jiawa.wiki.filter;
+ package com.jiawa.wiki.utils;
 
  import org.slf4j.Logger;
  import org.slf4j.LoggerFactory;
