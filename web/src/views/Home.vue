@@ -110,8 +110,8 @@ export default defineComponent({
     const ebook=ref();
     // const ebook2=reactive({books:[]});
     onMounted(()=>{
-      console.log("onMounted");
-      axios.get("http://localhost:8088/ebook/search").then((response)=>{
+      console.log("onMounted5-4");
+      axios.get("/ebook/search").then((response)=>{
         const data=response.data
         ebook.value=data.content
         console.log(response)
