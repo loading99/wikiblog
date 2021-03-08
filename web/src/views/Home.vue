@@ -3,8 +3,6 @@
     <a-layout-sider width="200" style="background: #fff">
       <a-menu
           mode="inline"
-          v-model:selectedKeys="selectedKeys2"
-          v-model:openKeys="openKeys"
           style="height: 100%"
       >
         <a-sub-menu key="sub1">
@@ -106,7 +104,6 @@ export default defineComponent({
       { type: 'MessageOutlined', text: '2' },
     ];
 
-    console.log("---setup---");
     const ebook=ref();
     // const ebook2=reactive({books:[]});
     onMounted(()=>{
@@ -114,7 +111,6 @@ export default defineComponent({
       axios.get("/ebook/search").then((response)=>{
         const data=response.data
         ebook.value=data.content
-        console.log(response)
       });
     });
   return {
