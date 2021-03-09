@@ -7,9 +7,18 @@
       v-model:selectedKeys="selectedKeys1"
       :style="{ lineHeight: '64px' }"
   >
-    <a-menu-item key="1">nav 1</a-menu-item>
-    <a-menu-item key="2">nav 2</a-menu-item>
-    <a-menu-item key="3">nav 3</a-menu-item>
+    <a-menu-item key="home">
+      <router-link to="/">Main</router-link>
+    </a-menu-item>
+    <a-menu-item key="ebook">
+      <router-link to="/ebooks">My Books</router-link>
+    </a-menu-item>
+    <a-menu-item key="about">
+      <router-link to="/">About me</router-link>
+    </a-menu-item>
+    <a-menu-item key="admin-ebook">
+      <router-link to="/admin-ebook">Admin</router-link>
+    </a-menu-item>
   </a-menu>
 </a-layout-header>
 </template>

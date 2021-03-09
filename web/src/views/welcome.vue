@@ -17,6 +17,15 @@
 </div>
 </template>
 
+
+<script lang="ts">
+
+import {defineComponent} from "vue";
+export default defineComponent({
+  name:'Welcome',
+})
+</script>
+
 <style>
 @import "about.css";
 </style>
