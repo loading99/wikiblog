@@ -29,9 +29,16 @@
             <a-button type="primary" @click="edit(record)">
               Edit
             </a-button>
-            <a-button type="danger">
-              Delete
-            </a-button>
+            <a-popconfirm
+                title="Cannot be recovered,Please Confirm"
+                ok-text="Yes"
+                cancel-text="cancel"
+                @confirm="handleDelete(record.id)"
+            >
+              <a-button type="danger">
+                Delete
+              </a-button>
+            </a-popconfirm>
           </a-space>
         </template>
       </a-table>
@@ -188,11 +195,28 @@ export default defineComponent({
     /**
      * Add
      */
-
     const add=()=>{
       modalVisible.value=true;
       formbook.value={};
     }
+
+    /**
+     * Delete
+     */
+    const handleDelete = (id:number) => {
+      axios.delete("/ebook/delete/"+id).then(function (response){
+        const data=response.data;
+        if (data.success){
+          // reload
+
+          handleQuery({
+            page: pagination.value.current,
+            size: pagination.value.pageSize
+          });
+        }
+      })
+    };
+
 
     onMounted(() => {
 
@@ -217,6 +241,7 @@ export default defineComponent({
       add,
 
       handleModalOk,
+      handleDelete,
 
     }
   }

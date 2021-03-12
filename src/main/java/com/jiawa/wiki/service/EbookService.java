@@ -71,4 +71,7 @@ public class EbookService {
             ebookmapper.updateByPrimaryKey(copy);
         }
     }
+    public void delete(Long id){
+        ebookmapper.deleteByPrimaryKey(id);
+    }
 }
