@@ -1,6 +1,11 @@
 <template>
   <a-layout style="padding: 24px 0; background: #fff">
     <a-layout-content :style="{ padding: '0 24px', minHeight: '280px' }">
+      <p>
+        <a-button type="primary" @click="add()" size="large">
+          Add New
+        </a-button>
+      </p>
       <a-table
           :columns="columns"
           :row-key="record => record.id"
@@ -180,6 +185,15 @@ export default defineComponent({
       formbook.value=record;
     };
 
+    /**
+     * Add
+     */
+
+    const add=()=>{
+      modalVisible.value=true;
+      formbook.value={};
+    }
+
     onMounted(() => {
 
       handleQuery({
@@ -200,7 +214,10 @@ export default defineComponent({
       modalVisible,
       modalLoading,
       edit,
+      add,
+
       handleModalOk,
+
     }
   }
 });

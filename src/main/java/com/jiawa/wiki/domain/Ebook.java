@@ -19,6 +19,12 @@ public class Ebook {
 
     private Integer voteCount;
 
+    public Ebook(){
+        this.setViewCount(0);
+        this.setDocCount(0);
+        this.setVoteCount(0);
+    }
+
     public Long getId() {
         return id;
     }

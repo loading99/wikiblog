@@ -8,6 +8,7 @@ import com.jiawa.wiki.req.EbookReq;
 import com.jiawa.wiki.req.UpdateReq;
 import com.jiawa.wiki.response.PageResp;
 import com.jiawa.wiki.utils.CopyUtil;
+import com.jiawa.wiki.utils.SnowFlake;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -24,6 +25,9 @@ public class EbookService {
 
     @Resource
     private EbookMapper ebookmapper;
+
+    @Resource
+    private SnowFlake snowflake;
 
     public PageResp<Ebook> list(){
         PageHelper.startPage(1,10);//Only Effective to the first query
@@ -52,12 +56,17 @@ public class EbookService {
     }
 
     public void update(UpdateReq req){
-        Ebook copy = CopyUtil.copy(req, Ebook.class);
-        //check if the id in the database
-        Ebook ebook = ebookmapper.selectByPrimaryKey(req.getId());
 
-        if (ObjectUtils.isEmpty(ebook.getId())){
+        Ebook copy = CopyUtil.copy(req,Ebook.class);
+        //check if the id in the database
+
+        if (ObjectUtils.isEmpty(req.getId())){
             //if ID doesn't exist
+            copy.setViewCount(0);
+            copy.setDocCount(0);
+            copy.setVoteCount(0);
+            copy.setId(snowflake.nextId());
+            ebookmapper.insert(copy);
         }else{
             ebookmapper.updateByPrimaryKey(copy);
         }
