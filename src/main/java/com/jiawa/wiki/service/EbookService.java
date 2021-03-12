@@ -5,6 +5,7 @@ import com.jiawa.wiki.domain.Ebook;
 import com.jiawa.wiki.domain.EbookExample;
 import com.jiawa.wiki.mapper.EbookMapper;
 import com.jiawa.wiki.req.EbookReq;
+import com.jiawa.wiki.req.UpdateReq;
 import com.jiawa.wiki.response.PageResp;
 import com.jiawa.wiki.utils.CopyUtil;
 import org.slf4j.Logger;
@@ -48,5 +49,17 @@ public class EbookService {
         response.setList(ebooks);
         response.setTotal(pageInfo.getTotal());
         return response;
+    }
+
+    public void update(UpdateReq req){
+        Ebook copy = CopyUtil.copy(req, Ebook.class);
+        //check if the id in the database
+        Ebook ebook = ebookmapper.selectByPrimaryKey(req.getId());
+
+        if (ObjectUtils.isEmpty(ebook.getId())){
+            //if ID doesn't exist
+        }else{
+            ebookmapper.updateByPrimaryKey(copy);
+        }
     }
 }

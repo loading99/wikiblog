@@ -13,6 +13,7 @@
           <img v-if="cover" :src="cover" alt="avatar" />
         </template>
 
+
         <template v-slot:action="{  record }">
           <a-space size="small">
             <router-link :to="'/admin/doc?ebookId=' + record.id">
@@ -32,13 +33,34 @@
     </a-layout-content>
   </a-layout>
 
+  <a-modal
+      title="Book Form"
+      v-model:visible="modalVisible"
+      :confirm-loading="modalLoading"
+      @ok="handleModalOk"
+  >
+    <a-form :model="formbook" :label-col="{ span: 6 }" :wrapper-col="{ span: 18 }">
+      <a-form-item label="Cover">
+        <a-input v-model:value="formbook.cover" />
+      </a-form-item>
+      <a-form-item label="Name">
+        <a-input v-model:value="formbook.name" />
+      </a-form-item>
+      <a-form-item label="Category">
+        <a-input v-model:value="formbook.category1Id" />
+      </a-form-item>
+      <a-form-item label="Description">
+        <a-input v-model:value="formbook.description" type="textarea" />
+      </a-form-item>
+    </a-form>
+  </a-modal>
 </template>
 
 <script lang="ts">
 import { defineComponent, onMounted, ref } from 'vue';
 import axios from 'axios';
 import { message } from 'ant-design-vue';
-// import {Tool} from "@/util/tool";
+
 
 export default defineComponent({
   name: 'AdminEbook',
@@ -63,19 +85,20 @@ export default defineComponent({
         dataIndex: 'name'
       },
       {
-        title: '分类',
+        title: 'Category',
+        dataIndex: 'category1Id',
         slots: { customRender: 'category' }
       },
       {
-        title: '文档数',
+        title: 'Doc No.',
         dataIndex: 'docCount'
       },
       {
-        title: '阅读数',
+        title: 'Views',
         dataIndex: 'viewCount'
       },
       {
-        title: '点赞数',
+        title: 'Likes',
         dataIndex: 'voteCount'
       },
       {
@@ -123,6 +146,40 @@ export default defineComponent({
       });
     };
 
+
+    /**
+     * 确认框 and Form
+     **/
+    const formbook = ref ({});
+    const modalVisible = ref(false);
+    const modalLoading = ref(false);
+    const handleModalOk = () => {
+      modalLoading.value = true;
+
+      axios.post("/ebook/save",formbook.value).then(function (response){
+
+        const data=response.data;
+        if (data.success){
+          modalVisible.value=false;
+          modalLoading.value=false;
+          // reload
+
+          handleQuery({
+            page: pagination.value.current,
+            size: pagination.value.pageSize
+          });
+        }
+      })
+    };
+
+    /**
+     * Edit
+     */
+    const edit = (record: any) => {
+      modalVisible.value = true;
+      formbook.value=record;
+    };
+
     onMounted(() => {
 
       handleQuery({
@@ -138,6 +195,12 @@ export default defineComponent({
       columns,
       loading,
       handleTableChange,
+
+      formbook,
+      modalVisible,
+      modalLoading,
+      edit,
+      handleModalOk,
     }
   }
 });
