@@ -77,18 +77,7 @@
 import { defineComponent, onMounted, ref,reactive,toRef} from 'vue';
 import axios from 'axios';
 
-const listData: Record<string, string>[] = [];
-for (let i = 0; i < 23; i++) {
-  listData.push({
-    href: 'https://www.antdv.com/',
-    title: `ant design vue part ${i}`,
-    avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-    description:
-        'Ant Design, a design language for background applications, is refined by Ant UED Team.',
-    content:
-        'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
-  });
-}
+
 export default defineComponent({
   name: 'Home',
   setup(){
@@ -96,7 +85,7 @@ export default defineComponent({
       onChange: (page: number) => {
         console.log(page);
       },
-      pageSize: 3,
+      pageSize: 4,
     };
     const actions: Record<string, string>[] = [
       { type: 'StarOutlined', text: '156' },
@@ -107,15 +96,18 @@ export default defineComponent({
     const ebook=ref();
     // const ebook2=reactive({books:[]});
     onMounted(()=>{
-      console.log("onMounted5-4");
-      axios.get("/ebook/search").then((response)=>{
+      axios.get("/ebook/search", {
+        params:{
+          page:1,
+          size:10
+        }
+      }).then((response)=>{
         const data=response.data
-        ebook.value=data.content
+        ebook.value=data.content.list
       });
     });
   return {
     ebook,
-    listData,
     pagination,
     actions,
   }

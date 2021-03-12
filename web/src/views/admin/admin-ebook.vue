@@ -23,9 +23,9 @@
             <a-button type="primary" @click="edit(record)">
               Edit
             </a-button>
-              <a-button type="danger">
-                Delete
-              </a-button>
+            <a-button type="danger">
+              Delete
+            </a-button>
           </a-space>
         </template>
       </a-table>
@@ -43,10 +43,11 @@ import { message } from 'ant-design-vue';
 export default defineComponent({
   name: 'AdminEbook',
   setup() {
+
     const ebooks = ref();
     const pagination = ref({
       current: 1,
-      pageSize: 10,
+      pageSize: 4,
       total: 0
     });
     const loading = ref(false);
@@ -87,18 +88,23 @@ export default defineComponent({
     /**
      * 数据查询
      **/
-    const handleQuery = (params: any) => {
+    const handleQuery = (p: any) => {
       loading.value = true;
       // 如果不清空现有数据，则编辑保存重新加载数据后，再点编辑，则列表显示的还是编辑前的数据
       ebooks.value = [];
-      axios.get("/ebook/list").then((response) => {
+      axios.get("/ebook/search",{
+        params: {
+          page:p.page,
+          size:p.size
+        }
+      }).then((response) => {
         loading.value = false;
         const data = response.data;
         if (data.success) {
           ebooks.value = data.content.list;
 
           // 重置分页按钮
-          pagination.value.current = params.page;
+          pagination.value.current = p.page;
           pagination.value.total = data.content.total;
         } else {
           message.error(data.message);
@@ -117,10 +123,13 @@ export default defineComponent({
       });
     };
 
-
-
     onMounted(() => {
-      handleQuery({});
+
+      handleQuery({
+        page:1,
+        size: pagination.value.pageSize
+      });
+
     });
 
     return {
@@ -133,3 +142,10 @@ export default defineComponent({
   }
 });
 </script>
+
+<style scoped>
+img {
+  width: 50px;
+  height: 50px;
+}
+</style>
