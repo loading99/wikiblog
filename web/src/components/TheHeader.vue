@@ -1,33 +1,81 @@
 <template>
   <a-layout-header class="header">
   <div class="logo" />
-  <a-menu
-      theme="dark"
-      mode="horizontal"
-      v-model:selectedKeys="selectedKeys1"
-      :style="{ lineHeight: '64px' }"
-  >
-    <a-menu-item key="home">
-      <router-link to="/">{{ $t('header.main') }} </router-link>
-    </a-menu-item>
-    <a-menu-item key="ebook">
-      <router-link to="/ebooks">My Books</router-link>
-    </a-menu-item>
-    <a-menu-item key="about">
-      <router-link to="/">About me</router-link>
-    </a-menu-item>
-    <a-menu-item key="admin-ebook">
-      <router-link to="/admin-ebook">Admin</router-link>
-    </a-menu-item>
-  </a-menu>
+    <a-row type="flex">
+      <a-col :flex="9">
+        <a-menu
+            theme="dark"
+            mode="horizontal"
+            v-model:selectedKeys="selectedKeys1"
+            :style="{ lineHeight: '64px' }"
+        >
+          <a-menu-item key="home">
+            <router-link to="/">{{ $t('header.main') }}</router-link>
+          </a-menu-item>
+          <a-menu-item key="ebook">
+            <router-link to="/ebooks">{{ $t('header.book') }}</router-link>
+          </a-menu-item>
+          <a-menu-item key="admin-ebook">
+            <router-link to="/admin-ebook">{{ $t('header.admin') }}</router-link>
+          </a-menu-item>
+          <a-menu-item key="about">
+            <router-link to="/">{{ $t('header.me') }}</router-link>
+          </a-menu-item>
+        </a-menu>
+      </a-col>
+      <a-col :flex="1">
+        <a-dropdown>
+          <template #overlay>
+            <a-menu @click="onClick">
+              <a-menu-item key="en">
+                <UserOutlined/>
+                English
+              </a-menu-item>
+              <a-menu-item key="ch">
+                <UserOutlined/>
+                Chinese
+              </a-menu-item>
+              <a-menu-item key="jp">
+                <UserOutlined/>
+                Japanese
+              </a-menu-item>
+            </a-menu>
+          </template>
+          <a-button style="position: absolute;right: 1px;top: 16px">
+            {{ $t('header.lang') }}
+            <DownOutlined/>
+          </a-button>
+        </a-dropdown>
+      </a-col>
+    </a-row>
 </a-layout-header>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-
+import { defineComponent, VNodeChild} from 'vue';
+import { DownOutlined } from '@ant-design/icons-vue';
+import i18n from "@/language/i18n";
+interface MenuInfo {
+  key: string;
+  keyPath: string[];
+  item: VNodeChild;
+  domEvent: MouseEvent;
+}
 export default defineComponent({
   name: 'TheHeader',
+
+  setup(){
+    const onClick = ({key}: MenuInfo) => {
+      console.log(`click on item ${key}`);
+      i18n.global.locale=key;
+    };
+    return {
+      onClick
+    };
+  },
+  components: {
+    DownOutlined,
+  },
 });
 </script>
 

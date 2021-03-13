@@ -6,7 +6,9 @@ const i18n = createI18n({
     locale: 'en',		//默认显示的语言
     messages: {
         ch:require('./ch.js'),	//引入语言文件
-        en:require('./en.js')
+        en:require('./en.js'),
+        jp:require('./jp.js')
     }
 })
+
 export default i18n; //将i18n暴露出去，在main.js中引入挂载
