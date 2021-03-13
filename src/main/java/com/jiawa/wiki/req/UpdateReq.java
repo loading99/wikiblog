@@ -1,8 +1,11 @@
 package com.jiawa.wiki.req;
 
+import javax.validation.constraints.NotNull;
+
 public class UpdateReq {
     private Long id;
 
+    @NotNull(message = "Name cannot be empty")
     private String name;
 
     private Long category1Id;

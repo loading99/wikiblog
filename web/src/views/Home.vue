@@ -99,7 +99,7 @@ export default defineComponent({
       axios.get("/ebook/search", {
         params:{
           page:1,
-          size:10
+          size:20
         }
       }).then((response)=>{
         const data=response.data

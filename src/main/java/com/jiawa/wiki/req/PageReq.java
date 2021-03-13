@@ -1,7 +1,16 @@
 package com.jiawa.wiki.req;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
+
+
 public class PageReq {
+
+    @NotNull(message="Page cannot be null")
     private int page;
+
+    @NotNull(message="Size cannot be null")
+    @Max(value=100,message = "Request exceeds limit!")
     private int size;
 
     public int getPage() {

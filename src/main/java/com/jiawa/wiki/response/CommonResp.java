@@ -1,6 +1,6 @@
 package com.jiawa.wiki.response;
 
-public class commonResp<T> {
+public class CommonResp<T> {
 
     private boolean success=true;
 
