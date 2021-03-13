@@ -1,11 +1,31 @@
 <template>
   <a-layout style="padding: 24px 0; background: #fff">
     <a-layout-content :style="{ padding: '0 24px', minHeight: '280px' }">
-      <p>
-        <a-button type="primary" @click="add()" size="large">
-          Add New
-        </a-button>
-      </p>
+
+
+      <a-form
+          layout="inline"
+          :model="param"
+      >
+        <a-form-item>
+          <a-button type="primary" @click="add()" size="large">
+            Add New
+          </a-button>
+        </a-form-item>
+        <a-form-item>
+          <a-input v-model:value="param.name" placeholder="Search Keyword">
+            <template #prefix>
+              <UserOutlined style="color: rgba(0, 0, 0, 0.25)"/>
+            </template>
+          </a-input>
+        </a-form-item>
+        <a-form-item>
+          <a-button @click="handleQuery({page: pagination.current, size: pagination.pageSize})">
+            Search
+          </a-button>
+        </a-form-item>
+      </a-form>
+
       <a-table
           :columns="columns"
           :row-key="record => record.id"
@@ -17,9 +37,7 @@
         <template #cover="{ cover }">
           <img v-if="cover" :src="cover" alt="avatar" />
         </template>
-
-
-        <template v-slot:action="{  record }">
+        <template v-slot:action="{record}">
           <a-space size="small">
             <router-link :to="'/admin/doc?ebookId=' + record.id">
               <a-button type="primary">
@@ -30,7 +48,7 @@
               Edit
             </a-button>
             <a-popconfirm
-                title="Cannot be recovered,Please Confirm"
+                title="Cannot be recovered, Please Confirm"
                 ok-text="Yes"
                 cancel-text="cancel"
                 @confirm="handleDelete(record.id)"
@@ -72,12 +90,21 @@
 import { defineComponent, onMounted, ref } from 'vue';
 import axios from 'axios';
 import { message } from 'ant-design-vue';
+import {Tool} from "@/util/tools";
 
 
 export default defineComponent({
   name: 'AdminEbook',
   setup() {
+    /**
+     * search Keyword
+     **/
+    const param=ref();
+    param.value={};
 
+    /**
+     * Book related Info
+     **/
     const ebooks = ref();
     const pagination = ref({
       current: 1,
@@ -129,8 +156,9 @@ export default defineComponent({
       ebooks.value = [];
       axios.get("/ebook/search",{
         params: {
-          page:p.page,
-          size:p.size
+          page: p.page,
+          size: p.size,
+          name: param.value.name,
         }
       }).then((response) => {
         loading.value = false;
@@ -159,7 +187,7 @@ export default defineComponent({
 
 
     /**
-     * 确认框 and Form
+     * update确认框 and Form
      **/
     const formbook = ref ({});
     const modalVisible = ref(false);
@@ -188,7 +216,7 @@ export default defineComponent({
      */
     const edit = (record: any) => {
       modalVisible.value = true;
-      formbook.value=record;
+      formbook.value=Tool.copy(record);
     };
 
     /**
@@ -217,6 +245,7 @@ export default defineComponent({
     };
 
 
+
     onMounted(() => {
 
       handleQuery({
@@ -227,6 +256,7 @@ export default defineComponent({
     });
 
     return {
+      param,
       ebooks,
       pagination,
       columns,
@@ -239,8 +269,10 @@ export default defineComponent({
       edit,
       add,
 
+      handleQuery,
       handleModalOk,
       handleDelete,
+
 
     }
   }

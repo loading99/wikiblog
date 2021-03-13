@@ -30,3 +30,9 @@ export default defineComponent({
   name: 'TheHeader',
 });
 </script>
+
+<style>
+a-menu-item{
+
+}
+</style>
