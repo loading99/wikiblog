@@ -8,7 +8,7 @@
       :style="{ lineHeight: '64px' }"
   >
     <a-menu-item key="home">
-      <router-link to="/">Main</router-link>
+      <router-link to="/">{{ $t('header.main') }} </router-link>
     </a-menu-item>
     <a-menu-item key="ebook">
       <router-link to="/ebooks">My Books</router-link>
