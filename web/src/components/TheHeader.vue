@@ -18,6 +18,9 @@
           <a-menu-item key="admin-ebook">
             <router-link to="/admin-ebook">{{ $t('header.admin') }}</router-link>
           </a-menu-item>
+          <a-menu-item key="admin-category">
+            <router-link to="/admin-category">{{ $t('header.cate') }}</router-link>
+          </a-menu-item>
           <a-menu-item key="about">
             <router-link to="/">{{ $t('header.me') }}</router-link>
           </a-menu-item>
@@ -28,16 +31,16 @@
           <template #overlay>
             <a-menu @click="onClick">
               <a-menu-item key="en">
-                <UserOutlined/>
+                <ProfileOutlined />
                 English
               </a-menu-item>
               <a-menu-item key="ch">
-                <UserOutlined/>
-                Chinese
+                <ProfileOutlined />
+                中文
               </a-menu-item>
               <a-menu-item key="jp">
-                <UserOutlined/>
-                Japanese
+                <ProfileOutlined />
+                日本語
               </a-menu-item>
             </a-menu>
           </template>

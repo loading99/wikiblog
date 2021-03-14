@@ -1,8 +1,6 @@
 <template>
-  <a-layout style="padding: 24px 0; background: #fff">
-    <a-layout-content :style="{ padding: '0 24px', minHeight: '280px' }">
-
-
+  <a-layout style="padding: 24px 0; background: #fff;">
+    <a-layout-content :style="{ padding: '0 24px', minHeight: '280px'}">
       <a-form
           layout="inline"
           :model="param"
@@ -29,7 +27,7 @@
       <a-table
           :columns="columns"
           :row-key="record => record.id"
-          :data-source="ebooks"
+          :data-source="categorys"
           :pagination="pagination"
           :loading="loading"
           @change="handleTableChange"
@@ -39,11 +37,6 @@
         </template>
         <template v-slot:action="{record}">
           <a-space size="small">
-            <router-link :to="'/admin/doc?ebookId=' + record.id">
-              <a-button type="primary">
-                File Management
-              </a-button>
-            </router-link>
             <a-button type="primary" @click="edit(record)">
               {{ $t('table.edit') }}
             </a-button>
@@ -69,18 +62,15 @@
       :confirm-loading="modalLoading"
       @ok="handleModalOk"
   >
-    <a-form :model="formbook" :label-col="{ span: 6 }" :wrapper-col="{ span: 18 }">
-      <a-form-item label="Cover">
-        <a-input v-model:value="formbook.cover" />
-      </a-form-item>
+    <a-form :model="categoryform" :label-col="{ span: 6 }" :wrapper-col="{ span: 18 }">
       <a-form-item label="Name">
-        <a-input v-model:value="formbook.name" />
+        <a-input v-model:value="categoryform.name" />
       </a-form-item>
-      <a-form-item label="Category">
-        <a-input v-model:value="formbook.category1Id" />
+      <a-form-item label="Parent Category">
+        <a-input v-model:value="categoryform.parent" />
       </a-form-item>
-      <a-form-item label="Description">
-        <a-input v-model:value="formbook.description" type="textarea" />
+      <a-form-item label="Order">
+        <a-input v-model:value="categoryform.sort" type="textarea" />
       </a-form-item>
     </a-form>
   </a-modal>
@@ -94,7 +84,7 @@ import {Tool} from "@/util/tools";
 
 
 export default defineComponent({
-  name: 'AdminEbook',
+  name: 'AdminCategory',
   setup() {
     /**
      * search Keyword
@@ -105,40 +95,27 @@ export default defineComponent({
     /**
      * Book related Info
      **/
-    const ebooks = ref();
+    const categorys = ref();
     const pagination = ref({
       current: 1,
-      pageSize: 5,
+      pageSize: 10,
       total: 0
     });
     const loading = ref(false);
 
     const columns = [
       {
-        title: 'Cover',
-        dataIndex: 'cover',
-        slots: { customRender: 'cover' }
-      },
-      {
         title: 'Name',
         dataIndex: 'name'
       },
       {
-        title: 'Category',
-        dataIndex: 'category1Id',
-        slots: { customRender: 'category' }
+        title: 'ParentID',
+        dataIndex: 'parent',
+        slots: { customRender: 'parent' }
       },
       {
-        title: 'Doc No.',
-        dataIndex: 'docCount'
-      },
-      {
-        title: 'Views',
-        dataIndex: 'viewCount'
-      },
-      {
-        title: 'Likes',
-        dataIndex: 'voteCount'
+        title: 'Order',
+        dataIndex: 'sort'
       },
       {
         title: 'Action',
@@ -153,8 +130,8 @@ export default defineComponent({
     const handleQuery = (p: any) => {
       loading.value = true;
       // 如果不清空现有数据，则编辑保存重新加载数据后，再点编辑，则列表显示的还是编辑前的数据
-      ebooks.value = [];
-      axios.get("/ebook/search",{
+      categorys.value = [];
+      axios.get("/category/search",{
         params: {
           page: p.page,
           size: p.size,
@@ -164,7 +141,7 @@ export default defineComponent({
         loading.value = false;
         const data = response.data;
         if (data.success) {
-          ebooks.value = data.content.list;
+          categorys.value = data.content.list;
           // 重置分页按钮
           pagination.value.current = p.page;
           pagination.value.total = data.content.total;
@@ -189,13 +166,13 @@ export default defineComponent({
     /**
      * update确认框 and Form
      **/
-    const formbook = ref ({});
+    const categoryform = ref ({});
     const modalVisible = ref(false);
     const modalLoading = ref(false);
     const handleModalOk = () => {
       modalLoading.value = true;
 
-      axios.post("/ebook/save",formbook.value).then(function (response){
+      axios.post("/category/save",categoryform.value).then(function (response){
         modalLoading.value=false;
         const data=response.data;
         if (data.success){
@@ -216,7 +193,7 @@ export default defineComponent({
      */
     const edit = (record: any) => {
       modalVisible.value = true;
-      formbook.value=Tool.copy(record);
+      categoryform.value=Tool.copy(record);
     };
 
     /**
@@ -224,14 +201,14 @@ export default defineComponent({
      */
     const add=()=>{
       modalVisible.value=true;
-      formbook.value={};
+      categoryform.value={};
     }
 
     /**
      * Delete
      */
     const handleDelete = (id:number) => {
-      axios.delete("/ebook/delete/"+id).then(function (response){
+      axios.delete("/category/delete/"+id).then(function (response){
         const data=response.data;
         if (data.success){
           // reload
@@ -257,13 +234,13 @@ export default defineComponent({
 
     return {
       param,
-      ebooks,
+      categorys,
       pagination,
       columns,
       loading,
       handleTableChange,
 
-      formbook,
+      categoryform,
       modalVisible,
       modalLoading,
       edit,
@@ -279,9 +256,9 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
-img {
-  width: 50px;
-  height: 50px;
+
+<style lang='css' scoped>
+.a-layout{
+  font-size: 16px;
 }
 </style>

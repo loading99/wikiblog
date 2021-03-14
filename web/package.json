@@ -30,6 +30,9 @@
     "@vue/eslint-config-typescript": "^5.0.2",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^7.0.0-0",
+    "less": "^4.1.1",
+    "less-loader": "^8.0.0",
+    "style-resources-loader": "^1.4.1",
     "typescript": "~3.9.3"
   }
 }
