@@ -1,7 +1,10 @@
 export class Tool {
+
     /**
      * 空校验 null或""都返回true
      */
+    private static v: Set<number>;
+
     public static isEmpty(obj: any) {
         if ((typeof obj === 'string')) {
             return !obj || obj.replace(/\s+/g, "") === ""
@@ -31,7 +34,7 @@ export class Tool {
      * 使用递归将数组转为树形结构
      * 父ID属性为parent
      */
-    public static array2Tree(array: any, parentId: number) {
+    public static array2Tree(array: any, parentId: number){
         if (Tool.isEmpty(array)) {
             return [];
         }
@@ -39,12 +42,12 @@ export class Tool {
         const result = [];
         for (let i = 0; i < array.length; i++) {
             const c = array[i];
+
             // console.log(Number(c.parent), Number(parentId));
             if (Number(c.parent) === Number(parentId)) {
                 result.push(c);
-
                 // 递归查看当前节点对应的子节点
-                const children = Tool.array2Tree(array, c.id);
+                const children = Tool.array2Tree(array, c.id,);
                 if (Tool.isNotEmpty(children)) {
                     c.children = children;
                 }

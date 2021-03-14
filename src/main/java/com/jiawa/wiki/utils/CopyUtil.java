@@ -24,16 +24,17 @@ public class CopyUtil {
         return obj;
     }
 
-    public static <T> List<T> copyList(List src, Class<T> clazz){
-        List<T> target=new ArrayList<>();
-        if (!CollectionUtils.isEmpty(src))
-        for (Object o : src) {
-            T obj=copy(o,clazz);
-            target.add(obj);
+    public static <T> List<T> copyList(List source, Class<T> clazz) {
+        List<T> target = new ArrayList<>();
+        if (!CollectionUtils.isEmpty(source)){
+            for (Object c: source) {
+                T obj = copy(c, clazz);
+                target.add(obj);
+            }
         }
         return target;
     }
-
-
-
 }
+
+
+

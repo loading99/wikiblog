@@ -30,19 +30,18 @@ public class CategoryService {
     @Resource
     private SnowFlake snowflake;
 
-    public PageResp<Category> list(){
-        PageHelper.startPage(1,10);//Only Effective to the first query
-        PageInfo<Category> pageInfo=new PageInfo<>();
-        List<Category> categorys = categorymapper.selectByExample(null);
-        PageResp<Category> response=new PageResp<>();
-        response.setList(categorys);
-        response.setTotal(pageInfo.getTotal());
-        return response;
+    public List<CategoryResp> list(){
+        CategoryExample categoryExample=new CategoryExample();
+        categoryExample.setOrderByClause("sort asc");
+        List<Category> categoryList=categorymapper.selectByExample(categoryExample);
+        List<CategoryResp> list=CopyUtil.copyList(categoryList,CategoryResp.class);
+        return list;
     }
 
-    public CategoryResp<Category> searchbyname(CategoryReq req){
+    public PageResp<Category> searchbyname(CategoryReq req){
 
         CategoryExample categoryExample = new CategoryExample();
+        categoryExample.setOrderByClause("sort asc");
         CategoryExample.Criteria criteria = categoryExample.createCriteria();
         if(!ObjectUtils.isEmpty(req.getName())) {
             criteria.andNameLike("%"+req.getName()+"%");
@@ -50,7 +49,7 @@ public class CategoryService {
         PageHelper.startPage(req.getPage(),req.getSize());
         List<Category> categorys = categorymapper.selectByExample(categoryExample);
         PageInfo<Category> pageInfo=new PageInfo<>(categorys);
-        CategoryResp<Category> response=new CategoryResp<>();
+        PageResp<Category> response=new PageResp<>();
         response.setList(categorys);
         response.setTotal(pageInfo.getTotal());
         return response;

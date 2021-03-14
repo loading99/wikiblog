@@ -18,7 +18,7 @@
           </a-input>
         </a-form-item>
         <a-form-item>
-          <a-button @click="handleQuery({page: pagination.current, size: pagination.pageSize})">
+          <a-button @click="handleSearch()">
             {{ $t('table.search') }}
           </a-button>
         </a-form-item>
@@ -27,10 +27,9 @@
       <a-table
           :columns="columns"
           :row-key="record => record.id"
-          :data-source="categorys"
-          :pagination="pagination"
+          :data-source="level1"
           :loading="loading"
-          @change="handleTableChange"
+          :pagination="false"
       >
         <template #cover="{ cover }">
           <img v-if="cover" :src="cover" alt="avatar" />
@@ -96,13 +95,7 @@ export default defineComponent({
      * Book related Info
      **/
     const categorys = ref();
-    const pagination = ref({
-      current: 1,
-      pageSize: 10,
-      total: 0
-    });
     const loading = ref(false);
-
     const columns = [
       {
         title: 'Name',
@@ -123,18 +116,38 @@ export default defineComponent({
         slots: { customRender: 'action' }
       }
     ];
+    const level1=ref();
 
     /**
      * 数据查询
      **/
-    const handleQuery = (p: any) => {
+    const handleQuery = () => {
+      loading.value = true;
+      // 如果不清空现有数据，则编辑保存重新加载数据后，再点编辑，则列表显示的还是编辑前的数据
+      categorys.value = [];
+      axios.get("/category/list").then((response) => {
+        loading.value = false;
+        const data = response.data;
+        if (data.success) {
+          categorys.value=data.content
+          level1.value=[];
+          level1.value=Tool.array2Tree(categorys.value,0)
+          // 重置分页按钮
+        } else {
+          message.error(data.message);
+        }
+      });
+    };
+
+    /**
+     * Search
+     **/
+    const handleSearch = () => {
       loading.value = true;
       // 如果不清空现有数据，则编辑保存重新加载数据后，再点编辑，则列表显示的还是编辑前的数据
       categorys.value = [];
       axios.get("/category/search",{
         params: {
-          page: p.page,
-          size: p.size,
           name: param.value.name,
         }
       }).then((response) => {
@@ -143,24 +156,12 @@ export default defineComponent({
         if (data.success) {
           categorys.value = data.content.list;
           // 重置分页按钮
-          pagination.value.current = p.page;
-          pagination.value.total = data.content.total;
         } else {
           message.error(data.message);
         }
       });
     };
 
-    /**
-     * 表格点击页码时触发
-     */
-    const handleTableChange = (pagination: any) => {
-      console.log("看看自带的分页参数都有啥：" + pagination);
-      handleQuery({
-        page: pagination.current,
-        size: pagination.pageSize
-      });
-    };
 
 
     /**
@@ -178,10 +179,7 @@ export default defineComponent({
         if (data.success){
           modalVisible.value=false;
           // reload
-          handleQuery({
-            page: pagination.value.current,
-            size: pagination.value.pageSize
-          });
+          handleQuery();
         }else{
           message.error(data.message);
         }
@@ -213,10 +211,7 @@ export default defineComponent({
         if (data.success){
           // reload
 
-          handleQuery({
-            page: pagination.value.current,
-            size: pagination.value.pageSize
-          });
+          handleQuery();
         }
       })
     };
@@ -225,20 +220,18 @@ export default defineComponent({
 
     onMounted(() => {
 
-      handleQuery({
-        page:1,
-        size: pagination.value.pageSize
-      });
+      handleQuery();
 
     });
 
     return {
       param,
-      categorys,
-      pagination,
+      // categorys,
+      level1,
+
       columns,
       loading,
-      handleTableChange,
+
 
       categoryform,
       modalVisible,
@@ -247,6 +240,7 @@ export default defineComponent({
       add,
 
       handleQuery,
+      handleSearch,
       handleModalOk,
       handleDelete,
 

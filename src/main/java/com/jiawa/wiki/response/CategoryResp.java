@@ -3,30 +3,43 @@ package com.jiawa.wiki.response;
 import java.util.List;
 
 public class CategoryResp<T> {
-    private long total;
-    private List<T> list;
+    private Long id;
 
-    public long getTotal() {
-        return total;
+    private Long parent;
+
+    private String name;
+
+    private Integer sort;
+
+    public Long getId() {
+        return id;
     }
 
-    public void setTotal(long total) {
-        this.total = total;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public List<T> getList() {
-        return list;
+    public Long getParent() {
+        return parent;
     }
 
-    public void setList(List<T> list) {
-        this.list = list;
+    public void setParent(Long parent) {
+        this.parent = parent;
     }
 
-    @Override
-    public String toString() {
-        return "PageResp{" +
-                "total=" + total +
-                ", list=" + list +
-                '}';
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getSort() {
+        return sort;
+    }
+
+    public void setSort(Integer sort) {
+        this.sort = sort;
     }
 }
