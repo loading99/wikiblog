@@ -82,8 +82,8 @@ export default defineComponent({
 });
 </script>
 
-<style>
-a-menu-item{
-
+<style lang="less">
+.a-layout-header{
+  font-size: @font-size-base;
 }
 </style>

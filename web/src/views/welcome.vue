@@ -14,8 +14,6 @@
   </div>
 </div>
 </template>
-
-
 <script lang="ts">
 
 import {defineComponent} from "vue";
@@ -24,6 +22,6 @@ export default defineComponent({
 })
 </script>
 
-<style>
-@import "about.css";
+<style scoped>
+@import "../assets/css/about.css";
 </style>

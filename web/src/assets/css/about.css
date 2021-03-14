@@ -6,8 +6,9 @@
 .background{
     width: 100%;
     height: 100vh;
-    background-image: url("../assets/winter.jpeg");
-    background-size: cover;
+    background-image: url("../winter.jpeg");
+
+    background-size: 100% 100%;
 
 }
 .snowflake img{
