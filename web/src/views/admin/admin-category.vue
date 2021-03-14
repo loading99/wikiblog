@@ -66,7 +66,16 @@
         <a-input v-model:value="categoryform.name" />
       </a-form-item>
       <a-form-item label="Parent Category">
-        <a-input v-model:value="categoryform.parent" />
+        <a-select
+            v-model:value="categoryform.parent"
+            style="width: 120px"
+            ref="select"
+        >
+          <a-select-option value="0">None</a-select-option>
+          <a-select-option v-for="c in level1" :key="c.id" :value="c.id" :disabled="categoryform.id==c.id">
+            {{c.name}}
+          </a-select-option>
+        </a-select>
       </a-form-item>
       <a-form-item label="Order">
         <a-input v-model:value="categoryform.sort" type="textarea" />
@@ -145,21 +154,26 @@ export default defineComponent({
     const handleSearch = () => {
       loading.value = true;
       // 如果不清空现有数据，则编辑保存重新加载数据后，再点编辑，则列表显示的还是编辑前的数据
-      categorys.value = [];
-      axios.get("/category/search",{
-        params: {
-          name: param.value.name,
-        }
-      }).then((response) => {
-        loading.value = false;
-        const data = response.data;
-        if (data.success) {
-          categorys.value = data.content.list;
-          // 重置分页按钮
-        } else {
-          message.error(data.message);
-        }
-      });
+      level1.value = [];
+      if (param.value.name == null) {
+        handleQuery()
+      } else {
+        axios.get("/category/search", {
+          params: {
+            name: param.value.name,
+          }
+        }).then((response) => {
+          loading.value = false;
+          const data = response.data;
+          if (data.success) {
+            level1.value = data.content.list;
+            param.value.name=null;
+            // 重置分页按钮
+          } else {
+            message.error(data.message);
+          }
+        });
+      }
     };
 
 
@@ -210,7 +224,6 @@ export default defineComponent({
         const data=response.data;
         if (data.success){
           // reload
-
           handleQuery();
         }
       })
@@ -231,8 +244,6 @@ export default defineComponent({
 
       columns,
       loading,
-
-
       categoryform,
       modalVisible,
       modalLoading,
@@ -251,8 +262,8 @@ export default defineComponent({
 </script>
 
 
-<style lang='css' scoped>
+<style lang='less' scoped>
 .a-layout{
-  font-size: 16px;
+  font-size: @font-size-base;
 }
 </style>

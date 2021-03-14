@@ -11,7 +11,7 @@ module.exports={
     },
     table:{
         add: "增加",
-        search: "查詢",
+        search: "查询",
         edit: "修改",
         deletion: "刪除",
     }
