@@ -1,9 +1,16 @@
-const path = require('path');
 module.exports = {
-  pluginOptions: {
-    'style-resources-loader': {
-      preProcessor: 'less',
-      patterns: [path.resolve(__dirname, 'src/assets/css/common.less')]
-    }
-  }
-}
+  css: {
+    loaderOptions: {
+      less: {
+        lessOptions: {
+          modifyVars: {
+            'font-size-base': '16px',
+            'font-size-lg': '18px',
+            'font-size-sm': '14px'
+          },
+          javascriptEnabled: true,
+        },
+      },
+    },
+  },
+};
