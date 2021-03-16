@@ -6,8 +6,7 @@
         <a-menu
             theme="dark"
             mode="horizontal"
-            v-model:selectedKeys="selectedKeys1"
-            :style="{ lineHeight: '64px' }"
+            :style="{ lineHeight: '64px'}"
         >
           <a-menu-item key="home">
             <router-link to="/">{{ $t('header.main') }}</router-link>
@@ -83,7 +82,5 @@ export default defineComponent({
 </script>
 
 <style lang="less">
-.a-layout-header{
-  font-size: @font-size-base;
-}
+@import "../assets/css/common.less";
 </style>

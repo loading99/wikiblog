@@ -77,12 +77,12 @@
 }
 @keyframes comet {
     0%,
-    40% {
+    20% {
         -webkit-transform: translateX(0);
         transform: translateX(0);
         opacity: 0;
     }
-    50% {
+    40% {
         opacity: 1;
     }
     60%,
