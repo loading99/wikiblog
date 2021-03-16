@@ -6,17 +6,9 @@ import AdminCategory from '../views/admin/admin-category.vue'
 import Login from '../views/login.vue'
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/ebooks',
+    path: '/',
     name: 'Home',
     component: Home
-  },
-  {
-    path: '/',
-    name: 'Welcome',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: Welcome
   },
   {
     path: '/admin-ebook',

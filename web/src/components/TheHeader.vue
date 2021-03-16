@@ -11,9 +11,6 @@
           <a-menu-item key="home">
             <router-link to="/">{{ $t('header.main') }}</router-link>
           </a-menu-item>
-          <a-menu-item key="ebook">
-            <router-link to="/ebooks">{{ $t('header.book') }}</router-link>
-          </a-menu-item>
           <a-menu-item key="admin-ebook">
             <router-link to="/admin-ebook">{{ $t('header.admin') }}</router-link>
           </a-menu-item>

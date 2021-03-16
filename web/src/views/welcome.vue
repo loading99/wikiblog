@@ -1,8 +1,5 @@
 <template>
 <div class="background">
-
-  <div class="content">
-  </div>
   <svg class="snowflakes" width="100%" height="100%" preserveAspectRatio="none">
     <circle class="snowflake" cx="79.86%" cy="20%" r="2"></circle>
     <circle class="snowflake" cx="19.29%" cy="35.46%" r="2.2"></circle>
