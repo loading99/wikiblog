@@ -10,18 +10,6 @@
             {{ $t('table.add') }}
           </a-button>
         </a-form-item>
-        <a-form-item>
-          <a-input v-model:value="param.name" placeholder="Search Keyword">
-            <template #prefix>
-              <UserOutlined style="color: rgba(0, 0, 0, 0.25)"/>
-            </template>
-          </a-input>
-        </a-form-item>
-        <a-form-item>
-          <a-button @click="handleSearch()">
-            {{ $t('table.search') }}
-          </a-button>
-        </a-form-item>
       </a-form>
 
       <a-table
@@ -65,17 +53,17 @@
       <a-form-item :label="$t('form.name') ">
         <a-input v-model:value="docform.name" />
       </a-form-item>
-      <a-form-item :label="$t('form.parent')">
-        <a-select
+      <a-form-item label="父文档">
+        <a-tree-select
             v-model:value="docform.parent"
-            style="width: 120px"
-            ref="select"
+            style="width: 100%"
+            :dropdown-style="{ maxHeight: '400px', overflow: 'auto' }"
+            :tree-data="treeSelect"
+            placeholder="Please select"
+            :replaceFields="{ title:'name', key: 'id', value: 'id' }"
+            tree-default-expand-all
         >
-          <a-select-option value="0">None</a-select-option>
-          <a-select-option v-for="c in level1" :key="c.id" :value="c.id" :disabled="docform.id==c.id">
-            {{c.name}}
-          </a-select-option>
-        </a-select>
+        </a-tree-select>
       </a-form-item>
       <a-form-item :label="$t('form.order')">
         <a-input v-model:value="docform.sort" type="textarea" />
@@ -89,11 +77,14 @@ import { defineComponent, onMounted, ref } from 'vue';
 import axios from 'axios';
 import { message } from 'ant-design-vue';
 import {Tool} from "@/util/tools";
+import {useRoute} from "vue-router";
 
 
 export default defineComponent({
   name: 'AdminDoc',
   setup() {
+    const route=useRoute();
+    console.log("-----route 的各种变量------",route)
     /**
      * search Keyword
      **/
@@ -131,56 +122,28 @@ export default defineComponent({
      * 数据查询
      **/
     const handleQuery = () => {
-      loading.value = true;
       // 如果不清空现有数据，则编辑保存重新加载数据后，再点编辑，则列表显示的还是编辑前的数据
       docs.value = [];
+      level1.value=[];
       axios.get("/doc/list").then((response) => {
-        loading.value = false;
         const data = response.data;
         if (data.success) {
           docs.value=data.content
-          level1.value=[];
+
           level1.value=Tool.array2Tree(docs.value,0)
-          // 重置分页按钮
         } else {
           message.error(data.message);
         }
       });
     };
 
-    /**
-     * Search
-     **/
-    const handleSearch = () => {
-      loading.value = true;
-      // 如果不清空现有数据，则编辑保存重新加载数据后，再点编辑，则列表显示的还是编辑前的数据
-      level1.value = [];
-      if (param.value.name == null) {
-        handleQuery()
-      } else {
-        axios.get("/doc/search", {
-          params: {
-            name: param.value.name,
-          }
-        }).then((response) => {
-          loading.value = false;
-          const data = response.data;
-          if (data.success) {
-            level1.value = data.content.list;
-            param.value.name=null;
-            // 重置分页按钮
-          } else {
-            message.error(data.message);
-          }
-        });
-      }
-    };
 
 
 
     /**
      * update确认框 and Form
      **/
+    const treeSelect= ref();
     const docform = ref ({});
     const modalVisible = ref(false);
     const modalLoading = ref(false);
@@ -201,11 +164,43 @@ export default defineComponent({
     };
 
     /**
+     * Recursively set node and children node as disabled
+     * cannot be chosen
+     */
+    const setDisable = (treeSelect: any, id: number) => {
+      for (let i = 0; i < treeSelect.length; i++) {
+        const node = treeSelect[i];
+        if (node.id == id) {
+          console.log("-----Disable Node-----",node.id);
+          node.disabled = true;
+          const child = node.children;
+          if(Tool.isEmpty(child)){
+            continue;
+          }
+          for (let j = 0; j < child.length; j++) {
+            const c = child[j];
+            setDisable(child, c.id);
+          }
+        } else {
+          const child = node.children;
+          if (!Tool.isEmpty(child)) {
+            setDisable(child, id);
+          }
+        }
+      }
+    }
+
+    /**
      * Edit
      */
     const edit = (record: any) => {
       modalVisible.value = true;
       docform.value=Tool.copy(record);
+
+      treeSelect.value=Tool.copy(level1.value);
+      setDisable(treeSelect.value,record.id);
+      treeSelect.value.unshift({id:0,name:"None"});
+      console.log("-----Upgraded Tree------",treeSelect.value);
     };
 
     /**
@@ -213,7 +208,11 @@ export default defineComponent({
      */
     const add=()=>{
       modalVisible.value=true;
-      docform.value={};
+      docform.value={
+        ebookId:route.query.ebookId
+      };
+      treeSelect.value=Tool.copy(level1.value);
+      treeSelect.value.unshift({id:0,name:"None"})
     }
 
     /**
@@ -234,6 +233,7 @@ export default defineComponent({
     onMounted(() => {
 
       handleQuery();
+      console.log("-------Tree 结构------", level1);
 
     });
 
@@ -251,9 +251,10 @@ export default defineComponent({
       add,
 
       handleQuery,
-      handleSearch,
       handleModalOk,
       handleDelete,
+
+      treeSelect,
 
 
     }
