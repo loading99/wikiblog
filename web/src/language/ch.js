@@ -14,6 +14,7 @@ module.exports={
         search: "查询",
         edit: "修改",
         deletion: "刪除",
+        fm: "文档管理"
     },
     sider:{
         allcategory: "全部"

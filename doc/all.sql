@@ -81,14 +81,14 @@ insert into `category` (id, parent, name, sort) values (503, 500, '热门服务�
 drop table if exists `doc`;
 create table `doc` (
                        `id` bigint not null comment 'id',
-                       `ebook_id` bigint not null default 0 comment '电子书id',
-                       `parent` bigint not null default 0 comment '父id',
+                       `ebook_id` bigint not null default 0 comment 'Ebook id',
+                       `parent` bigint not null default 0 comment 'Parent id',
                        `name` varchar(50) not null comment '名称',
-                       `sort` int comment '顺序',
-                       `view_count` int default 0 comment '阅读数',
-                       `vote_count` int default 0 comment '点赞数',
+                       `sort` int comment 'order',
+                       `view_count` int default 0 comment 'views',
+                       `vote_count` int default 0 comment 'Comments',
                        primary key (`id`)
-) engine=innodb default charset=utf8mb4 comment='文档';
+) engine=innodb default charset=utf8mb4 comment='doc';
 
 insert into `doc` (id, ebook_id, parent, name, sort, view_count, vote_count) values (1, 1, 0, '文档1', 1, 0, 0);
 insert into `doc` (id, ebook_id, parent, name, sort, view_count, vote_count) values (2, 1, 1, '文档1.1', 1, 0, 0);

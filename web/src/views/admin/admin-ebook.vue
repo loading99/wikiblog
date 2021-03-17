@@ -39,7 +39,7 @@
           <a-space size="small">
             <router-link :to="'/admin/doc?ebookId=' + record.id">
               <a-button type="primary">
-                File Management
+                {{ $t('table.fm') }}
               </a-button>
             </router-link>
             <a-button type="primary" @click="edit(record)">

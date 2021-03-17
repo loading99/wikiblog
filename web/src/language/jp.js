@@ -13,7 +13,8 @@ module.exports={
         add: "Add",
         search: "Search",
         edit: "Edit",
-        deletion: "Delete",
+        deletion: "削除する",
+        fm: "資料管理"
     },
     sider:{
         allcategory: "All"
