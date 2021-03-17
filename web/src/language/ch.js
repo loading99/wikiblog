@@ -7,16 +7,22 @@ module.exports={
         cate: "分类管理",
         lang: "选择语言",
     },
-    footer:{
-    },
-    table:{
+    footer: {},
+    table: {
         add: "增加",
         search: "查询",
         edit: "修改",
         deletion: "刪除",
         fm: "文档管理"
     },
-    sider:{
+    form: {
+        name: "名称",
+        parent: "父节点",
+        order: "顺序",
+        category1: "分类1",
+        category2: "分类2"
+    },
+    sider: {
         allcategory: "全部"
     }
 }

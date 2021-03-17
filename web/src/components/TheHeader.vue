@@ -12,10 +12,10 @@
             <router-link to="/">{{ $t('header.main') }}</router-link>
           </a-menu-item>
           <a-menu-item key="admin-ebook">
-            <router-link to="/admin-ebook">{{ $t('header.admin') }}</router-link>
+            <router-link to="/admin/ebook">{{ $t('header.admin') }}</router-link>
           </a-menu-item>
           <a-menu-item key="admin-category">
-            <router-link to="/admin-category">{{ $t('header.cate') }}</router-link>
+            <router-link to="/admin/category">{{ $t('header.cate') }}</router-link>
           </a-menu-item>
           <a-menu-item key="about">
             <router-link to="/">{{ $t('header.me') }}</router-link>

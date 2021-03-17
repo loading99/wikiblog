@@ -9,6 +9,13 @@ module.exports={
     },
     footer:{
     },
+    form: {
+        name: "Name",
+        parent: "ParentID",
+        order: "Order",
+        category1: "category1",
+        category2: "category2"
+    },
     table:{
         add: "Add",
         search: "Search",
