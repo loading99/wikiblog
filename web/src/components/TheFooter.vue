@@ -1,6 +1,6 @@
 <template>
   <a-layout-footer style="text-align: center">
-    Blogs ©2020 Created by Zhijian
+    Blogs ©2020 Created by Zhijian, All Rights Reserved
   </a-layout-footer>
 </template>
 

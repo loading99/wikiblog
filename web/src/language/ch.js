@@ -14,5 +14,8 @@ module.exports={
         search: "查询",
         edit: "修改",
         deletion: "刪除",
+    },
+    sider:{
+        allcategory: "全部"
     }
 }

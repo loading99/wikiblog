@@ -222,7 +222,11 @@
       <a-menu
           mode="inline"
           style="height: 100%"
+          @click="handleClick"
       >
+        <a-menu-item :key="0">
+          {{ $t('sider.allcategory') }}
+        </a-menu-item>
         <a-sub-menu v-for="item in level1" :key="item.id">
           <template v-slot:title>
             <span>
@@ -300,7 +304,7 @@ export default defineComponent({
       axios.get("/ebook/search", {
         params:{
           page:1,
-          size:20
+          size:100
         }
       }).then((response)=>{
         const data=response.data
@@ -323,7 +327,6 @@ export default defineComponent({
           categorys.value=data.content
           level1.value=[];
           level1.value=Tool.array2Tree(categorys.value,0)
-          console.log("Tree Structure",level1.value)
           handleEbookQuery()
         } else {
           message.error(data.message);
@@ -334,6 +337,24 @@ export default defineComponent({
     const onClick=()=>{
       console.log("-------欢迎页面进入书籍分类页面--------")
       showWelcome.value=false;
+    }
+
+    const handleClick=(value:any)=>{
+      console.log("-----Handleclick 参数-----",value);
+      axios.get("/ebook/search", {
+        params:{
+          page: 1,
+          size: 100,
+          categoryId2: value.key
+        }
+      }).then((response)=>{
+        const data=response.data
+        if (data.success) {
+          ebook.value=data.content.list;
+        }else{
+          message.error(data.message);
+        }
+      });
     }
 
 
@@ -356,7 +377,9 @@ export default defineComponent({
      * 主页和ebook list切换
      */
     onClick,
-    showWelcome
+    showWelcome,
+
+    handleClick,
   }
 
   }

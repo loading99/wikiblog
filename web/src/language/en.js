@@ -14,5 +14,8 @@ module.exports={
         search: "Search",
         edit: "Edit",
         deletion: "Delete",
+    },
+    sider:{
+        allcategory: "All"
     }
 }

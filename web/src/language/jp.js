@@ -1,7 +1,21 @@
 module.exports={
     header: {
-        main: "Main"
+        main: "Main",
+        book: "My book",
+        me: "About me",
+        admin: "Admin",
+        cate: "Category",
+        lang: "language",
     },
     footer:{
+    },
+    table:{
+        add: "Add",
+        search: "Search",
+        edit: "Edit",
+        deletion: "Delete",
+    },
+    sider:{
+        allcategory: "All"
     }
 }
