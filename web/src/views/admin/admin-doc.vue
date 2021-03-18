@@ -139,6 +139,8 @@ export default defineComponent({
      */
     const editor = new E('#content');
 
+
+
     /**
      * 数据查询
      **/
@@ -211,22 +213,38 @@ export default defineComponent({
         }
       }
     }
+    /**
+     * Query Rich text from database.
+     * @param id
+     */
+    const handleContent=(id:bigint)=>{
+      axios.get("/doc/content/"+id).then((response)=>{
+        const data=response.data;
+        if (data.success){
+          editor.txt.html(data.content);
+        }else{
+          message.error(data.message);
+        }
+      })
+    }
 
     /**
      * Edit
      */
     const edit = (record: any) => {
-
       modalVisible.value = true;
+      editor.txt.html("");
       docform.value=Tool.copy(record);
       treeSelect.value=Tool.copy(level1.value);
       setDisable(treeSelect.value,record.id);
       treeSelect.value.unshift({id:0,name:"None"});
       console.log("-----Upgraded Tree------",treeSelect.value);
-
+      //rich text editor show
+      handleContent(docform.value.id);
       setTimeout(()=>{
         editor.create();
       },1000);
+
     };
 
     /**
@@ -239,7 +257,6 @@ export default defineComponent({
       };
       treeSelect.value=Tool.copy(level1.value);
       treeSelect.value.unshift({id:0,name:"None"})
-
       /**
        * Online Rich Text editor Rendering class content
        * Note the scripts within the function may run asynchronously
@@ -276,6 +293,8 @@ export default defineComponent({
         }
       }
     }
+
+
 
     const handleDelete = (id:bigint) => {
       deleteIDs(level1.value,id);

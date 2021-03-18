@@ -1,11 +1,14 @@
 package com.jiawa.wiki.controller;
 
+import com.jiawa.wiki.domain.Content;
 import com.jiawa.wiki.domain.Doc;
 import com.jiawa.wiki.req.DocReq;
+import com.jiawa.wiki.response.ContentResp;
 import com.jiawa.wiki.response.DocResp;
 import com.jiawa.wiki.response.CommonResp;
 import com.jiawa.wiki.response.PageResp;
 import com.jiawa.wiki.service.DocService;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -25,6 +28,18 @@ public class DocController {
         CommonResp<List<DocResp>> resp = new CommonResp<>();
         List<DocResp> list = docService.list();
         resp.setContent(list);
+        return resp;
+    }
+    @GetMapping("/content/{id}")
+    public CommonResp getContent(@PathVariable Long id){
+        CommonResp<String> resp = new CommonResp<>();
+        if (ObjectUtils.isEmpty(id)) {
+            resp.setSuccess(false);
+            resp.setMessage("The Content id cannot be empty!");
+        } else {
+            String content = docService.findContent(id);
+            resp.setContent(content);
+        }
         return resp;
     }
 

@@ -80,9 +80,16 @@ public class DocService {
             }
         }
     }
+    public String findContent(Long id){
+
+        Content content = contentmapper.selectByPrimaryKey(id);
+        return content.getContent();
+    }
+
     public void delete(Long id){
         docmapper.deleteByPrimaryKey(id);
     }
+
     public void delete(List<Long> IDlist){
         DocExample docExample = new DocExample();
         DocExample.Criteria criteria=docExample.createCriteria();
