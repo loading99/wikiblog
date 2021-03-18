@@ -213,25 +213,51 @@ export default defineComponent({
     }
 
     /**
-     * Delete
+     * Recursively search the tree and add IDs in one entire branch
      */
+    let IDlist:Array<bigint>=[];
+    const deleteIDs = (tree: any, id: bigint) => {
+      for (let i = 0; i < tree.length; i++) {
+        const node = tree[i];
+        if (node.id == id) {
+          const child = node.children;
+          IDlist.push(id);
+          if (Tool.isEmpty(child)) {
+            continue;
+          }
+          for (let j = 0; j < child.length; j++) {
+            const c = child[j];
+            deleteIDs(child, c.id);
+          }
+        } else {
+          const child = node.children;
+          if (!Tool.isEmpty(child)) {
+            deleteIDs(child, id);
+          }
+        }
+      }
+    }
+
     const handleDelete = (id:bigint) => {
-      axios.delete("/doc/delete/"+id).then(function (response){
+      deleteIDs(level1.value,id);
+      console.log("-----IDs to be deleted------",IDlist);
+      if(Tool.isEmpty(IDlist)){
+        message.error("Deleting Empty records")
+      }else{
+      axios.delete("/doc/delete/"+IDlist.join(',')).then(function (response){
         const data=response.data;
         if (data.success){
           // reload
+          IDlist=[];
           handleQuery();
         }
       })
+      }
     };
 
-
-
     onMounted(() => {
-
       handleQuery();
       console.log("-------Tree 结构------", level1);
-
     });
 
     return {
