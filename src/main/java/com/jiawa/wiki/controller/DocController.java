@@ -23,10 +23,10 @@ public class DocController {
     @Resource
     private DocService docService;
 
-    @GetMapping("/list")
-    public CommonResp getDocList(){
+    @GetMapping("/list/{ebookId}")
+    public CommonResp getDocList(@PathVariable Long ebookId){
         CommonResp<List<DocResp>> resp = new CommonResp<>();
-        List<DocResp> list = docService.list();
+        List<DocResp> list = docService.list(ebookId);
         resp.setContent(list);
         return resp;
     }
@@ -43,13 +43,6 @@ public class DocController {
         return resp;
     }
 
-    @GetMapping("/search")
-    public CommonResp searchDocbyName(@Valid DocReq req){
-        CommonResp<PageResp<Doc>> resp = new CommonResp<>();
-        PageResp<Doc> list = docService.searchbyname(req);
-        resp.setContent(list);
-        return resp;
-    }
 
     @PostMapping("/save")
     public CommonResp saveDoc(@Valid @RequestBody DocReq req){

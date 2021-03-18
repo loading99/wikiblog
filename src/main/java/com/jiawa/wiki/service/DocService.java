@@ -35,8 +35,9 @@ public class DocService {
     @Resource
     private SnowFlake snowflake;
 
-    public List<DocResp> list(){
+    public List<DocResp> list(Long id){
         DocExample docExample=new DocExample();
+        docExample.createCriteria().andEbookIdEqualTo(id);
         docExample.setOrderByClause("sort asc");
         List<Doc> docList=docmapper.selectByExample(docExample);
         List<DocResp> list=CopyUtil.copyList(docList,DocResp.class);
