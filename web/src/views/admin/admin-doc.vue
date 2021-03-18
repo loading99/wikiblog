@@ -165,12 +165,13 @@ export default defineComponent({
      * update确认框 and Form
      **/
     const treeSelect= ref();
-    const docform = ref ({});
+    const docform = ref ();
+    docform.value={};
     const modalVisible = ref(false);
     const modalLoading = ref(false);
     const handleModalOk = () => {
       modalLoading.value = true;
-
+      docform.value.content=editor.txt.html();
       axios.post("/doc/save",docform.value).then(function (response){
         modalLoading.value=false;
         const data=response.data;
@@ -238,7 +239,6 @@ export default defineComponent({
       };
       treeSelect.value=Tool.copy(level1.value);
       treeSelect.value.unshift({id:0,name:"None"})
-
 
       /**
        * Online Rich Text editor Rendering class content

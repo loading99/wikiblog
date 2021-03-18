@@ -18,6 +18,16 @@ public class DocReq extends PageReq {
     @NotNull(message = "Sort order cannot be empty!")
     private Integer sort;
 
+    private String content;
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
     private Integer viewCount;
 
     private Integer voteCount;

@@ -1,8 +1,10 @@
 package com.jiawa.wiki.service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.jiawa.wiki.domain.Content;
 import com.jiawa.wiki.domain.Doc;
 import com.jiawa.wiki.domain.DocExample;
+import com.jiawa.wiki.mapper.ContentMapper;
 import com.jiawa.wiki.mapper.DocMapper;
 import com.jiawa.wiki.req.DocReq;
 import com.jiawa.wiki.response.DocResp;
@@ -24,6 +26,9 @@ public class DocService {
 
     @Resource
     private DocMapper docmapper;
+
+    @Resource
+    private ContentMapper contentmapper;
 
     @Resource
     private SnowFlake snowflake;
@@ -56,13 +61,23 @@ public class DocService {
 
         Doc copy = CopyUtil.copy(req,Doc.class);
         //check if the id in the database
+        Content content=CopyUtil.copy(req,Content.class);
 
         if (ObjectUtils.isEmpty(req.getId())){
             //if ID doesn't exist
-            copy.setId(snowflake.nextId());
+            final long ID = snowflake.nextId();
+            copy.setId(ID);
             docmapper.insert(copy);
+            content.setId(ID);
+            contentmapper.insert(content);
         }else{
             docmapper.updateByPrimaryKey(copy);
+
+            int count = contentmapper.updateByPrimaryKeyWithBLOBs(content);
+            //防止在创建文档分类时并没有创建content，导致插入失败
+            if(count==0){
+                contentmapper.insert(content);
+            }
         }
     }
     public void delete(Long id){
