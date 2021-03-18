@@ -13,11 +13,13 @@
       </a-form>
 
       <a-table
+          v-if="level1.length>0"
           :columns="columns"
           :row-key="record => record.id"
           :data-source="level1"
           :loading="loading"
           :pagination="false"
+          :defaultExpandAllRows="true"
       >
         <template v-slot:action="{record}">
           <a-space size="small">
@@ -42,35 +44,43 @@
 
   <a-modal
       title="Doc Form"
+      width="80%"
       v-model:visible="modalVisible"
       :confirm-loading="modalLoading"
       @ok="handleModalOk"
   >
-    <a-form :model="docform" :label-col="{ span: 6 }" :wrapper-col="{ span: 18 }">
-      <a-form-item :label="$t('form.name') ">
-        <a-input v-model:value="docform.name" />
-      </a-form-item>
-      <a-form-item label="父文档">
-        <a-tree-select
-            v-model:value="docform.parent"
-            style="width: 100%"
-            :dropdown-style="{ maxHeight: '400px', overflow: 'auto' }"
-            :tree-data="treeSelect"
-            placeholder="Please select"
-            :replaceFields="{ title:'name', key: 'id', value: 'id' }"
-            tree-default-expand-all
-        >
-        </a-tree-select>
-      </a-form-item>
-      <a-form-item :label="$t('form.order')">
-        <a-input v-model:value="docform.sort" type="textarea" />
-      </a-form-item>
-      <a-form-item :label="$t('form.content')">
-        <div id="content">
+        <a-form :model="docform" :label-col="{ span: 6 }" :wrapper-col="{ span: 18 }" >
+          <a-row justify="space-between">
+            <a-col :span="8">
+              <a-form-item :label="$t('form.name') ">
+                <a-input v-model:value="docform.name"/>
+              </a-form-item>
+              <a-form-item label="父文档">
+                <a-tree-select
+                    v-model:value="docform.parent"
+                    style="width: 100%"
+                    :dropdown-style="{ maxHeight: '400px', overflow: 'auto' }"
+                    :tree-data="treeSelect"
+                    placeholder="Please select"
+                    :replaceFields="{ title:'name', key: 'id', value: 'id' }"
+                    tree-default-expand-all
+                >
+                </a-tree-select>
+              </a-form-item>
+              <a-form-item :label="$t('form.order')">
+                <a-input v-model:value="docform.sort" type="textarea"/>
+              </a-form-item>
+            </a-col>
+            <a-col :span="14">
+              <a-form-item>
+                <div id="content"></div>
+              </a-form-item>
+            </a-col>
+          </a-row>
+        </a-form>
 
-        </div>
-      </a-form-item>
-    </a-form>
+
+
   </a-modal>
 </template>
 <TheFooter></TheFooter>
@@ -122,6 +132,8 @@ export default defineComponent({
     ];
     //Category Tree Strucutre
     const level1=ref();
+    level1.value=[];
+
     /**
      * Rich text Edit
      */
@@ -204,7 +216,6 @@ export default defineComponent({
      */
     const edit = (record: any) => {
 
-
       modalVisible.value = true;
       docform.value=Tool.copy(record);
       treeSelect.value=Tool.copy(level1.value);
@@ -212,10 +223,9 @@ export default defineComponent({
       treeSelect.value.unshift({id:0,name:"None"});
       console.log("-----Upgraded Tree------",treeSelect.value);
 
-
       setTimeout(()=>{
         editor.create();
-      },100);
+      },1000);
     };
 
     /**
@@ -238,7 +248,7 @@ export default defineComponent({
        */
       setTimeout(()=>{
         editor.create();
-      },100);
+      },1000);
     }
 
     /**
