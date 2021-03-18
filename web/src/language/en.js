@@ -5,7 +5,7 @@ module.exports={
         me: "About me",
         admin: "Admin",
         cate: "Category",
-        lang: "language",
+        lang: "Language",
     },
     footer:{
     },
@@ -13,8 +13,9 @@ module.exports={
         name: "Name",
         parent: "ParentID",
         order: "Order",
-        category1: "category1",
-        category2: "category2"
+        category1: "Category1",
+        category2: "Category2",
+        content:"Content",
     },
     table:{
         add: "Add",

@@ -20,7 +20,8 @@ module.exports={
         parent: "父节点",
         order: "顺序",
         category1: "分类1",
-        category2: "分类2"
+        category2: "分类2",
+        content:"内容",
     },
     sider: {
         allcategory: "全部"

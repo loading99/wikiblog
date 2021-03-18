@@ -14,7 +14,8 @@ module.exports={
         parent: "ParentID",
         order: "Order",
         category1: "category1",
-        category2: "category2"
+        category2: "category2",
+        content:"コンテンツ",
     },
     table:{
         add: "Add",

@@ -65,6 +65,11 @@
       <a-form-item :label="$t('form.order')">
         <a-input v-model:value="docform.sort" type="textarea" />
       </a-form-item>
+      <a-form-item :label="$t('form.content')">
+        <div id="content">
+
+        </div>
+      </a-form-item>
     </a-form>
   </a-modal>
 </template>
@@ -75,6 +80,7 @@ import axios from 'axios';
 import { message } from 'ant-design-vue';
 import {Tool} from "@/util/tools";
 import {useRoute} from "vue-router";
+import E from 'wangeditor'
 
 
 export default defineComponent({
@@ -82,6 +88,7 @@ export default defineComponent({
   setup() {
     const route=useRoute();
     console.log("-----route 的各种变量------",route)
+
     /**
      * search Keyword
      **/
@@ -113,7 +120,12 @@ export default defineComponent({
         slots: { customRender: 'action' }
       }
     ];
+    //Category Tree Strucutre
     const level1=ref();
+    /**
+     * Rich text Edit
+     */
+    const editor = new E('#content');
 
     /**
      * 数据查询
@@ -191,13 +203,19 @@ export default defineComponent({
      * Edit
      */
     const edit = (record: any) => {
+
+
       modalVisible.value = true;
       docform.value=Tool.copy(record);
-
       treeSelect.value=Tool.copy(level1.value);
       setDisable(treeSelect.value,record.id);
       treeSelect.value.unshift({id:0,name:"None"});
       console.log("-----Upgraded Tree------",treeSelect.value);
+
+
+      setTimeout(()=>{
+        editor.create();
+      },100);
     };
 
     /**
@@ -210,6 +228,17 @@ export default defineComponent({
       };
       treeSelect.value=Tool.copy(level1.value);
       treeSelect.value.unshift({id:0,name:"None"})
+
+
+      /**
+       * Online Rich Text editor Rendering class content
+       * Note the scripts within the function may run asynchronously
+       * So The content tag may not show on the screen when the function begins,
+       * Setting a timeout solves this issue.
+       */
+      setTimeout(()=>{
+        editor.create();
+      },100);
     }
 
     /**
