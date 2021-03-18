@@ -234,7 +234,7 @@ export default defineComponent({
     /**
      * Delete
      */
-    const handleDelete = (id:number) => {
+    const handleDelete = (id:bigint) => {
       axios.delete("/ebook/delete/"+id).then(function (response){
         const data=response.data;
         if (data.success){

@@ -19,9 +19,6 @@
           :loading="loading"
           :pagination="false"
       >
-        <template #cover="{ cover }">
-          <img v-if="cover" :src="cover" alt="avatar" />
-        </template>
         <template v-slot:action="{record}">
           <a-space size="small">
             <a-button type="primary" @click="edit(record)">
@@ -218,7 +215,7 @@ export default defineComponent({
     /**
      * Delete
      */
-    const handleDelete = (id:number) => {
+    const handleDelete = (id:bigint) => {
       axios.delete("/doc/delete/"+id).then(function (response){
         const data=response.data;
         if (data.success){
