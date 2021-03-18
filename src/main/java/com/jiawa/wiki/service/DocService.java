@@ -2,6 +2,7 @@ package com.jiawa.wiki.service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.jiawa.wiki.domain.Content;
+import com.jiawa.wiki.domain.ContentExample;
 import com.jiawa.wiki.domain.Doc;
 import com.jiawa.wiki.domain.DocExample;
 import com.jiawa.wiki.mapper.ContentMapper;
@@ -15,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
+import org.yaml.snakeyaml.events.Event;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -88,6 +90,9 @@ public class DocService {
 
     public void delete(Long id){
         docmapper.deleteByPrimaryKey(id);
+
+        //Delete content as well
+        contentmapper.deleteByPrimaryKey(id);
     }
 
     public void delete(List<Long> IDlist){
@@ -95,5 +100,11 @@ public class DocService {
         DocExample.Criteria criteria=docExample.createCriteria();
         criteria.andIdIn(IDlist);
         docmapper.deleteByExample(docExample);
+
+        //delete content as well
+        ContentExample contentExample=new ContentExample();
+        ContentExample.Criteria contentcriteria = contentExample.createCriteria();
+        contentcriteria.andIdIn(IDlist);
+        contentmapper.deleteByExample(contentExample);
     }
 }
