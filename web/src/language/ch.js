@@ -31,5 +31,8 @@ module.exports={
         likes:"点赞",
         comment:"评论"
     },
-    preview:"内容预览"
+    preview:"内容预览",
+    message:{
+        nothing:"对不起，找不到相关内容。"
+    }
 }

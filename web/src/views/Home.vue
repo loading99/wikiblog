@@ -241,6 +241,7 @@
       </a-menu>
     </a-layout-sider>
     <a-layout-content :style="{ padding: '0 24px', minHeight: '280px' }">
+      <h3 v-if="ebook.length==0">{{ $t('message.nothing') }}</h3>
       <a-list item-layout="vertical" size="large" :pagination="pagination" :data-source="ebook">
         <template #renderItem="{ item }">
           <a-list-item key="item.name">
@@ -275,12 +276,14 @@ import { defineComponent, onMounted, ref} from 'vue';
 import axios from 'axios';
 import {message} from "ant-design-vue";
 import {Tool} from "@/util/tools";
+import search from "ant-design-vue/es/transfer/search";
 
 
 export default defineComponent({
   name: 'Home',
   setup(){
     const ebook=ref();
+    ebook.value=[];
     const pagination = {
       onChange: (page: number) => {
         console.log(page);

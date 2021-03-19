@@ -32,5 +32,8 @@ module.exports={
         likes:"Like",
         comment:"Comment"
     },
-    preview:"Preview"
+    preview:"Preview",
+    message:{
+        nothing:"Sorry, cannot find anything."
+    }
 }

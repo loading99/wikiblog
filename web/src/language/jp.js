@@ -32,5 +32,8 @@ module.exports={
         likes:"いいね！",
         comment:"コメント"
     },
-    preview:"Preview"
+    preview:"Preview",
+    message:{
+        nothing:"すみません、何もありません。"
+    }
 }
