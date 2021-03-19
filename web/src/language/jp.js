@@ -5,7 +5,8 @@ module.exports={
         me: "About me",
         admin: "Admin",
         cate: "Category",
-        lang: "language",
+        lang: "Language",
+        user: "User Mangement"
     },
     footer:{
     },

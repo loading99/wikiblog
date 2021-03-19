@@ -3,9 +3,10 @@ module.exports={
         main: "主页",
         book: "我的书籍",
         me: "关于我",
-        admin: "管理入口",
+        admin: "电子书管理",
         cate: "分类管理",
         lang: "选择语言",
+        user: "用户管理"
     },
     footer: {},
     table: {

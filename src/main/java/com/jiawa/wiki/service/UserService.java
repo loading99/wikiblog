@@ -1,0 +1,73 @@
+package com.jiawa.wiki.service;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.jiawa.wiki.domain.User;
+import com.jiawa.wiki.domain.UserExample;
+import com.jiawa.wiki.mapper.UserMapper;
+import com.jiawa.wiki.req.UserReq;
+import com.jiawa.wiki.req.UpdateReq;
+import com.jiawa.wiki.response.PageResp;
+import com.jiawa.wiki.utils.CopyUtil;
+import com.jiawa.wiki.utils.SnowFlake;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
+
+import javax.annotation.Resource;
+import java.util.List;
+
+@Service
+public class UserService {
+
+    private final static Logger LOG = LoggerFactory.getLogger(UserService.class);
+
+    @Resource
+    private UserMapper usermapper;
+
+    @Resource
+    private SnowFlake snowflake;
+
+    public PageResp<User> list(){
+        PageHelper.startPage(1,10);//Only Effective to the first query
+        PageInfo<User> pageInfo=new PageInfo<>();
+        List<User> users = usermapper.selectByExample(null);
+        PageResp<User> response=new PageResp<>();
+        response.setList(users);
+        response.setTotal(pageInfo.getTotal());
+        return response;
+    }
+
+    public PageResp<User> searchbyname(UserReq req){
+
+        UserExample userExample = new UserExample();
+        UserExample.Criteria criteria = userExample.createCriteria();
+        if(!ObjectUtils.isEmpty(req.getAccount())) {
+            criteria.andNameLike("%"+req.getAccount()+"%");
+        }
+        PageHelper.startPage(req.getPage(),req.getSize());
+        List<User> users = usermapper.selectByExample(userExample);
+        PageInfo<User> pageInfo=new PageInfo<>(users);
+        PageResp<User> response=new PageResp<>();
+        response.setList(users);
+        response.setTotal(pageInfo.getTotal());
+        return response;
+    }
+
+    public void update(UpdateReq req){
+
+        User copy = CopyUtil.copy(req,User.class);
+        //check if the id in the database
+
+        if (ObjectUtils.isEmpty(req.getId())){
+            //if ID doesn't exist
+            copy.setId(snowflake.nextId());
+            usermapper.insert(copy);
+        }else{
+            usermapper.updateByPrimaryKey(copy);
+        }
+    }
+    public void delete(Long id){
+        usermapper.deleteByPrimaryKey(id);
+    }
+}

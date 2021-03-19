@@ -3,9 +3,10 @@ module.exports={
         main: "Main",
         book: "My book",
         me: "About me",
-        admin: "Admin",
-        cate: "Category",
+        admin: "Ebook Management",
+        cate: "Category Management",
         lang: "Language",
+        user: "User Mangement"
     },
     footer:{
     },
