@@ -26,5 +26,11 @@ module.exports={
     },
     sider:{
         allcategory: "All"
-    }
+    },
+    actions:{
+        views:"Views",
+        likes:"Like",
+        comment:"Comment"
+    },
+    preview:"Preview"
 }

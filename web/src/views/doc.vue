@@ -18,15 +18,16 @@
           <div>
             <h2>{{doc.name}}</h2>
             <div>
-              <span>阅读数：{{doc.viewCount}}</span> &nbsp; &nbsp;
-              <span>点赞数：{{doc.voteCount}}</span>
+              <span><likeOutlined/> {{doc.viewCount}}</span> &nbsp; &nbsp;
+              <span><messageOutlined/> {{doc.voteCount}}</span>
+
             </div>
             <a-divider style="height: 2px; background-color: #9999cc"/>
           </div>
           <div class="wangeditor" :innerHTML="html"></div>
           <div class="vote-div">
             <a-button type="primary" shape="round" :size="'large'" @click="vote">
-              <template #icon><LikeOutlined /> &nbsp;点赞：{{doc.voteCount}} </template>
+              <template #icon><LikeOutlined /> &nbsp;{{ $t('actions.likes') }} {{doc.voteCount}} </template>
             </a-button>
           </div>
         </a-col>
@@ -194,7 +195,7 @@ export default defineComponent({
 
 /* 和antdv p冲突，覆盖掉 */
 .wangeditor blockquote p {
-  font-family:"YouYuan";
+  font-family:"Times New Roman";
   margin: 20px 10px !important;
   font-size: 16px !important;
   font-weight:600;

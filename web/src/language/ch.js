@@ -25,5 +25,11 @@ module.exports={
     },
     sider: {
         allcategory: "全部"
-    }
+    },
+    actions:{
+        views:"阅读数",
+        likes:"点赞",
+        comment:"评论"
+    },
+    preview:"内容预览"
 }

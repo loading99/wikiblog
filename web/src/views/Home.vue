@@ -386,6 +386,6 @@ export default defineComponent({
 });
 </script>
 
-<style>
+<style scoped>
 @import "../assets/css/about.css";
 </style>

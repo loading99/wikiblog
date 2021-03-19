@@ -70,6 +70,11 @@
               <a-form-item :label="$t('form.order')">
                 <a-input v-model:value="docform.sort" type="textarea"/>
               </a-form-item>
+              <a-form-item>
+                <a-button type="primary" @click="handlePreviewContent()">
+                  <EyeOutlined /> {{ $t('preview') }}
+                </a-button>
+              </a-form-item>
             </a-col>
             <a-col :span="14">
               <a-form-item>
@@ -78,10 +83,11 @@
             </a-col>
           </a-row>
         </a-form>
-
-
-
   </a-modal>
+
+  <a-drawer width="1000" placement="right" :closable="false" :visible="drawerVisible" @close="onDrawerClose">
+    <div class="wangeditor" :innerHTML="previewHtml"></div>
+  </a-drawer>
 </template>
 <TheFooter></TheFooter>
 <script lang="ts">
@@ -313,6 +319,18 @@ export default defineComponent({
       }
     };
 
+    // ----------------富文本预览--------------
+    const drawerVisible = ref(false);
+    const previewHtml = ref();
+    const handlePreviewContent = () => {
+      const html = editor.txt.html();
+      previewHtml.value = html;
+      drawerVisible.value = true;
+    };
+    const onDrawerClose = () => {
+      drawerVisible.value = false;
+    };
+
     onMounted(() => {
       handleQuery();
       console.log("-------Tree 结构------", level1);
@@ -336,6 +354,12 @@ export default defineComponent({
       handleDelete,
 
       treeSelect,
+
+      //Preview
+      handlePreviewContent,
+      onDrawerClose,
+      drawerVisible,
+      previewHtml
 
 
     }

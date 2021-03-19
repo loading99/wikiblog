@@ -61,7 +61,6 @@ public class DocService {
         return response;
     }
     public void update(DocReq req){
-
         Doc copy = CopyUtil.copy(req,Doc.class);
         //check if the id in the database
         Content content=CopyUtil.copy(req,Content.class);
@@ -86,6 +85,9 @@ public class DocService {
     public String findContent(Long id){
 
         Content content = contentmapper.selectByPrimaryKey(id);
+        if(ObjectUtils.isEmpty(content)){
+            return "";
+        }
         return content.getContent();
     }
 

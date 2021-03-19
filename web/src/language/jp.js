@@ -26,5 +26,11 @@ module.exports={
     },
     sider:{
         allcategory: "All"
-    }
+    },
+    actions:{
+        views:"Views",
+        likes:"いいね！",
+        comment:"コメント"
+    },
+    preview:"Preview"
 }
