@@ -158,8 +158,9 @@ export default defineComponent({
         const data = response.data;
         if (data.success) {
           docs.value=data.content
-
-          level1.value=Tool.array2Tree(docs.value,0)
+          if(!Tool.isEmpty(docs.value)){
+            level1.value=Tool.array2Tree(docs.value,0)
+          }
         } else {
           message.error(data.message);
         }
@@ -173,6 +174,7 @@ export default defineComponent({
      * update确认框 and Form
      **/
     const treeSelect= ref();
+    treeSelect.value={};
     const docform = ref ();
     docform.value={};
     const modalVisible = ref(false);
@@ -261,8 +263,15 @@ export default defineComponent({
       docform.value={
         ebookId:route.query.ebookId
       };
+
       treeSelect.value=Tool.copy(level1.value);
-      treeSelect.value.unshift({id:0,name:"None"})
+      if(Tool.isEmpty(treeSelect.value)){
+        treeSelect.value=[{id:0,name:"None"}]
+        console.log("-----Manully add options if treeselect is empty-------")
+      }else{
+        treeSelect.value.unshift({id:0,name:"None"})
+      }
+
       /**
        * Online Rich Text editor Rendering class content
        * Note the scripts within the function may run asynchronously
