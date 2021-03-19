@@ -6,6 +6,8 @@ import com.jiawa.wiki.req.UpdateReq;
 import com.jiawa.wiki.response.CommonResp;
 import com.jiawa.wiki.response.PageResp;
 import com.jiawa.wiki.service.UserService;
+import org.springframework.util.DigestUtils;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -34,7 +36,8 @@ public class UserController {
     }
 
     @PostMapping("/save")
-    public CommonResp saveUser(@Valid @RequestBody UpdateReq req){
+    public CommonResp saveUser(@Valid @RequestBody UserReq req){
+        req.setPassword(DigestUtils.md5DigestAsHex(req.getPassword().getBytes()));
         userService.update(req);
         CommonResp resp = new CommonResp<>();
         return resp;

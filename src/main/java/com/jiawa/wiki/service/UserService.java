@@ -3,15 +3,19 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.jiawa.wiki.domain.User;
 import com.jiawa.wiki.domain.UserExample;
+import com.jiawa.wiki.exception.BusinessException;
+import com.jiawa.wiki.exception.BusinessExceptionCode;
 import com.jiawa.wiki.mapper.UserMapper;
 import com.jiawa.wiki.req.UserReq;
 import com.jiawa.wiki.req.UpdateReq;
 import com.jiawa.wiki.response.PageResp;
 import com.jiawa.wiki.utils.CopyUtil;
 import com.jiawa.wiki.utils.SnowFlake;
+import org.apache.ibatis.jdbc.Null;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
@@ -54,20 +58,37 @@ public class UserService {
         return response;
     }
 
-    public void update(UpdateReq req){
+    public void update(UserReq req){
 
         User copy = CopyUtil.copy(req,User.class);
         //check if the id in the database
-
         if (ObjectUtils.isEmpty(req.getId())){
             //if ID doesn't exist
-            copy.setId(snowflake.nextId());
-            usermapper.insert(copy);
+            User user = selectbyAcc(req.getAccount());
+            if(ObjectUtils.isEmpty(user)){
+                copy.setId(snowflake.nextId());
+                usermapper.insert(copy);
+            }else{
+                throw new BusinessException(BusinessExceptionCode.USER_LOGIN_NAME_EXIST);
+            }
         }else{
-            usermapper.updateByPrimaryKey(copy);
+            copy.setAccount(null);
+            usermapper.updateByPrimaryKeySelective(copy);
         }
     }
     public void delete(Long id){
         usermapper.deleteByPrimaryKey(id);
+    }
+
+    public User selectbyAcc(String acc){
+        UserExample userExample = new UserExample();
+        UserExample.Criteria criteria = userExample.createCriteria();
+        criteria.andAccountEqualTo(acc);
+        List<User> users = usermapper.selectByExample(userExample);
+        if(CollectionUtils.isEmpty(users)){
+            return null;
+        }else {
+            return users.get(0);
+        }
     }
 }
