@@ -6,6 +6,7 @@ import com.jiawa.wiki.domain.UserExample;
 import com.jiawa.wiki.exception.BusinessException;
 import com.jiawa.wiki.exception.BusinessExceptionCode;
 import com.jiawa.wiki.mapper.UserMapper;
+import com.jiawa.wiki.req.ResetPasswordReq;
 import com.jiawa.wiki.req.UserReq;
 import com.jiawa.wiki.req.UpdateReq;
 import com.jiawa.wiki.response.PageResp;
@@ -73,8 +74,14 @@ public class UserService {
             }
         }else{
             copy.setAccount(null);
+            copy.setPassword(null);
             usermapper.updateByPrimaryKeySelective(copy);
         }
+    }
+
+    public void resetpassword(ResetPasswordReq req){
+        User copy = CopyUtil.copy(req,User.class);
+        usermapper.updateByPrimaryKeySelective(copy);
     }
     public void delete(Long id){
         usermapper.deleteByPrimaryKey(id);

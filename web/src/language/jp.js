@@ -17,6 +17,7 @@ module.exports={
         category1: "category1",
         category2: "category2",
         content:"コンテンツ",
+        newPass:"新しいパスワード",
     },
     table:{
         add: "Add",

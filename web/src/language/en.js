@@ -17,6 +17,7 @@ module.exports={
         category1: "Category1",
         category2: "Category2",
         content:"Content",
+        newPass:"New Password",
     },
     table:{
         add: "Add",
@@ -36,6 +37,7 @@ module.exports={
     },
     preview:"Preview",
     message:{
-        nothing:"Sorry, cannot find anything."
+        nothing:"Sorry, cannot find anything.",
+        invalidpw:"Password should be between 6,32 and contain characters and numbers",
     }
 }

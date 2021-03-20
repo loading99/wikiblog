@@ -11,12 +11,12 @@
           </a-form-item>
           <a-form-item>
             <a-button type="primary" @click="handleQuery({page: 1, size: pagination.pageSize})">
-              查询
+              {{ $t('table.search') }}
             </a-button>
           </a-form-item>
           <a-form-item>
             <a-button type="primary" @click="add()">
-              新增
+              {{ $t('table.add') }}
             </a-button>
           </a-form-item>
         </a-form>
@@ -73,24 +73,26 @@
   </a-modal>
 
   <a-modal
-      title="重置密码"
+      :title="$t('table.reset')"
       v-model:visible="resetModalVisible"
       :confirm-loading="resetModalLoading"
       @ok="handleResetModalOk"
   >
     <a-form :model="user" :label-col="{ span: 6 }" :wrapper-col="{ span: 18 }">
-      <a-form-item label="新密码">
+      <a-form-item :label="$t('form.newPass')">
         <a-input v-model:value="user.password" type="password"/>
       </a-form-item>
     </a-form>
   </a-modal>
+
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref } from 'vue';
+import { defineComponent, onMounted, ref} from 'vue';
 import axios from 'axios';
 import { message } from 'ant-design-vue';
 import {Tool} from "@/util/tools";
+import i18n from "@/language/i18n";
 
 declare let hexMd5: any;
 declare let KEY: any;
@@ -107,6 +109,7 @@ export default defineComponent({
       total: 0
     });
     const loading = ref(false);
+
 
     const columns = [
       {
@@ -166,31 +169,47 @@ export default defineComponent({
         size: pagination.pageSize
       });
     };
+    const validate=(str: string)=>{
+      const pattern="^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,32}$";
+      if(str.match(pattern)){
+        return true;
+      }else{
+        return false;
+      }
+    }
 
-    // -------- 表单 ---------
+    // -------- Change username cannot change account name ---------
     const user = ref();
     const modalVisible = ref(false);
     const modalLoading = ref(false);
     const handleModalOk = () => {
       modalLoading.value = true;
 
-      user.value.password = hexMd5(user.value.password + KEY);
+      /**
+       * Validate Password
+       */
+      if (validate(user.value.password)) {
+        user.value.password = hexMd5(user.value.password + KEY);
+        axios.post("/user/save", user.value).then((response) => {
+          modalLoading.value = false;
+          const data = response.data; // data = commonResp
+          if (data.success) {
+            modalVisible.value = false;
+            // 重新加载列表
+            handleQuery({
+              page: pagination.value.current,
+              size: pagination.value.pageSize,
+            });
+          } else {
 
-      axios.post("/user/save", user.value).then((response) => {
+            message.error(data.message);
+          }
+        });
+      } else {
         modalLoading.value = false;
-        const data = response.data; // data = commonResp
-        if (data.success) {
-          modalVisible.value = false;
-
-          // 重新加载列表
-          handleQuery({
-            page: pagination.value.current,
-            size: pagination.value.pageSize,
-          });
-        } else {
-          message.error(data.message);
-        }
-      });
+        const msg=i18n.global.t('message.invalidpw')
+        message.error(msg)
+      }
     };
 
     /**
@@ -229,24 +248,29 @@ export default defineComponent({
     const resetModalLoading = ref(false);
     const handleResetModalOk = () => {
       resetModalLoading.value = true;
+      if(validate(user.value.password)){
+        user.value.password = hexMd5(user.value.password + KEY);
+        axios.post("/user/reset-password", user.value).then((response) => {
+          resetModalLoading.value = false;
+          const data = response.data; // data = commonResp
+          if (data.success) {
+            resetModalVisible.value = false;
 
-      user.value.password = hexMd5(user.value.password + KEY);
+            // 重新加载列表
+            handleQuery({
+              page: pagination.value.current,
+              size: pagination.value.pageSize,
+            });
+          } else {
 
-      axios.post("/user/reset-password", user.value).then((response) => {
+            message.error(data.message);
+          }
+        });
+      }else{
         resetModalLoading.value = false;
-        const data = response.data; // data = commonResp
-        if (data.success) {
-          resetModalVisible.value = false;
-
-          // 重新加载列表
-          handleQuery({
-            page: pagination.value.current,
-            size: pagination.value.pageSize,
-          });
-        } else {
-          message.error(data.message);
-        }
-      });
+        const msg=i18n.global.t('message.invalidpw')
+        message.error(msg)
+      }
     };
 
     /**

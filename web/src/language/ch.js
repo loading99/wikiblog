@@ -24,6 +24,7 @@ module.exports={
         category1: "分类1",
         category2: "分类2",
         content:"内容",
+        newPass:"新密码",
     },
     sider: {
         allcategory: "全部"
@@ -35,6 +36,7 @@ module.exports={
     },
     preview:"内容预览",
     message:{
-        nothing:"对不起，找不到相关内容。"
+        nothing:"对不起，找不到相关内容。",
+        invalidpw:"密码必须在6-20 位之间并包括符号和数字",
     }
 }
