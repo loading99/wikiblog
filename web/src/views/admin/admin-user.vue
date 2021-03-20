@@ -32,10 +32,10 @@
         <template v-slot:action="{ text, record }">
           <a-space size="small">
             <a-button type="primary" @click="resetPassword(record)">
-              重置密码
+              {{ $t('table.reset') }}
             </a-button>
             <a-button type="primary" @click="edit(record)">
-              编辑
+              {{ $t('table.edit') }}
             </a-button>
             <a-popconfirm
                 title="删除后不可恢复，确认删除?"
@@ -44,7 +44,7 @@
                 @confirm="handleDelete(record.id)"
             >
               <a-button type="danger">
-                删除
+                {{ $t('table.deletion') }}
               </a-button>
             </a-popconfirm>
           </a-space>

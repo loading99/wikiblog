@@ -37,7 +37,6 @@ public class UserController {
 
     @PostMapping("/save")
     public CommonResp saveUser(@Valid @RequestBody UserReq req){
-        req.setPassword(DigestUtils.md5DigestAsHex(req.getPassword().getBytes()));
         userService.update(req);
         CommonResp resp = new CommonResp<>();
         return resp;

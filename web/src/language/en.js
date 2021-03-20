@@ -23,7 +23,8 @@ module.exports={
         search: "Search",
         edit: "Edit",
         deletion: "Delete",
-        fm:"File management"
+        fm:"File management",
+        reset: "Reset Password"
     },
     sider:{
         allcategory: "All"

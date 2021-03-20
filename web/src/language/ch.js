@@ -14,7 +14,8 @@ module.exports={
         search: "查询",
         edit: "修改",
         deletion: "刪除",
-        fm: "文档管理"
+        fm: "文档管理",
+        reset: "重置密码"
     },
     form: {
         name: "名称",
