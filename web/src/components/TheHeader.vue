@@ -30,15 +30,12 @@
           <template #overlay>
             <a-menu @click="onClick">
               <a-menu-item key="en">
-                <ProfileOutlined />
                 English
               </a-menu-item>
               <a-menu-item key="ch">
-                <ProfileOutlined />
                 中文
               </a-menu-item>
               <a-menu-item key="jp">
-                <ProfileOutlined />
                 日本語
               </a-menu-item>
             </a-menu>

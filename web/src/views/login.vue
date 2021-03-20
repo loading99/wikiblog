@@ -1,5 +1,29 @@
 <template>
+
   <div class="back">
+    <div class="banner">
+      <div class="agileinfo-dot">
+
+        <div class="w3layoutscontaineragileits">
+          <h2>登录</h2>
+          <form action="#" method="post">
+            <input type="email" name="Username" :placeholder="$t('form.acc')" required>
+            <input type="password" name="Password" :placeholder="$t('form.password')" required>
+            <ul class="agileinfotickwthree">
+              <li>
+                <input type="checkbox" id="brand1" value="">
+                <a href="#">{{ $t('actions.forget') }}</a>
+              </li>
+            </ul>
+            <div class="aitssendbuttonw3ls">
+              <input type="submit" :value="$t('actions.login')">
+              <div class="clear"></div>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
       <div class="stars-wrapper">
         <svg class="stars" width="100%" height="100%" preserveAspectRatio="none">
           <circle class="star" cx="95.24%" cy="73.06%" r="1.1"></circle>
@@ -202,6 +226,7 @@
           <circle class="star" cx="40.8%" cy="82.15%" r="0.8"></circle>
           <circle class="star" cx="29.88%" cy="0.1%" r="0.6"></circle>
           <circle class="star" cx="53.46%" cy="74.5%" r="1.2"></circle>
+          <h4>Log In</h4>
         </svg>
         <svg class="stars" width="100%" height="100%" preserveAspectRatio="none">
           <circle class="star" cx="96.1%" cy="74.21%" r="1.1"></circle>
@@ -637,7 +662,9 @@
           </g>
         </svg>
       </div>
-    </div>
+
+
+  </div>
 </template>
 
 
@@ -651,5 +678,5 @@ export default defineComponent({
 
 <style scoped>
 @import "../assets/css/login.css";
-
+@import "../assets/css/logform.css";
 </style>

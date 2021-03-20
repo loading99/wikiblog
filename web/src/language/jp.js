@@ -17,6 +17,8 @@ module.exports={
         category1: "category1",
         category2: "category2",
         content:"コンテンツ",
+        password:"パスワード",
+        acc:"アカウント",
         newPass:"新しいパスワード",
     },
     table:{
@@ -33,7 +35,9 @@ module.exports={
     actions:{
         views:"Views",
         likes:"いいね！",
-        comment:"コメント"
+        comment:"コメント",
+        login:"スタート",
+        forget:"パスワードを忘れた"
     },
     preview:"Preview",
     message:{

@@ -17,6 +17,8 @@ module.exports={
         category1: "Category1",
         category2: "Category2",
         content:"Content",
+        password:"Password",
+        acc:"Account",
         newPass:"New Password",
     },
     table:{
@@ -33,7 +35,9 @@ module.exports={
     actions:{
         views:"Views",
         likes:"Like",
-        comment:"Comment"
+        comment:"Comment",
+        login:"Start",
+        forget:"Forget Password"
     },
     preview:"Preview",
     message:{

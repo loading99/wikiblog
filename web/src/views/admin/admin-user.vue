@@ -184,7 +184,6 @@ export default defineComponent({
     const modalLoading = ref(false);
     const handleModalOk = () => {
       modalLoading.value = true;
-
       /**
        * Validate Password
        */
@@ -255,14 +254,12 @@ export default defineComponent({
           const data = response.data; // data = commonResp
           if (data.success) {
             resetModalVisible.value = false;
-
             // 重新加载列表
             handleQuery({
               page: pagination.value.current,
               size: pagination.value.pageSize,
             });
           } else {
-
             message.error(data.message);
           }
         });

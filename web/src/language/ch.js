@@ -24,7 +24,10 @@ module.exports={
         category1: "分类1",
         category2: "分类2",
         content:"内容",
+        password:"密码",
+        acc:"账号",
         newPass:"新密码",
+
     },
     sider: {
         allcategory: "全部"
@@ -32,7 +35,10 @@ module.exports={
     actions:{
         views:"阅读数",
         likes:"点赞",
-        comment:"评论"
+        comment:"评论",
+        login:"登录",
+        forget:"忘记密码？"
+
     },
     preview:"内容预览",
     message:{
