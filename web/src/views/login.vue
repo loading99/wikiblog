@@ -5,10 +5,13 @@
       <div class="agileinfo-dot">
 
         <div class="w3layoutscontaineragileits">
-          <h2>登录</h2>
-          <form action="#" method="post">
-            <input type="email" name="Username" :placeholder="$t('form.acc')" required>
-            <input type="password" name="Password" :placeholder="$t('form.password')" required>
+          <!--          <h2>登录</h2>-->
+          <form id="LoginForm" name="LoginForm">
+            <a-input v-model:value="param.acc" type="email" name="Username" :placeholder="$t('form.acc')"
+                     required></a-input>
+            <a-input v-model:value="param.password" type="password" name="Password" :placeholder="$t('form.password')"
+                     required></a-input>
+
             <ul class="agileinfotickwthree">
               <li>
                 <input type="checkbox" id="brand1" value="">
@@ -16,7 +19,7 @@
               </li>
             </ul>
             <div class="aitssendbuttonw3ls">
-              <input type="submit" :value="$t('actions.login')">
+              <input type="button" :onclick="handleLogin" :value="$t('actions.login')">
               <div class="clear"></div>
             </div>
           </form>
@@ -642,9 +645,6 @@
           <g transform="rotate(-135)">
             <ellipse class="comet comet-a" fill="url(#comet-gradient)" cx="0" cy="0" rx="150" ry="2"></ellipse>
           </g>
-          <g transform="rotate(-135)">
-            <ellipse class="comet comet-b" fill="url(#comet-gradient)" cx="0" cy="0" rx="150" ry="2"></ellipse>
-          </g>
           <g transform="rotate(45 700 0)">
             <ellipse class="comet-c" fill="url(#comet-gradient)" cx="700px" cy="0px" rx="150" ry="2"></ellipse>
           </g>
@@ -670,9 +670,43 @@
 
 <script lang="ts">
 
-import {defineComponent} from "vue";
+import {defineComponent, ref} from "vue";
+import axios from 'axios';
+import {message} from "ant-design-vue";
+import i18n from "@/language/i18n";
+import userstatus from "../../public/js/status";
+declare let hexMd5:any;
+declare let KEY:any;
+
 export default defineComponent({
   name:'Login',
+  setup(){
+    const param=ref();
+    param.value={};
+    const handleLogin=()=>{
+      param.value.password=hexMd5(param.value.password+KEY);
+      axios.post('user/login',{
+        account:param.value.acc,
+        password:param.value.password
+      }).then((response)=>{
+        const data=response.data;
+        param.value.password="";
+        if(data.success){
+          userstatus.value=data.content;
+          console.log("----全局变量----",userstatus.value.account)
+          message.success(i18n.global.t('message.loginSuccess'));
+        }else{
+          message.error(data.message);
+        }
+      })
+    }
+    return{
+      param,
+      handleLogin,
+    }
+  },
+
+
 })
 </script>
 

@@ -6,9 +6,11 @@ import com.jiawa.wiki.domain.UserExample;
 import com.jiawa.wiki.exception.BusinessException;
 import com.jiawa.wiki.exception.BusinessExceptionCode;
 import com.jiawa.wiki.mapper.UserMapper;
+import com.jiawa.wiki.req.LoginReq;
 import com.jiawa.wiki.req.ResetPasswordReq;
 import com.jiawa.wiki.req.UserReq;
 import com.jiawa.wiki.req.UpdateReq;
+import com.jiawa.wiki.response.LoginResp;
 import com.jiawa.wiki.response.PageResp;
 import com.jiawa.wiki.utils.CopyUtil;
 import com.jiawa.wiki.utils.SnowFlake;
@@ -96,6 +98,22 @@ public class UserService {
             return null;
         }else {
             return users.get(0);
+        }
+    }
+
+    public LoginResp login(LoginReq req) {
+        User userDB = selectbyAcc(req.getAccount());
+        if (ObjectUtils.isEmpty(userDB)) {
+            LOG.info("用户名不存在，{}", req.getAccount());
+            throw new BusinessException(BusinessExceptionCode.LOGIN_USER_ERROR);
+        } else {
+            if (userDB.getPassword().equals(req.getPassword())) {
+                LoginResp loginResp = CopyUtil.copy(userDB, LoginResp.class);
+                return loginResp;
+            } else {
+                LOG.info("密码不正确，{}", req.getPassword());
+                throw new BusinessException(BusinessExceptionCode.LOGIN_USER_ERROR);
+            }
         }
     }
 }

@@ -6,7 +6,8 @@ module.exports={
         admin: "电子书管理",
         cate: "分类管理",
         lang: "选择语言",
-        user: "用户管理"
+        user: "用户管理",
+        login: "登录"
     },
     footer: {},
     table: {
@@ -42,7 +43,9 @@ module.exports={
     },
     preview:"内容预览",
     message:{
+        hello:"您好, ",
         nothing:"对不起，找不到相关内容。",
         invalidpw:"密码必须在6-20 位之间并包括符号和数字",
+        loginSuccess:"登录成功"
     }
 }

@@ -2,7 +2,7 @@
   <a-layout-header class="header">
   <div class="logo" />
     <a-row type="flex">
-      <a-col :flex="9">
+      <a-col :flex="18">
         <a-menu
             theme="dark"
             mode="horizontal"
@@ -23,9 +23,18 @@
           <a-menu-item key="about">
             <router-link to="/">{{ $t('header.me') }}</router-link>
           </a-menu-item>
+
         </a-menu>
       </a-col>
       <a-col :flex="1">
+        <a class="login-menu" href="/login" v-show="!userstatus.account">
+          <span>{{ $t('header.login') }}</span>
+        </a>
+        <a class="login-menu" v-show="!!userstatus.account" >
+          <span>{{ $t('message.hello') }}{{ userstatus.name }}</span>
+        </a>
+      </a-col>
+      <a-col :flex="4">
         <a-dropdown>
           <template #overlay>
             <a-menu @click="onClick">
@@ -45,15 +54,17 @@
             <DownOutlined/>
           </a-button>
         </a-dropdown>
+
       </a-col>
     </a-row>
 </a-layout-header>
 </template>
 
 <script lang="ts">
-import { defineComponent, VNodeChild} from 'vue';
+import { defineComponent, VNodeChild,ref} from 'vue';
 import { DownOutlined } from '@ant-design/icons-vue';
 import i18n from "@/language/i18n";
+import userstatus from "../../public/js/status";
 interface MenuInfo {
   key: string;
   keyPath: string[];
@@ -65,11 +76,12 @@ export default defineComponent({
 
   setup(){
     const onClick = ({key}: MenuInfo) => {
-      console.log(`click on item ${key}`);
+      console.log(`switch to language ${key}`);
       i18n.global.locale=key;
     };
     return {
-      onClick
+      userstatus,
+      onClick,
     };
   },
   components: {
@@ -80,4 +92,9 @@ export default defineComponent({
 
 <style lang="less">
 @import "../assets/css/common.less";
+.login-menu
+{
+  float: left;
+  color: white;
+}
 </style>

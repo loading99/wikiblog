@@ -6,7 +6,8 @@ module.exports={
         admin: "Ebook Management",
         cate: "Category Management",
         lang: "Language",
-        user: "User Mangement"
+        user: "User Mangement",
+        login: "Sign in"
     },
     footer:{
     },
@@ -41,7 +42,9 @@ module.exports={
     },
     preview:"Preview",
     message:{
+        hello:"Hello, ",
         nothing:"Sorry, cannot find anything.",
         invalidpw:"Password should be between 6,32 and contain characters and numbers",
+        loginSuccess:"Login Success"
     }
 }

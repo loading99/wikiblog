@@ -170,10 +170,10 @@ ul.agileinfotickwthree li input[type="checkbox"]:checked+label span:first-child:
   height: 10px;
 }
 
-input[type="submit"] {
+input[type="button"] {
   font-size: 16px;
   padding: 16px 65px;
-  width: 97%;
+  width: 87%;
   color: #FFF;
   border: none;
   border-radius: 0px;
@@ -183,10 +183,10 @@ input[type="submit"] {
   border-radius:25px;
   background: url(../images/send1.png) no-repeat 410px 12px;
   background-color: #f54950;
-  background-size: 24px;
+  background-size: 20px;
 }
 
-input[type="submit"]:hover {
+input[type="button"]:hover {
   background-color: #fff;
   color: #f54950;
   background-color: #ce8c8f;
@@ -287,11 +287,11 @@ input[type="checkbox"] {
 .form-sub-w3ls input[type="text"],.form-sub-w3ls input[type="password"],.form-sub-w3ls input[type="email"]{
   border:2px solid #fff;
 }
-.submit-w3l  input[type="submit"] {
+.submit-w3l  input[type="button"] {
   background:#fff;
   color:#537b35;
 }
-.submit-w3l  input[type="submit"]:hover {
+.submit-w3l  input[type="button"]:hover {
   background:#fff;
   color:#000;
 }
@@ -308,7 +308,7 @@ input[type="checkbox"] {
 }
 /*--- Responsive Code ---*/
 @media screen and (max-width: 1920px) {
-  input[type="submit"] {
+  input[type="button"] {
     background: url(../images/send1.png) no-repeat 500px 12px;
     background-color: #f54950;
     background-size: 24px;
@@ -318,7 +318,7 @@ input[type="checkbox"] {
   }
 }
 @media screen and (max-width: 1680px) {
-  input[type="submit"] {
+  input[type="button"] {
     background: url(../images/send1.png) no-repeat 440px 12px;
     background-color: #f54950;
     background-size: 24px;
@@ -329,7 +329,7 @@ input[type="checkbox"] {
 }
 
 @media screen and (max-width: 1600px) {
-  input[type="submit"] {
+  input[type="button"] {
     background: url(../images/send1.png) no-repeat 415px 12px;
     background-color: #f54950;
     background-size: 24px;
@@ -421,7 +421,7 @@ input[type="checkbox"] {
   .agileinfo-dot {
     padding: 1em 0 17.4em;
   }
-  input[type="submit"] {
+  input[type="button"] {
     background: url(../images/send1.png) no-repeat 405px 12px;
     background-color: #f54950;
     background-size: 24px;
@@ -459,7 +459,7 @@ input[type="checkbox"] {
     letter-spacing: 1px;
     line-height: 24px;
   }
-  input[type="submit"] {
+  input[type="button"] {
     background: url(../images/send1.png) no-repeat 365px 12px;
     background-color: #f54950;
     background-size: 24px;
@@ -491,7 +491,7 @@ input[type="checkbox"] {
   .w3footeragile p {
     line-height: 24px;
   }
-  input[type="submit"] {
+  input[type="button"] {
     background: url(../images/send1.png) no-repeat 325px 12px;
     background-color: #f54950;
     background-size: 24px;
@@ -518,7 +518,7 @@ input[type="checkbox"] {
     top: 0;
     border: 1px solid #EEE;
   }
-  input[type="submit"] {
+  input[type="button"] {
     font-size: 15px;
     padding: 15px 40px;
     background: url(../images/send1.png) no-repeat 305px 12px;
@@ -567,7 +567,7 @@ input[type="checkbox"] {
     background: url(../images/user.png) no-repeat 300px 11px;
     background-size: 25px;
   }
-  input[type="submit"] {
+  input[type="button"] {
     font-size: 15px;
     padding: 15px 40px;
     background: url(../images/send1.png) no-repeat 285px 12px;
@@ -640,7 +640,7 @@ input[type="checkbox"] {
     padding: 15px 53px;
     width: 70%;
   }
-  input[type="submit"] {
+  input[type="button"] {
     font-size: 15px;
     padding: 15px 40px;
     background: url(../images/send1.png) no-repeat 290px 12px;
@@ -669,7 +669,7 @@ input[type="checkbox"] {
     font-size: 26px;
   }
 
-  input[type="submit"] {
+  input[type="button"] {
     font-size: 15px;
     padding: 15px 40px;
     background: url(../images/send1.png) no-repeat 240px 12px;
@@ -697,7 +697,7 @@ input[type="checkbox"] {
   .agileinfo-dot {
     padding: 1em 0 2.3em;
   }
-  input[type="submit"] {
+  input[type="button"] {
     font-size: 15px;
     padding: 15px 40px;
     background: url(../images/send1.png) no-repeat 285px 12px;
@@ -761,7 +761,7 @@ input[type="checkbox"] {
     padding: 15px 45px;
     width: 66%;
   }
-  input[type="submit"] {
+  input[type="button"] {
     font-size: 15px;
     padding: 13px 40px;
     background: url(../images/send1.png) no-repeat 213px 10px;
