@@ -670,11 +670,11 @@
 
 <script lang="ts">
 
-import {defineComponent, ref} from "vue";
+import {defineComponent, ref,computed} from "vue";
 import axios from 'axios';
 import {message} from "ant-design-vue";
 import i18n from "@/language/i18n";
-import userstatus from "../../public/js/status";
+import store from "@/store";
 declare let hexMd5:any;
 declare let KEY:any;
 
@@ -692,9 +692,9 @@ export default defineComponent({
         const data=response.data;
         param.value.password="";
         if(data.success){
-          userstatus.value=data.content;
-          console.log("----全局变量----",userstatus.value.account)
           message.success(i18n.global.t('message.loginSuccess'));
+          console.log("----Set value by vuex----")
+          store.commit("setUser",data.content)
         }else{
           message.error(data.message);
         }
