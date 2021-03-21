@@ -8,9 +8,10 @@ const store=createStore({
   },
   mutations: {
     setUser(state,user){
+      console.log("---Set User---")
       state.userstatus=user;
       SessionStorage.set(USER,user);
-    }
+    },
   },
   actions: {
   },

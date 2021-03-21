@@ -7,7 +7,9 @@ module.exports={
         cate: "Category",
         lang: "Language",
         user: "User Mangement",
-        login: "ログイン"
+        login: "ログイン",
+        logout:"ログアウト",
+        portal:"Admin"
     },
     footer:{
     },
@@ -42,9 +44,10 @@ module.exports={
     },
     preview:"Preview",
     message:{
-        hello:"ようこそ、　",
+        hello:"ようこそ、",
         nothing:"すみません、何もありません。",
         invalidpw:"Password should be between 6,32 and contain characters and numbers",
-        loginSuccess:"ログイン成功"
+        loginSuccess:"ログイン成功",
+        logoutSuccess:"ログアウト成功",
     }
 }

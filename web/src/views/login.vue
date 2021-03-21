@@ -24,7 +24,6 @@
             </div>
           </form>
         </div>
-
       </div>
     </div>
       <div class="stars-wrapper">
@@ -711,7 +710,9 @@ export default defineComponent({
 })
 </script>
 
-<style scoped>
+<style src="../assets/css/logform.css" scoped>
+</style>
+
+<style>
 @import "../assets/css/login.css";
-@import "../assets/css/logform.css";
 </style>

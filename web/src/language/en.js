@@ -7,7 +7,9 @@ module.exports={
         cate: "Category Management",
         lang: "Language",
         user: "User Mangement",
-        login: "Sign in"
+        login: "Sign in",
+        logout:" Sign out",
+        portal:"Admin Portal"
     },
     footer:{
     },
@@ -45,6 +47,7 @@ module.exports={
         hello:"Hello, ",
         nothing:"Sorry, cannot find anything.",
         invalidpw:"Password should be between 6,32 and contain characters and numbers",
-        loginSuccess:"Login Success"
+        loginSuccess:"Login Success",
+        logoutSuccess:"Logout Success",
     }
 }
