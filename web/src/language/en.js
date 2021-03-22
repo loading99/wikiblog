@@ -49,5 +49,6 @@ module.exports={
         invalidpw:"Password should be between 6,32 and contain characters and numbers",
         loginSuccess:"Login Success",
         logoutSuccess:"Logout Success",
+        loginRequired:"Login Required!"
     }
 }

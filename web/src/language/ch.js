@@ -50,5 +50,6 @@ module.exports={
         invalidpw:"密码必须在6-20 位之间并包括符号和数字",
         loginSuccess:"登录成功",
         logoutSuccess:"退出成功",
+        loginRequired:"此页面需要登录"
     }
 }

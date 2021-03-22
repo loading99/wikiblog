@@ -84,8 +84,15 @@ public class UserController {
         Long token=snowFlake.nextId();
         logger.info("-------Generate Token and save in Redis-------");
         loginResp.setToken(token.toString());
-        redisTemplate.opsForValue().set(token, JSONObject.toJSONString(loginResp),3600, TimeUnit.SECONDS);
+        redisTemplate.opsForValue().set(token.toString(), JSONObject.toJSONString(loginResp),3600, TimeUnit.SECONDS);
         resp.setContent(loginResp);
         return resp;
     }
+    @GetMapping("/logout/{token}")
+    public CommonResp logout(@PathVariable String token){
+        CommonResp resp = new CommonResp<>();
+        redisTemplate.delete(token);
+        return resp;
+    }
+
 }

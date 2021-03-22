@@ -14,10 +14,10 @@
           <a-menu-item key="admin-user" v-if="!!user.account">
             <router-link to="/admin/user">{{ $t('header.user') }}</router-link>
           </a-menu-item>
-          <a-menu-item key="admin-ebook" >
+          <a-menu-item key="admin-ebook" v-if="!!user.account">
             <router-link to="/admin/ebook">{{ $t('header.admin') }}</router-link>
           </a-menu-item>
-          <a-menu-item key="admin-category" >
+          <a-menu-item key="admin-category" v-if="!!user.account">
             <router-link to="/admin/category">{{ $t('header.cate') }}</router-link>
           </a-menu-item>
           <a-menu-item key="about">
@@ -39,7 +39,7 @@
             cancel-text="No"
             @confirm="logout"
         >
-          <a class="login-menu" v-show="!!user.account" >
+          <a class="login-menu"  v-show="!!user.account" >
             <span>{{ $t('header.logout') }}</span>
           </a>
         </a-popconfirm>
@@ -101,6 +101,7 @@ export default defineComponent({
           message.success(i18n.global.t('message.logoutSuccess'));
           console.log("---Reset global value by vuex---");
           store.commit("setUser",{});
+          window.location.href='/';
         }else{
           message.error(data.message);
         }

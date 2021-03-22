@@ -7,6 +7,7 @@ import "ant-design-vue/dist/antd.css"
 import * as Icons from '@ant-design/icons-vue';
 import axios from 'axios';
 import i18n from './language/i18n';
+import {Tool} from "@/util/tools";
 
 axios.defaults.baseURL=process.env.VUE_APP_SERVER;
 /**
@@ -14,6 +15,10 @@ axios.defaults.baseURL=process.env.VUE_APP_SERVER;
  */
 axios.interceptors.request.use(function (config) {
     console.log('Request Parameters：', config);
+    const token=store.state.userstatus.token;
+    if(Tool.isNotEmpty(token)){
+        config.headers.token=token;
+    }
     return config;
 }, error => {
     return Promise.reject(error);
