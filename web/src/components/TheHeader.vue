@@ -1,5 +1,6 @@
 <template>
-  <a-layout-header class="header">
+  <a-layout-header class="head" style="padding-left: 15%">
+
   <div class="logo" />
     <a-row type="flex">
       <a-col :flex="18">
@@ -21,7 +22,7 @@
             <router-link to="/admin/category">{{ $t('header.cate') }}</router-link>
           </a-menu-item>
           <a-menu-item key="about">
-            <router-link to="/">{{ $t('header.me') }}</router-link>
+            <router-link to="/about">{{ $t('header.me') }}</router-link>
           </a-menu-item>
 
         </a-menu>
@@ -120,10 +121,10 @@ export default defineComponent({
 </script>
 
 <style lang="less">
-@import "../assets/css/common.less";
 .login-menu
 {
   float: left;
   color: white;
 }
+
 </style>

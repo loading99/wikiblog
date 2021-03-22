@@ -1,0 +1,220 @@
+<template>
+
+  <body>
+  <aside class="sidebar">
+    <div class="avatar">
+      <img src="../assets/images/avatar.jpg" title="保罗酱"/>
+    </div>
+    <nav class="nav">
+      <a href="#info">Info</a>
+      <a href="#skills">Skills</a>
+      <a href="#story">Experience</a>
+      <a href="#works">Creation</a>
+      <a href="#team">Social Media</a>
+    </nav>
+  </aside>
+  <main>
+    <section id="info">
+      <div class="wrap">
+        <h2 class="title">Basic Information</h2>
+        <div class="row">
+          <div class="col-l-4">
+            <p>Name:Zhijian Hu</p>
+            <p>English Name：Calum</p>
+            <p>Gender: Male</p>
+            <p>Address: 400W 113th St. New York, NY</p>
+          </div>
+          <div class="col-l-4">
+            <p>Education: Masters</p>
+            <p>GitHub：<a href="/">Link</a></p>
+            <p>Email: <a href="zhij311@gmail.com">zhij311@gmail.com</a></p>
+          </div>
+          <div class="col-l-4">
+            <p>我是一个热爱钻研计算机技术的青少年，从小开始对计算机有极大的兴趣。目前我专注网站开发领域。我还自己发起建立了一个制作游戏的团队，希望能和大家合作，一同创造出属于我们自己的原创作品。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="skills">
+      <div class="wrap">
+        <h2 class="title">Professional Skills</h2>
+        <div class="row scrollable">
+          <div class="col-l-4">
+            <h3>Programming Language</h3>
+            <div class="row">
+              <div class="col-l-5">
+                <p>
+                  <i class="fa fa-python"></i>
+                  Python</p>
+                <p>
+                  <i class="devicon-java-plain colored"></i>
+                  Java</p>
+                <p>
+                  <i class="fa fa-html5"></i>
+                  HTML5</p>
+                <p>
+                  <i class="devicon-css3-plain-wordmark" style="font-size: 1.5em;"></i>
+                  CSS3</p>
+              </div>
+              <div class="col-l-5">
+                <p></p>
+                <p>GitHub：<a href="/">Link</a></p>
+                <p>Email: <a href="zhij311@gmail.com">zhij311@gmail.com</a></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-s-6 col-m-4 center-fixed">
+            <div class="skills-icon">
+              <i class="fa fa-html5"></i>
+            </div>
+            <div class="skills-title">
+              <h3>HTML 5</h3>
+              <p>熟悉 HTML5 网站的架构和开发</p>
+            </div>
+          </div>
+
+
+
+          <div class="col-s-6 col-m-4 center-fixed">
+            <div class="skills-icon">
+              <i class="fa fa-code"></i>
+            </div>
+            <div class="skills-title">
+              <h3>JavaScript</h3>
+              <p>能使用 JS 制作简单的程序、交互与特效</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="story">
+      <div class="wrap">
+        <h2 class="title">Experience</h2>
+        <div class="row">
+          <div class="col-m-8">
+            <ul class="timeline">
+              <li>2016.07.03：创立缤奇（Binkic）团队</li>
+              <li>2016.12.20：仿照某动漫官网编写模板，并搭建运营了一个动漫型社区</li>
+              <li>2017.05.30：带领团队进行招新，并发起了首个游戏项目：<a>色块冲刺</a></li>
+              <li>2017.08.17：为团队制作了首部宣传片：<a href="javascript:;" target="_blank">创意可以改变什么</a></li>
+              <li>2017.12.08：个人编写的前端响应式框架 <a href="javascript:;" target="_blank">Kico Style</a> 初现雏形</li>
+              <li>2018.03.01：基于 Kico Style 的第一个原创 <a href="javascript:;" target="_blank">缤奇团队官网</a> 正式上线</li>
+              <li>2018.04.27：使用前端技术编写的 <a href="javascript:;" target="_blank">梦想晨会</a> 制作完成</li>
+              <li>2018.06.07：参加“众创杯”创业大赛校园选拔赛，团队项目荣获三等奖</li>
+              <li>2018.06.17：动漫门户网站制作完成，内含一个自己设计的简单音乐播放器</li>
+              <li>2018.06.25：参加全国中职信息技术技能大赛微网站项目，荣获一等奖</li>
+              <li>2018.08.03：原创博客主题 <a href="javascript:;" target="_blank">Single</a> 发布，截至 2 月共有 66 Stars</li>
+              <li>2018.09.19：个人编写的播放器 <a href="javascript:;" target="_blank">Kico Player</a> 发布测试版</li>
+              <li>2018.12.12：基于 ES6 的时钟小工具 <a href="javascript:;" target="_blank">Kico Tools</a> 发布测试版</li>
+              <li>2018.12.18：第一个基于 PHP 的个人首页 <a href="javascript:;" target="_blank">Sweet</a> 发布正式版</li>
+              <li>2019.01.01：缤奇团队新<a href="javascript:;" target="_blank">官网</a>正式上线，后端采用 Typecho 驱动</li>
+            </ul>
+          </div>
+          <div class="col-m-4 center-fixed">
+            <img src="../assets/images/story.png"/>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="works">
+      <div class="wrap">
+        <h2 class="title">个人作品</h2>
+        <div class="row">
+          <div class="col-s-6">
+            <div class="works-item">
+              <img src="../assets/images/works/binkic-2017.jpg"/>
+              <p>缤奇团队 2017 官网</p>
+            </div>
+          </div>
+          <div class="col-s-6">
+            <div class="works-item">
+              <img src="../assets/images/works/space.jpg"/>
+              <p>个人博客</p>
+            </div>
+          </div>
+          <div class="col-s-6">
+            <div class="works-item">
+              <img src="../assets/images/works/dream.jpg"/>
+              <p>梦想主题班会</p>
+            </div>
+          </div>
+          <div class="col-s-6">
+            <div class="works-item">
+              <img src="../assets/images/works/kico-style.jpg"/>
+              <p>Kico Style 响应式框架</p>
+            </div>
+          </div>
+          <div class="col-s-6">
+            <div class="works-item">
+              <img src="../assets/images/works/robots.jpg"/>
+              <p>小缤机器人</p>
+            </div>
+          </div>
+          <div class="col-s-6">
+            <div class="works-item">
+              <img src="../assets/images/works/single.jpg"/>
+              <p>Single 博客主题</p>
+            </div>
+          </div>
+          <div class="col-s-6">
+            <div class="works-item">
+              <img src="../assets/images/works/kico-player.jpg"/>
+              <p>Kico Player 播放器</p>
+            </div>
+          </div>
+          <div class="col-s-6">
+            <div class="works-item">
+              <img src="../assets/images/works/sweet.jpg"/>
+              <p>个人主页 Sweet</p>
+            </div>
+          </div>
+          <div class="col-s-6">
+            <div class="works-item">
+              <img src="../assets/images/works/binkic-2018.jpg"/>
+              <p>缤奇团队 2018 官网</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="content-d" id="team">
+      <div class="wrap">
+        <h2 class="title">我的团队</h2>
+        <div class="row">
+          <div class="col-m-6">
+            <p>我的团队 - 缤奇团队由一群热爱科技创新的年轻人所组成，做到了“实际”与“创新”的结合。奇思妙想不乏真正落实。集思广益，生动有趣的创意，尽在缤奇。缤奇团队如今有超过30名成员，各个部门互帮互助，同为一个目标而努力进取着。</p>
+            <p>缤奇团队致力于开发原创游戏、动漫等项目。目前我们已完成项目有手机游戏“色块冲刺”、聊天娱乐项目“小缤机器人”等。正在创作项目有解密游戏“月亮湖的秘密”、VR 项目“梦想码头”等。缤奇官网 &amp; 社区已陆续开放。网站采用团队成员自主编写的 CSS3 自适应框架，针对移动设备有布局优化，缤奇团队有着丰富的网站建设技术能力、有独立的画师以及文编。</p>
+            <p>团队官网：<a href="XXX">XXX</a></p>
+          </div>
+          <div class="col-m-6 center">
+            <img src="../assets/images/team.png"/>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+
+<!--  <script src="kico.js"></script>-->
+<!--  <script src="moreduo.js"></script>-->
+
+  </body>
+</template>
+
+<script lang="ts">
+
+import {defineComponent} from "vue";
+export default defineComponent({
+  name:'About',
+})
+</script>
+<style scoped>
+@import "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.10.1/devicon.min.css";
+@import "https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css";
+</style>
+
+<style scoped src="../assets/css/kico.css">
+</style>
+<style scoped src="../assets/css/moreduo.css">
+</style>

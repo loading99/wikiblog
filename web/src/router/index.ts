@@ -7,6 +7,7 @@ import AdminDoc from '../views/admin/admin-doc.vue'
 import AdminUser from '../views/admin/admin-user.vue'
 import Login from '../views/login.vue'
 import DocPage from '../views/doc.vue'
+import About from '../views/about.vue'
 import store from "@/store";
 import {Tool} from "@/util/tools";
 import {message} from "ant-design-vue";
@@ -16,15 +17,15 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    meta:{
+      loginRequired:false
+    }
   },
   {
     path: '/admin/ebook',
     name: 'AdminEbook',
     component: AdminEbook,
-    meta:{
-      loginRequired:true
-    }
   },
   {
     path: '/admin/category',
@@ -60,6 +61,11 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Login',
     component: Login
   },
+  {
+    path: '/about',
+    name: 'about',
+    component: About
+  }
 ]
 
 const router = createRouter({
