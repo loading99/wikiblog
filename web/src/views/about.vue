@@ -38,54 +38,22 @@
     <section id="skills">
       <div class="wrap">
         <h2 class="title">Professional Skills</h2>
-        <div class="row scrollable">
-          <div class="col-l-4">
-            <h3>Programming Language</h3>
-            <div class="row">
-              <div class="col-l-5">
-                <p>
-                  <i class="fa fa-python"></i>
-                  Python</p>
-                <p>
-                  <i class="devicon-java-plain colored"></i>
-                  Java</p>
-                <p>
-                  <i class="fa fa-html5"></i>
-                  HTML5</p>
-                <p>
-                  <i class="devicon-css3-plain-wordmark" style="font-size: 1.5em;"></i>
-                  CSS3</p>
-              </div>
-              <div class="col-l-5">
-                <p></p>
-                <p>GitHub：<a href="/">Link</a></p>
-                <p>Email: <a href="zhij311@gmail.com">zhij311@gmail.com</a></p>
-              </div>
-            </div>
-          </div>
-          <div class="col-s-6 col-m-4 center-fixed">
-            <div class="skills-icon">
-              <i class="fa fa-html5"></i>
-            </div>
-            <div class="skills-title">
-              <h3>HTML 5</h3>
-              <p>熟悉 HTML5 网站的架构和开发</p>
-            </div>
-          </div>
+        <div class="row-scrollable">
+          <p>
 
-
-
-          <div class="col-s-6 col-m-4 center-fixed">
-            <div class="skills-icon">
-              <i class="fa fa-code"></i>
-            </div>
-            <div class="skills-title">
-              <h3>JavaScript</h3>
-              <p>能使用 JS 制作简单的程序、交互与特效</p>
-            </div>
-          </div>
+            <strong class="title3"><fa icon="code" type="fas" class="icons"></fa> Programming Language: </strong>
+            <span>Java, Python, R, Matlab, SQL, JavaScript, HTML, CSS3</span>
+          </p>
+          <p><strong class="title3"><fa icon="tools" type="fas" class="icons"></fa> Frameworks: </strong>
+            <span>Hadoop, Flume, Kafka, Spark, Spring Boot/MVC, MyBatis, Vue, Flask, TensorFlow</span>
+          </p>
+          <p><strong class="title3"><fa icon="database" type="fas" class="icons"></fa> Database/Tools: </strong>
+            <span>PostgreSQL, MySQL, HBase, Redis, AWS, IDEA, Docker, Git, Maven.</span>
+          </p>
         </div>
       </div>
+
+
     </section>
 
     <section id="story">

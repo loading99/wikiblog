@@ -7,6 +7,7 @@ import "ant-design-vue/dist/antd.css"
 import * as Icons from '@ant-design/icons-vue';
 import axios from 'axios';
 import i18n from './language/i18n';
+import { FontAwesomeIcon } from "../plugins/font-awesome";
 import {Tool} from "@/util/tools";
 
 axios.defaults.baseURL=process.env.VUE_APP_SERVER;
@@ -33,7 +34,7 @@ axios.interceptors.response.use(function (response) {
 
 
 const app = createApp(App);
-app.use(store).use(router).use(Antd).use(i18n).mount('#app');
+app.use(store).use(router).use(Antd).component("fa", FontAwesomeIcon).use(i18n).mount('#app');
 
 
 //icons

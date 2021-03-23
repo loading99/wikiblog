@@ -11,6 +11,10 @@
   },
   "dependencies": {
     "@ant-design/icons-vue": "^6.0.1",
+    "@fortawesome/fontawesome-svg-core": "^1.2.35",
+    "@fortawesome/free-brands-svg-icons": "^5.15.3",
+    "@fortawesome/free-solid-svg-icons": "^5.15.3",
+    "@fortawesome/vue-fontawesome": "^3.0.0-1",
     "ant-design-vue": "^2.0.1",
     "axios": "^0.21.0",
     "vue": "^3.0.0",

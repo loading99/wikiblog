@@ -1407,3 +1407,10 @@ img[bk-image=active]{
 i{
     font-size: 1.5em;
 }
+.icons{
+    width: 20px;
+}
+.title3{
+    font-family: "Times New Roman", "Times New Roman";
+    font-size: 1.2em;
+}
