@@ -97,14 +97,18 @@ import { message } from 'ant-design-vue';
 import {Tool} from "@/util/tools";
 import {useRoute} from "vue-router";
 import E from 'wangeditor'
+import store from "@/store";
 
 
 export default defineComponent({
   name: 'AdminDoc',
   setup() {
+    /**
+     * First Get route information
+     * check if menu item is showed
+     */
     const route=useRoute();
-    console.log("-----route 的各种变量------",route)
-
+    store.commit("setPage",route.path);
     /**
      * search Keyword
      **/

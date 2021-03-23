@@ -173,8 +173,18 @@
 <script lang="ts">
 
 import {defineComponent} from "vue";
+import {useRoute} from "vue-router";
+import store from "@/store";
 export default defineComponent({
   name:'About',
+  setup(){
+    /**
+     * First Get route information
+     * check if menu item is showed
+     */
+    const route=useRoute();
+    store.commit("setPage",route.path);
+  }
 })
 </script>
 <style scoped>
@@ -182,7 +192,8 @@ export default defineComponent({
 @import "https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css";
 </style>
 
-<style scoped src="../assets/css/kico.css">
+<style src="../assets/css/kico.css">
 </style>
 <style scoped src="../assets/css/moreduo.css">
 </style>
+

@@ -277,11 +277,20 @@ import axios from 'axios';
 import {message} from "ant-design-vue";
 import {Tool} from "@/util/tools";
 import search from "ant-design-vue/es/transfer/search";
+import {useRoute} from "vue-router";
+import store from "@/store";
 
 
 export default defineComponent({
   name: 'Home',
   setup(){
+    /**
+     * First Get route information
+     * check if menu item is showed
+     */
+    const route=useRoute();
+    store.commit("setPage",route.path);
+
     const ebook=ref();
     ebook.value=[];
     const pagination = {

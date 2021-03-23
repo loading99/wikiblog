@@ -42,11 +42,18 @@ import axios from 'axios';
 import {message} from 'ant-design-vue';
 import {Tool} from "../util/tools";
 import {useRoute} from "vue-router";
+import store from "@/store";
 
 export default defineComponent({
   name: 'Doc',
   setup() {
-    const route = useRoute();
+    /**
+     * First Get route information
+     * check if menu item is showed
+     */
+    const route=useRoute();
+    store.commit("setPage",route.path);
+
     const docs = ref();
     const html = ref();
     const defaultSelectedKeys = ref();

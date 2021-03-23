@@ -4,7 +4,8 @@ declare let SessionStorage: any;
 const USER='USER';
 const store=createStore({
   state: {
-    userstatus:SessionStorage.get(USER) || {}
+    userstatus:SessionStorage.get(USER) || {},
+    page:true,
   },
   mutations: {
     setUser(state,user){
@@ -12,6 +13,12 @@ const store=createStore({
       state.userstatus=user;
       SessionStorage.set(USER,user);
     },
+    setPage(state,Page){
+      console.log("----Set Page---");
+      if(Page=='/about'){
+        state.page=false;
+      }
+    }
   },
   actions: {
   },

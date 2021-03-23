@@ -661,8 +661,6 @@
           </g>
         </svg>
       </div>
-
-
   </div>
 </template>
 
@@ -674,12 +672,20 @@ import axios from 'axios';
 import {message} from "ant-design-vue";
 import i18n from "@/language/i18n";
 import store from "@/store";
+import {useRoute} from "vue-router";
 declare let hexMd5:any;
 declare let KEY:any;
 
 export default defineComponent({
   name:'Login',
   setup(){
+    /**
+     * First Get route information
+     * check if menu item is showed
+     */
+    const route=useRoute();
+    store.commit("setPage",route.path);
+
     const param=ref();
     param.value={};
     const handleLogin=()=>{
