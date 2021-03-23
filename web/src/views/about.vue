@@ -164,9 +164,6 @@
   </main>
 
 
-<!--  <script src="kico.js"></script>-->
-<!--  <script src="moreduo.js"></script>-->
-
   </body>
 </template>
 
@@ -187,12 +184,30 @@ export default defineComponent({
   }
 })
 </script>
+
+<style>
+/*定义icon大小*/
+i{
+  font-size: 1.5em;
+}
+.icons{
+  width: 20px;
+}
+.HOME{
+  width: 30px;
+}
+.title3{
+  font-family: "Times New Roman", "Times New Roman";
+  font-size: 1.2em;
+}
+</style>
+
 <style scoped>
 @import "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.10.1/devicon.min.css";
 @import "https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css";
 </style>
 
-<style src="../assets/css/kico.css">
+<style scoped src="../assets/css/kico.css">
 </style>
 <style scoped src="../assets/css/moreduo.css">
 </style>

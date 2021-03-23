@@ -24,7 +24,7 @@
           <a-menu-item key="about">
             <router-link to="/about">{{ $t('header.me') }}</router-link>
           </a-menu-item>
-          <a-menu-item key="Home" style="float:right;right: 30%">
+          <a-menu-item key="Home" style="float:right;right: 30%;">
             <router-link to="/"><fa icon="home" type="fas" class="HOME"></fa></router-link>
           </a-menu-item>
         </a-menu>
@@ -62,7 +62,7 @@
               </a-menu-item>
             </a-menu>
           </template>
-          <a-button style="position: absolute;right: 1px;top: 16px">
+          <a-button style="position: absolute;top: 16px">
             {{ $t('header.lang') }}
             <DownOutlined/>
           </a-button>
@@ -96,6 +96,8 @@ export default defineComponent({
      * 在About里面 栏目都不显示，在其他URL里都显示
      */
     const show=computed(()=>store.state.page);
+    console.log("show 变量",show);
+
     const user=computed(()=> store.state.userstatus);
     const onClick = ({key}: MenuInfo) => {
       console.log(`switch to language ${key}`);

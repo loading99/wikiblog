@@ -289,6 +289,7 @@ export default defineComponent({
      * check if menu item is showed
      */
     const route=useRoute();
+    console.log("----Curent----",route.path)
     store.commit("setPage",route.path);
 
     const ebook=ref();

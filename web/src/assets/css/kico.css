@@ -1403,17 +1403,4 @@ img[bk-image=active]{
     box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
 }
 
-/*定义icon大小*/
-i{
-    font-size: 1.5em;
-}
-.icons{
-    width: 20px;
-}
-.HOME{
-    width: 25px;
-}
-.title3{
-    font-family: "Times New Roman", "Times New Roman";
-    font-size: 1.2em;
-}
+

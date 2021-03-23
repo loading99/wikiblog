@@ -17,6 +17,8 @@ const store=createStore({
       console.log("----Set Page---");
       if(Page=='/about'){
         state.page=false;
+      }else{
+        state.page=true;
       }
     }
   },
