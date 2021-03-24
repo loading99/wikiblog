@@ -120,4 +120,8 @@ public class DocService {
         contentcriteria.andIdIn(IDlist);
         contentmapper.deleteByExample(contentExample);
     }
+
+    public void vote(Long id){
+        docMapperCust.updateVoteCount(id);
+    }
 }
