@@ -7,6 +7,7 @@ import com.jiawa.wiki.domain.Doc;
 import com.jiawa.wiki.domain.DocExample;
 import com.jiawa.wiki.mapper.ContentMapper;
 import com.jiawa.wiki.mapper.DocMapper;
+import com.jiawa.wiki.mapper.DocMapperCust;
 import com.jiawa.wiki.req.DocReq;
 import com.jiawa.wiki.response.DocResp;
 import com.jiawa.wiki.response.PageResp;
@@ -30,10 +31,15 @@ public class DocService {
     private DocMapper docmapper;
 
     @Resource
+    private DocMapperCust docMapperCust;
+
+    @Resource
     private ContentMapper contentmapper;
 
     @Resource
     private SnowFlake snowflake;
+
+
 
     public List<DocResp> list(Long id){
         DocExample docExample=new DocExample();
@@ -66,10 +72,13 @@ public class DocService {
         Content content=CopyUtil.copy(req,Content.class);
 
         if (ObjectUtils.isEmpty(req.getId())){
-            //if ID doesn't exist
+            //if ID doesn't exist,add new
             final long ID = snowflake.nextId();
             copy.setId(ID);
+            copy.setViewCount(0);
+            copy.setVoteCount(0);
             docmapper.insert(copy);
+
             content.setId(ID);
             contentmapper.insert(content);
         }else{
@@ -85,6 +94,7 @@ public class DocService {
     public String findContent(Long id){
 
         Content content = contentmapper.selectByPrimaryKey(id);
+        docMapperCust.updateViewCount(id);
         if(ObjectUtils.isEmpty(content)){
             return "";
         }

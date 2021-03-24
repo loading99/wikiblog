@@ -13,7 +13,6 @@ public class SpringMVCConfig implements WebMvcConfigurer {
     @Resource
     LoginInterceptor loginInterceptor;
 
-
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(loginInterceptor)
                 .addPathPatterns("/**")
