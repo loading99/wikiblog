@@ -2,12 +2,15 @@ package com.jiawa.wiki.controller;
 
 import com.jiawa.wiki.domain.Content;
 import com.jiawa.wiki.domain.Doc;
+import com.jiawa.wiki.mapper.DocMapperCust;
 import com.jiawa.wiki.req.DocReq;
 import com.jiawa.wiki.response.ContentResp;
 import com.jiawa.wiki.response.DocResp;
 import com.jiawa.wiki.response.CommonResp;
 import com.jiawa.wiki.response.PageResp;
 import com.jiawa.wiki.service.DocService;
+import com.jiawa.wiki.utils.RedisTokenValidate;
+import com.jiawa.wiki.utils.RequestContext;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -64,6 +67,7 @@ public class DocController {
     }
     @GetMapping("/vote/{id}")
     public CommonResp voteDoc(@PathVariable Long id){
+
         CommonResp resp=new CommonResp();
         docService.vote(id);
         return resp;

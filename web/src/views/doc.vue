@@ -18,8 +18,8 @@
           <div>
             <h2>{{doc.name}}</h2>
             <div>
-              <span><likeOutlined/> {{doc.viewCount}}</span> &nbsp; &nbsp;
-              <span><messageOutlined/> {{doc.voteCount}}</span>
+              <span>{{ $t('actions.views') }}: {{doc.viewCount}}</span> &nbsp; &nbsp;
+              <span>{{ $t('actions.likes') }}: {{doc.voteCount}}</span>
 
             </div>
             <a-divider style="height: 2px; background-color: #9999cc"/>

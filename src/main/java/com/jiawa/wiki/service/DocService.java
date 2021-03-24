@@ -5,6 +5,8 @@ import com.jiawa.wiki.domain.Content;
 import com.jiawa.wiki.domain.ContentExample;
 import com.jiawa.wiki.domain.Doc;
 import com.jiawa.wiki.domain.DocExample;
+import com.jiawa.wiki.exception.BusinessException;
+import com.jiawa.wiki.exception.BusinessExceptionCode;
 import com.jiawa.wiki.mapper.ContentMapper;
 import com.jiawa.wiki.mapper.DocMapper;
 import com.jiawa.wiki.mapper.DocMapperCust;
@@ -12,6 +14,8 @@ import com.jiawa.wiki.req.DocReq;
 import com.jiawa.wiki.response.DocResp;
 import com.jiawa.wiki.response.PageResp;
 import com.jiawa.wiki.utils.CopyUtil;
+import com.jiawa.wiki.utils.RedisTokenValidate;
+import com.jiawa.wiki.utils.RequestContext;
 import com.jiawa.wiki.utils.SnowFlake;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,6 +42,9 @@ public class DocService {
 
     @Resource
     private SnowFlake snowflake;
+
+    @Resource
+    private RedisTokenValidate redisTokenValidator;
 
 
 
@@ -122,6 +129,12 @@ public class DocService {
     }
 
     public void vote(Long id){
-        docMapperCust.updateVoteCount(id);
+        String ip= RequestContext.getRemoteAddr();
+        if(redisTokenValidator.validate("DOC_VOTE"+id+"_"+ip,24*3600)){
+            docMapperCust.updateVoteCount(id);
+        }else{
+            throw new BusinessException(BusinessExceptionCode.VOTE_REPEAT);
+        }
+
     }
 }
