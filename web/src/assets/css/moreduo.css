@@ -123,9 +123,13 @@ main section{
     font-family: "Font Awesome 5 Free";
     content: "\f005";
 }
-#skills .title:before{
+#education .title:before{
     font-family: "FontAwesome";
     content: "\f19d";
+}
+#skills .title:before{
+    font-family: "FontAwesome";
+    content: "\f02d";
 }
 #works .title:before{
     font-family: "FontAwesome";
