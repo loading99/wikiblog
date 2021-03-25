@@ -192,6 +192,8 @@ i{
   width: 20px;
 }
 .HOME{
+  top: 18px;
+  position: absolute;
   width: 30px;
 }
 .title3{

@@ -10,7 +10,7 @@ import DocPage from '../views/doc.vue'
 import About from '../views/about.vue'
 import store from "@/store";
 import {Tool} from "@/util/tools";
-import {message} from "ant-design-vue";
+import {message, notification} from "ant-design-vue";
 import i18n from "@/language/i18n";
 
 const routes: Array<RouteRecordRaw> = [
@@ -87,7 +87,9 @@ router.beforeEach((to, from, next) => {
   })) {
     const loginUser = store.state.userstatus;
     if (Tool.isEmpty(loginUser)) {
-      message.error(i18n.global.t('message.loginRequired'))
+      notification['error']({
+        message:i18n.global.t('message.loginRequired'),
+      })
       console.log("用户未登录!");
       next('/login');
     } else {

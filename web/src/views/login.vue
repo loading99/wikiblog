@@ -669,7 +669,7 @@
 
 import {defineComponent, ref,computed} from "vue";
 import axios from 'axios';
-import {message} from "ant-design-vue";
+import {message, notification} from "ant-design-vue";
 import i18n from "@/language/i18n";
 import store from "@/store";
 import {useRoute} from "vue-router";
@@ -698,7 +698,10 @@ export default defineComponent({
         const data=response.data;
         param.value.password="";
         if(data.success){
-          message.success(i18n.global.t('message.loginSuccess'));
+          // message.success(i18n.global.t('message.loginSuccess'));
+          notification['success']({
+            message:i18n.global.t('message.loginSuccess')
+          })
           console.log("----Set global value by vuex----");
           store.commit("setUser",data.content);
         }else{

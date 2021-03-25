@@ -20,6 +20,7 @@ import com.jiawa.wiki.utils.SnowFlake;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 import org.yaml.snakeyaml.events.Event;
 
@@ -73,6 +74,7 @@ public class DocService {
         response.setTotal(pageInfo.getTotal());
         return response;
     }
+    @Transactional
     public void update(DocReq req){
         Doc copy = CopyUtil.copy(req,Doc.class);
         //check if the id in the database
@@ -115,6 +117,7 @@ public class DocService {
         contentmapper.deleteByPrimaryKey(id);
     }
 
+    @Transactional
     public void delete(List<Long> IDlist){
         DocExample docExample = new DocExample();
         DocExample.Criteria criteria=docExample.createCriteria();
