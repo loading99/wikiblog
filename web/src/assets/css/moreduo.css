@@ -116,22 +116,27 @@ main section{
 .title:before{
     float: left;
     margin-right: .5em;
-    font-family: "FontAwesome";
+
 }
 
 #info .title:before{
+    font-family: "Font Awesome 5 Free";
     content: "\f005";
 }
 #skills .title:before{
+    font-family: "FontAwesome";
     content: "\f19d";
 }
 #works .title:before{
+    font-family: "FontAwesome";
     content: "\f091";
 }
 #story .title:before{
+    font-family: "FontAwesome";
     content: "\f0b1";
 }
 #team .title:before{
+    font-family: "Font Awesome 5 Free";
     content: "\f024";
 }
 

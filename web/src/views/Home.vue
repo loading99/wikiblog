@@ -246,10 +246,19 @@
         <template #renderItem="{ item }">
           <a-list-item key="item.name">
             <template #actions>
-          <span v-for="{ type, text } in actions" :key="type">
-            <component v-bind:is="type" style="margin-right: 8px" />
-            {{ text }}
+              <span>
+            <component v-bind:is="'ProfileOutlined'" style="margin-right: 8px"/>
+            {{ item.docCount }}
           </span>
+              <span>
+            <component v-bind:is="'LikeOutlined'" style="margin-right: 8px"/>
+            {{ item.voteCount }}
+          </span>
+              <span>
+            <component v-bind:is="'UserOutlined'" style="margin-right: 8px"/>
+            {{ item.viewCount }}
+          </span>
+
             </template>
             <template #extra>
               <img
@@ -300,11 +309,11 @@ export default defineComponent({
       },
       pageSize: 4,
     };
-    const actions: Record<string, string>[] = [
-      { type: 'StarOutlined', text: '156' },
-      { type: 'LikeOutlined', text: '156' },
-      { type: 'MessageOutlined', text: '2' },
-    ];
+    // const actions: Record<string, string>[] = [
+    //   { type: 'StarOutlined', text: '156' },
+    //   { type: 'LikeOutlined', text: '156' },
+    //   { type: 'MessageOutlined', text: '2' },
+    // ];
 
     /**
      * Query Ebook Data
@@ -379,7 +388,7 @@ export default defineComponent({
   return {
     ebook,
     pagination,
-    actions,
+    // actions,
 
     /**
      * 侧边栏sider

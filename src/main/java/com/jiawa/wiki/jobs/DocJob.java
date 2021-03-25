@@ -23,7 +23,7 @@ public class DocJob {
     private SnowFlake snowFlake;
 
     /**
-     * 每30秒更新电子书信息
+     * Update Ebook Info everyday 0:00 AM
      */
     @Scheduled(cron = "0 0 0 * * ? ")
     public void cron() {
