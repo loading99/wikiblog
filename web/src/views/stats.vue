@@ -62,29 +62,82 @@ export default defineComponent({
     });
 
 
-    const echart=()=>{
+    const initEcharts=(list:any)=>{
       const chartDom = document.getElementById('main');
       const myChart = echarts.init(chartDom);
 
+      const xAxis=[];
+      const seriesView=[];
+      const seriesVote=[];
+      for (let i=0;i<list.length;i++){
+        const record=list[i];
+        xAxis.push(record.date);
+        seriesView.push(record.viewIncrease);
+        seriesVote.push(record.voteIncrease);
+      }
+
 
       const option = {
+        title: {
+          text: '30天趋势图'
+        },
+        tooltip: {
+          trigger: 'axis'
+        },
+        legend: {
+          data: ['总阅读量','总点赞量']
+        },
+        grid: {
+          left: '1%',
+          right: '4%',
+          bottom: '3%',
+          containLabel: true
+        },
+        toolbox: {
+          feature: {
+            saveAsImage: {}
+          }
+        },
         xAxis: {
           type: 'category',
-          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+          boundaryGap: false,
+          data: xAxis
         },
         yAxis: {
           type: 'value'
         },
-        series: [{
-          data: [150, 230, 224, 218, 135, 147, 260],
-          type: 'line'
-        }]
+        series: [
+          {
+            name: '总阅读量',
+            type: 'line',
+            data: seriesView,
+            smooth: true
+          },
+          {
+            name: '总点赞量',
+            type: 'line',
+            data: seriesVote,
+            smooth:true
+          },
+        ]
       };
 
       option && myChart.setOption(option);
     };
+
+    const get30DayStats=()=>{
+      axios.get('ebook-snapshot/get-30-statistic').then((response)=>{
+        const data=response.data;
+        if(data.success){
+          if(data.success){
+            const ststisticList=data.content;
+            initEcharts(ststisticList);
+          }
+        }
+      })
+    }
     onMounted(()=>{
-      echart();
+      get30DayStats()
     })
 
     return {
