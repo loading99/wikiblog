@@ -8,6 +8,7 @@ import AdminUser from '../views/admin/admin-user.vue'
 import Login from '../views/login.vue'
 import DocPage from '../views/doc.vue'
 import About from '../views/about.vue'
+import Stats from '../views/stats.vue'
 import store from "@/store";
 import {Tool} from "@/util/tools";
 import {message, notification} from "ant-design-vue";
@@ -65,7 +66,13 @@ const routes: Array<RouteRecordRaw> = [
     path: '/about',
     name: 'about',
     component: About
-  }
+  },
+  {
+    path: '/stats',
+    name: 'Stats',
+    component: Stats
+  },
+
 ]
 
 const router = createRouter({

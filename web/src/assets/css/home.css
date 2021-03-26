@@ -13,7 +13,20 @@
     right: -50%;
     bottom: -50%;
 }
-
+.clock {
+    color: #e6d7d7;
+    bottom: 20%;
+    right: 6%;
+    position: absolute;
+    font-size: 28px;
+    font-family: "Adobe Garamond Pro";
+}
+.hour{
+    font-size: 2.5em;
+}
+.ant-divider-horizontal{
+    margin: 5px 0 !important;
+}
 .snowflake{
     display: flex;
     align-items: center;

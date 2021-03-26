@@ -227,5 +227,4 @@ export default defineComponent({
 </script>
 
 <style scoped>
-@import "../assets/css/about.css";
 </style>

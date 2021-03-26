@@ -1,5 +1,10 @@
 <template>
   <div class="background" v-show="showWelcome" @click="onClick">
+    <div class="clock">
+      <span class="hour">{{now.hour}}</span>
+      <a-divider style="height: 2px"></a-divider>
+      {{now.day}}
+    </div>
     <svg class="snowflakes" width="100%" height="100%" preserveAspectRatio="none">
       <circle class="snowflake" cx="79.86%" cy="0%" r="2"></circle>
       <circle class="snowflake" cx="19.29%" cy="0%" r="2.2"></circle>
@@ -285,9 +290,10 @@ import { defineComponent, onMounted, ref} from 'vue';
 import axios from 'axios';
 import {message} from "ant-design-vue";
 import {Tool} from "@/util/tools";
-import search from "ant-design-vue/es/transfer/search";
+
 import {useRoute} from "vue-router";
 import store from "@/store";
+import moment from 'moment';
 
 
 export default defineComponent({
@@ -300,6 +306,26 @@ export default defineComponent({
     const route=useRoute();
     console.log("----Curent----",route.path)
     store.commit("setPage",route.path);
+
+    /**
+     * Time Locale render
+     */
+    const now = ref();
+    now.value =
+        {
+          day: moment(Date.now()).format('MMM DD, YYYY'),
+          hour: moment(Date.now()).format('HH:mm')
+        }
+
+    setInterval(() => {
+      now.value.hour = moment(Date.now()).format('HH:mm')
+    }, 1000*58);
+
+
+
+
+
+
 
     const ebook=ref();
     ebook.value=[];
@@ -386,6 +412,7 @@ export default defineComponent({
 
     });
   return {
+    now,
     ebook,
     pagination,
     // actions,
@@ -409,5 +436,5 @@ export default defineComponent({
 </script>
 
 <style scoped>
-@import "../assets/css/about.css";
+@import "../assets/css/home.css";
 </style>

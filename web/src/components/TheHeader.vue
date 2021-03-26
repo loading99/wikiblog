@@ -24,6 +24,9 @@
           <a-menu-item key="about">
             <router-link to="/about">{{ $t('header.me') }}</router-link>
           </a-menu-item>
+          <a-menu-item key="stats" v-if="show">
+            <router-link to="/stats">{{ $t('header.stats') }}</router-link>
+          </a-menu-item>
           <a-menu-item key="Home" style="float:right;right: 30%;">
             <router-link to="/"><fa icon="home" type="fas" class="HOME"></fa></router-link>
           </a-menu-item>

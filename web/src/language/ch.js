@@ -9,7 +9,8 @@ module.exports={
         user: "用户管理",
         login: "登录",
         logout:" 退出登录",
-        portal:"管理员入口"
+        portal:"管理员入口",
+        stats:"统计数据"
     },
     footer: {},
     table: {

@@ -9,7 +9,8 @@ module.exports={
         user: "User Mangement",
         login: "ログイン",
         logout:"ログアウト",
-        portal:"Admin"
+        portal:"Admin",
+        stats:"Statistics"
     },
     footer:{
     },
