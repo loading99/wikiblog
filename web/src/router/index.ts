@@ -9,6 +9,7 @@ import Login from '../views/login.vue'
 import DocPage from '../views/doc.vue'
 import About from '../views/about.vue'
 import Stats from '../views/stats.vue'
+import Loading from '../views/loading.vue'
 import store from "@/store";
 import {Tool} from "@/util/tools";
 import {message, notification} from "ant-design-vue";
@@ -19,14 +20,16 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     name: 'Home',
     component: Home,
-    meta:{
-      loginRequired:false
-    }
   },
   {
     path: '/admin/ebook',
     name: 'AdminEbook',
     component: AdminEbook,
+  },
+  {
+    path: '/loading',
+    name: 'Loading',
+    component: Loading,
   },
   {
     path: '/admin/category',

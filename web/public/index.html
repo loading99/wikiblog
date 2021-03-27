@@ -7,8 +7,6 @@
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
       <script  src="<%= BASE_URL %>js/md5.js"></script>
       <script  src="<%= BASE_URL %>js/session-storage.js"></script>
-      <script  src="<%= BASE_URL %>js/kico.js"></script>
-      <script  src="<%= BASE_URL %>js/moreduo.js"></script>
       <script  src="<%= BASE_URL %>js/echarts.min.js"></script>
       <script data-search-pseudo-elements defer src="https://kit.fontawesome.com/2e75c5cb4f.js"></script>
     <title><%= htmlWebpackPlugin.options.title %></title>
@@ -17,7 +15,14 @@
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
-    <div id="app"></div>
+    <div id="app">
+        <div class="load" style="left:50%;top: 50%;
+        position: absolute;
+        font-size: 20px;
+        font-weight: 400">
+            Loading...
+        </div>
+    </div>
     <!-- built files will be auto injected -->
   </body>
 </html>
