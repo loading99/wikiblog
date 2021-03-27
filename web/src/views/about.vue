@@ -11,6 +11,7 @@
       <a href="#story">Experience</a>
       <a href="#works">Creation</a>
       <a href="#team">Social Media</a>
+
     </nav>
   </aside>
   <main>
@@ -29,9 +30,9 @@
             <p>GitHub：<a href="/">Link</a></p>
             <p>Email: <a href="zhij311@gmail.com">zhij311@gmail.com</a></p>
           </div>
-          <div class="col-l-4">
-            <p>我是一个热爱钻研计算机技术的青少年，从小开始对计算机有极大的兴趣。目前我专注网站开发领域。我还自己发起建立了一个制作游戏的团队，希望能和大家合作，一同创造出属于我们自己的原创作品。</p>
-          </div>
+<!--          <div class="col-l-4">-->
+<!--            <p>我是一个热爱钻研计算机技术的青少年，从小开始对计算机有极大的兴趣。目前我专注网站开发领域。我还自己发起建立了一个制作游戏的团队，希望能和大家合作，一同创造出属于我们自己的原创作品。</p>-->
+<!--          </div>-->
         </div>
       </div>
     </section>
@@ -62,25 +63,24 @@
         <div class="row">
           <div class="col-m-8">
             <ul class="timeline">
-              <li>2016.07.03：创立缤奇（Binkic）团队</li>
-              <li>2016.12.20：仿照某动漫官网编写模板，并搭建运营了一个动漫型社区</li>
-              <li>2017.05.30：带领团队进行招新，并发起了首个游戏项目：<a>色块冲刺</a></li>
-              <li>2017.08.17：为团队制作了首部宣传片：<a href="javascript:;" target="_blank">创意可以改变什么</a></li>
-              <li>2017.12.08：个人编写的前端响应式框架 <a href="javascript:;" target="_blank">Kico Style</a> 初现雏形</li>
-              <li>2018.03.01：基于 Kico Style 的第一个原创 <a href="javascript:;" target="_blank">缤奇团队官网</a> 正式上线</li>
-              <li>2018.04.27：使用前端技术编写的 <a href="javascript:;" target="_blank">梦想晨会</a> 制作完成</li>
-              <li>2018.06.07：参加“众创杯”创业大赛校园选拔赛，团队项目荣获三等奖</li>
-              <li>2018.06.17：动漫门户网站制作完成，内含一个自己设计的简单音乐播放器</li>
-              <li>2018.06.25：参加全国中职信息技术技能大赛微网站项目，荣获一等奖</li>
-              <li>2018.08.03：原创博客主题 <a href="javascript:;" target="_blank">Single</a> 发布，截至 2 月共有 66 Stars</li>
-              <li>2018.09.19：个人编写的播放器 <a href="javascript:;" target="_blank">Kico Player</a> 发布测试版</li>
-              <li>2018.12.12：基于 ES6 的时钟小工具 <a href="javascript:;" target="_blank">Kico Tools</a> 发布测试版</li>
-              <li>2018.12.18：第一个基于 PHP 的个人首页 <a href="javascript:;" target="_blank">Sweet</a> 发布正式版</li>
-              <li>2019.01.01：缤奇团队新<a href="javascript:;" target="_blank">官网</a>正式上线，后端采用 Typecho 驱动</li>
+              <li>2021.02: Graduated From Columbia University </li>
+              <li>2021.01: Personal Web blog v1.0 Published </li>
+              <li>2020.12: Implemented CNN Models to build projects: Neural Style Transfer</li>
+              <li>2020.09: Developed Spark Streaming based real time data analysis. See <a href="https://github.com/loading99/big-data" target="_blank">details</a></li>
+              <li>2020.06: Joined Inossem Inc. as Full Stack Engineer, developed online consulting web service</li>
+              <li>2020.05: Python Flask Based Book trading web development deployed on <a href="https://fisher-book.herokuapp.com/" target="_blank">Heroku</a></li>
+              <li>2019.09: Started Graduate University. </li>
+              <li>2019.05: Graduation Worldwide Trip. Let's take a break! <a href="/journey" target="_blank">My Journey</a></li>
+              <li>2019.03: Graduated From University of California, San Diego</li>
+              <li>2019.02-04: MNIST Handwrittern Digit Rcognition RESTful API Deployed in
+                <a href="https://hub.docker.com/r/kyurem/handwritten_digit_recognition" target="_blank">Docker</a>
+              </li>
+              <li>2018.12: Joined Eyecredit Data Service Co. as Data Engineer, implemented ETL with Hadoop</li>
+              <li>2015.09.24: Started my journey. Entered University of California, San Diego</li>
             </ul>
           </div>
           <div class="col-m-4 center-fixed">
-            <img src="../assets/images/story.png"/>
+            <img src="../assets/images/banner4.jpg"/>
           </div>
         </div>
       </div>
