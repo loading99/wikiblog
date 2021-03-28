@@ -9,12 +9,11 @@ import Login from '../views/login.vue'
 import DocPage from '../views/doc.vue'
 import About from '../views/about.vue'
 import Stats from '../views/stats.vue'
-import Loading from '../views/loading.vue'
 import Page500 from '../views/error/500.vue'
 import Page404 from '../views/error/404.vue'
 import store from "@/store";
 import {Tool} from "@/util/tools";
-import {message, notification} from "ant-design-vue";
+import {notification} from "ant-design-vue";
 import i18n from "@/language/i18n";
 
 const routes: Array<RouteRecordRaw> = [
@@ -27,11 +26,6 @@ const routes: Array<RouteRecordRaw> = [
     path: '/admin/ebook',
     name: 'AdminEbook',
     component: AdminEbook,
-  },
-  {
-    path: '/loading',
-    name: 'Loading',
-    component: Loading,
   },
   {
     path: '/admin/category',
