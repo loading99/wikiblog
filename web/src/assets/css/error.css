@@ -1,0 +1,16 @@
+
+.board{
+    width: 100vw;
+    height: 100vh;
+    background-image: url("../images/error/500-Page.jpg");
+    background-size: 100% 100%;
+
+}
+.msg{
+    top:40%;
+    right: 20%;
+    position: absolute;
+    font-family: "Budding";
+    font-weight: bolder;
+    font-size: 32px;
+}

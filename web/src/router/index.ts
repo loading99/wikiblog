@@ -10,6 +10,7 @@ import DocPage from '../views/doc.vue'
 import About from '../views/about.vue'
 import Stats from '../views/stats.vue'
 import Loading from '../views/loading.vue'
+import Page500 from '../views/error/500.vue'
 import store from "@/store";
 import {Tool} from "@/util/tools";
 import {message, notification} from "ant-design-vue";
@@ -74,6 +75,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/stats',
     name: 'Stats',
     component: Stats
+  },
+  {
+    path: '/500',
+    name: 'Page500',
+    component: Page500
   },
 
 ]

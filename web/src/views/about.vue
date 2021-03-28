@@ -9,7 +9,7 @@
       <a href="#info">Info</a>
       <a href="#skills">Skills</a>
       <a href="#story">Experience</a>
-      <a href="#works">Creation</a>
+      <a href="#works">Design</a>
       <a href="#team">Social Media</a>
 
     </nav>
