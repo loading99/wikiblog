@@ -1,16 +1,41 @@
 
-.board{
+.board500{
     width: 100vw;
     height: 100vh;
     background-image: url("../images/error/500-Page.jpg");
     background-size: 100% 100%;
 
 }
-.msg{
-    top:40%;
+.board404{
+    width: 100vw;
+    height: 100vh;
+    background: white;
+
+}
+.wrapper{
+    top:20%;
+    left:25%;
+    width: 60%;
+    height: 90%;
+    position: absolute;
+    background-image: url("../images/error/404page.jpg");
+    background-size: 100% 100%;
+}
+
+.msg500{
+    top:35%;
     right: 20%;
     position: absolute;
     font-family: "Budding";
     font-weight: bolder;
     font-size: 32px;
+}
+.msg404{
+    top:30%;
+    right: 35%;
+    position: absolute;
+    font-family: "Budding";
+    font-weight: bolder;
+    font-size: 32px;
+    z-index: 1;
 }

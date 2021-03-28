@@ -11,6 +11,7 @@ import About from '../views/about.vue'
 import Stats from '../views/stats.vue'
 import Loading from '../views/loading.vue'
 import Page500 from '../views/error/500.vue'
+import Page404 from '../views/error/404.vue'
 import store from "@/store";
 import {Tool} from "@/util/tools";
 import {message, notification} from "ant-design-vue";
@@ -81,7 +82,15 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Page500',
     component: Page500
   },
-
+  {
+    name: '404',
+    path: '/404',
+    component: Page404
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    redirect: '/404'
+  }
 ]
 
 const router = createRouter({

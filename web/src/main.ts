@@ -28,7 +28,6 @@ axios.interceptors.response.use(function (response) {
     console.log('Result：', response);
     return response;
 }, error => {
-
     router.push({name:"Page500"})
 });
 

@@ -1,8 +1,11 @@
 <template>
+
+
   <div class="board404">
-    <div class="msg">
-      Sorry, something goes wrong,<br>
-      we are working on this!
+    <div class="msg404">
+      Oh No! Something is missing...<br>
+    </div>
+    <div class="wrapper">
     </div>
   </div>
 </template>
@@ -10,7 +13,7 @@
 
 import {defineComponent} from "vue";
 export default defineComponent({
-  name:'Page500',
+  name:'Page404',
 })
 </script>
 
