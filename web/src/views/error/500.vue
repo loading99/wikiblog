@@ -1,6 +1,6 @@
 <template>
-  <div class="board404">
-    <div class="msg">
+  <div class="board500">
+    <div class="msg500">
       Sorry, something goes wrong,<br>
       we are working on this!
     </div>

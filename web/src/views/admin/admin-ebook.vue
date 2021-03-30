@@ -75,7 +75,12 @@
         <a-input v-model:value="formbook.name" />
       </a-form-item>
       <a-form-item label="Category">
-        <a-input v-model:value="formbook.categoryid" />
+<!--        <a-input v-model:value="formbook.categoryid" />-->
+        <a-cascader v-model:value="arr"
+                    :options="level1"
+                    placeholder="Please select"
+                    :field-names="{ label: 'name', value: 'id'}"
+        />
       </a-form-item>
       <a-form-item label="Description">
         <a-input v-model:value="formbook.description" type="textarea" />
@@ -131,12 +136,8 @@ export default defineComponent({
         dataIndex: 'name'
       },
       {
-        title: 'Category1',
-        dataIndex: 'category1Id',
-      },
-      {
-        title: 'Category2',
-        dataIndex: 'category2Id',
+        title: 'Category',
+        dataIndex: 'categoryid',
       },
       {
         title: 'Doc No.',
@@ -196,15 +197,44 @@ export default defineComponent({
     };
 
 
+
+    /**
+     * 查询数据Category，在修改或增加图书分类时调用，默认当前书的categories，如果没有就显示Please select
+     **/
+
+    const level1=ref();
+    const categorys=ref();
+    categorys.value={};
+    const listCategory = () => {
+      // 如果不清空现有数据，则编辑保存重新加载数据后，再点编辑，则列表显示的还是编辑前的数据
+      categorys.value = [];
+      axios.get("/category/list").then((response) => {
+        const data = response.data;
+        if (data.success) {
+          categorys.value=data.content
+          level1.value=[];
+          level1.value=Tool.array2Tree(categorys.value,0)
+          // 重置分页按钮
+        } else {
+          message.error(data.message);
+        }
+      });
+    };
+
+
     /**
      * update确认框 and Form
      **/
-    const formbook = ref ({});
+    const arr=ref<string[]>([]);
+    const formbook = ref ();
     const modalVisible = ref(false);
     const modalLoading = ref(false);
     const handleModalOk = () => {
       modalLoading.value = true;
 
+      //cascader will select all levels of categories as a list, so select the last one
+      // console.log("------formbook parameters-------",arr.value.pop());
+      formbook.value.categoryid=arr.value.pop();
       axios.post("/ebook/save",formbook.value).then(function (response){
         modalLoading.value=false;
         const data=response.data;
@@ -227,6 +257,7 @@ export default defineComponent({
     const edit = (record: any) => {
       modalVisible.value = true;
       formbook.value=Tool.copy(record);
+
     };
 
     /**
@@ -235,6 +266,7 @@ export default defineComponent({
     const add=()=>{
       modalVisible.value=true;
       formbook.value={};
+
     }
 
     /**
@@ -260,6 +292,7 @@ export default defineComponent({
         page:1,
         size: pagination.value.pageSize
       });
+      listCategory();
 
     });
 
@@ -281,7 +314,9 @@ export default defineComponent({
       handleModalOk,
       handleDelete,
 
-
+      //categories
+      level1,
+      arr,
     }
   }
 });
