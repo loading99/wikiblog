@@ -5,9 +5,7 @@ public class Ebook {
 
     private String name;
 
-    private Long category1Id;
-
-    private Long category2Id;
+    private Long categoryid;
 
     private String description;
 
@@ -18,12 +16,6 @@ public class Ebook {
     private Integer viewCount;
 
     private Integer voteCount;
-
-    public Ebook(){
-        this.setViewCount(0);
-        this.setDocCount(0);
-        this.setVoteCount(0);
-    }
 
     public Long getId() {
         return id;
@@ -41,20 +33,12 @@ public class Ebook {
         this.name = name;
     }
 
-    public Long getCategory1Id() {
-        return category1Id;
+    public Long getCategoryid() {
+        return categoryid;
     }
 
-    public void setCategory1Id(Long category1Id) {
-        this.category1Id = category1Id;
-    }
-
-    public Long getCategory2Id() {
-        return category2Id;
-    }
-
-    public void setCategory2Id(Long category2Id) {
-        this.category2Id = category2Id;
+    public void setCategoryid(Long categoryid) {
+        this.categoryid = categoryid;
     }
 
     public String getDescription() {
@@ -105,8 +89,7 @@ public class Ebook {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", name=").append(name);
-        sb.append(", category1Id=").append(category1Id);
-        sb.append(", category2Id=").append(category2Id);
+        sb.append(", categoryid=").append(categoryid);
         sb.append(", description=").append(description);
         sb.append(", cover=").append(cover);
         sb.append(", docCount=").append(docCount);

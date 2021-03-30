@@ -25,8 +25,7 @@ drop table if exists `ebook`;
 create table `ebook` (
                          `id` bigint not null comment 'id',
                          `name` varchar(50) comment '名称',
-                         `category1_id` bigint comment '分类1',
-                         `category2_id` bigint comment '分类2',
+                         `categoryid` bigint comment 'Ebook最终分类',
                          `description` varchar(200) comment '描述',
                          `cover` varchar(200) comment '封面',
                          `doc_count` int not null default 0 comment '文档数',
@@ -41,15 +40,6 @@ insert into `ebook` (id, name, description) values (3, 'Python ', 'Python From b
 insert into `ebook` (id, name, description) values (4, 'Mysql ', 'MySql From beginning');
 insert into `ebook` (id, name, description) values (5, 'Oracle ', 'Oracle from beginning');
 
-drop table if exists `test`;
-create table `test` (
-                        `id` bigint not null comment 'id',
-                        `name` varchar(50) comment '名称',
-                        `password` varchar(50) comment '密码',
-                        primary key (`id`)
-) engine=innodb default charset=utf8mb4 comment='测试';
-
-insert into `test` (id, name, password) values (1, '测试', 'password');
 
 # 分类
 drop table if exists `category`;
@@ -117,7 +107,7 @@ create table `user` (
                         unique key `account` (`account`)
 ) engine=innodb default charset=utf8mb4 comment='用户';
 
-insert into `user` (id, `account`, `name`, `password`) values (1, 'test', '测试', 'e70e2222a9d67c4f2eae107533359aa4');
+insert into `user` (id, `account`, `name`, `password`) values (1, 'admin', '管理员', '69ee34ef98b66b5ac84fa92449d5fcce');
 
 -- 电子书快照表
 drop table if exists `ebook_snapshot`;
@@ -142,3 +132,5 @@ create table `demo` (
 ) engine=innodb default charset=utf8mb4 comment='测试';
 
 insert into `demo` (id, name) values (1, '测试');
+
+CREATE DATABASE IF NOT EXISTS wiki;

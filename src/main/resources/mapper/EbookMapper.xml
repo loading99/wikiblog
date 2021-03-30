@@ -4,8 +4,7 @@
   <resultMap id="BaseResultMap" type="com.jiawa.wiki.domain.Ebook">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="category1_id" jdbcType="BIGINT" property="category1Id" />
-    <result column="category2_id" jdbcType="BIGINT" property="category2Id" />
+    <result column="categoryid" jdbcType="BIGINT" property="categoryid" />
     <result column="description" jdbcType="VARCHAR" property="description" />
     <result column="cover" jdbcType="VARCHAR" property="cover" />
     <result column="doc_count" jdbcType="INTEGER" property="docCount" />
@@ -71,8 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, `name`, category1_id, category2_id, description, cover, doc_count, view_count, 
-    vote_count
+    id, `name`, categoryid, description, cover, doc_count, view_count, vote_count
   </sql>
   <select id="selectByExample" parameterType="com.jiawa.wiki.domain.EbookExample" resultMap="BaseResultMap">
     select
@@ -105,14 +103,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.jiawa.wiki.domain.Ebook">
-    insert into ebook (id, `name`, category1_id, 
-      category2_id, description, cover, 
-      doc_count, view_count, vote_count
-      )
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{category1Id,jdbcType=BIGINT}, 
-      #{category2Id,jdbcType=BIGINT}, #{description,jdbcType=VARCHAR}, #{cover,jdbcType=VARCHAR}, 
-      #{docCount,jdbcType=INTEGER}, #{viewCount,jdbcType=INTEGER}, #{voteCount,jdbcType=INTEGER}
-      )
+    insert into ebook (id, `name`, categoryid, 
+      description, cover, doc_count, 
+      view_count, vote_count)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{categoryid,jdbcType=BIGINT}, 
+      #{description,jdbcType=VARCHAR}, #{cover,jdbcType=VARCHAR}, #{docCount,jdbcType=INTEGER}, 
+      #{viewCount,jdbcType=INTEGER}, #{voteCount,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.jiawa.wiki.domain.Ebook">
     insert into ebook
@@ -123,11 +119,8 @@
       <if test="name != null">
         `name`,
       </if>
-      <if test="category1Id != null">
-        category1_id,
-      </if>
-      <if test="category2Id != null">
-        category2_id,
+      <if test="categoryid != null">
+        categoryid,
       </if>
       <if test="description != null">
         description,
@@ -152,11 +145,8 @@
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="category1Id != null">
-        #{category1Id,jdbcType=BIGINT},
-      </if>
-      <if test="category2Id != null">
-        #{category2Id,jdbcType=BIGINT},
+      <if test="categoryid != null">
+        #{categoryid,jdbcType=BIGINT},
       </if>
       <if test="description != null">
         #{description,jdbcType=VARCHAR},
@@ -190,11 +180,8 @@
       <if test="record.name != null">
         `name` = #{record.name,jdbcType=VARCHAR},
       </if>
-      <if test="record.category1Id != null">
-        category1_id = #{record.category1Id,jdbcType=BIGINT},
-      </if>
-      <if test="record.category2Id != null">
-        category2_id = #{record.category2Id,jdbcType=BIGINT},
+      <if test="record.categoryid != null">
+        categoryid = #{record.categoryid,jdbcType=BIGINT},
       </if>
       <if test="record.description != null">
         description = #{record.description,jdbcType=VARCHAR},
@@ -220,8 +207,7 @@
     update ebook
     set id = #{record.id,jdbcType=BIGINT},
       `name` = #{record.name,jdbcType=VARCHAR},
-      category1_id = #{record.category1Id,jdbcType=BIGINT},
-      category2_id = #{record.category2Id,jdbcType=BIGINT},
+      categoryid = #{record.categoryid,jdbcType=BIGINT},
       description = #{record.description,jdbcType=VARCHAR},
       cover = #{record.cover,jdbcType=VARCHAR},
       doc_count = #{record.docCount,jdbcType=INTEGER},
@@ -237,11 +223,8 @@
       <if test="name != null">
         `name` = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="category1Id != null">
-        category1_id = #{category1Id,jdbcType=BIGINT},
-      </if>
-      <if test="category2Id != null">
-        category2_id = #{category2Id,jdbcType=BIGINT},
+      <if test="categoryid != null">
+        categoryid = #{categoryid,jdbcType=BIGINT},
       </if>
       <if test="description != null">
         description = #{description,jdbcType=VARCHAR},
@@ -264,8 +247,7 @@
   <update id="updateByPrimaryKey" parameterType="com.jiawa.wiki.domain.Ebook">
     update ebook
     set `name` = #{name,jdbcType=VARCHAR},
-      category1_id = #{category1Id,jdbcType=BIGINT},
-      category2_id = #{category2Id,jdbcType=BIGINT},
+      categoryid = #{categoryid,jdbcType=BIGINT},
       description = #{description,jdbcType=VARCHAR},
       cover = #{cover,jdbcType=VARCHAR},
       doc_count = #{docCount,jdbcType=INTEGER},

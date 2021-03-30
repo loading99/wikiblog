@@ -3,22 +3,23 @@ package com.jiawa.wiki.req;
 public class EbookReq extends PageReq{
     private long id;
     private String name;
-    private long categoryId2;
+    private long categoryid;
+
 
     public long getId() {
         return id;
     }
 
-    public long getCategoryId2() {
-        return categoryId2;
-    }
-
-    public void setCategoryId2(long categoryId2) {
-        this.categoryId2 = categoryId2;
-    }
-
     public void setId(long id) {
         this.id = id;
+    }
+
+    public long getCategoryid() {
+        return categoryid;
+    }
+
+    public void setCategoryid(long categoryid) {
+        this.categoryid = categoryid;
     }
 
     public String getName() {

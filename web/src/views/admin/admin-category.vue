@@ -56,7 +56,7 @@
   </a-layout>
 
   <a-modal
-      title="Book Form"
+      title="Category Form"
       v-model:visible="modalVisible"
       :confirm-loading="modalLoading"
       @ok="handleModalOk"

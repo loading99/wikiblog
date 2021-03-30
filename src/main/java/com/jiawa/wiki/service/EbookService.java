@@ -46,8 +46,8 @@ public class EbookService {
         if(!ObjectUtils.isEmpty(req.getName())) {
             criteria.andNameLike("%"+req.getName()+"%");
         }
-        if((!ObjectUtils.isEmpty(req.getCategoryId2())) && req.getCategoryId2()!=0) {
-            criteria.andCategory2IdEqualTo(req.getCategoryId2());
+        if((!ObjectUtils.isEmpty(req.getCategoryid())) && req.getCategoryid()!=0) {
+            criteria.andCategoryidEqualTo(req.getCategoryid());
         }
 
         PageHelper.startPage(req.getPage(),req.getSize());

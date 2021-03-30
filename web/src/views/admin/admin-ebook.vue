@@ -74,11 +74,8 @@
       <a-form-item label="Name">
         <a-input v-model:value="formbook.name" />
       </a-form-item>
-      <a-form-item label="Category1">
-        <a-input v-model:value="formbook.category1Id" />
-      </a-form-item>
-      <a-form-item label="Category2">
-        <a-input v-model:value="formbook.category2Id" />
+      <a-form-item label="Category">
+        <a-input v-model:value="formbook.categoryid" />
       </a-form-item>
       <a-form-item label="Description">
         <a-input v-model:value="formbook.description" type="textarea" />

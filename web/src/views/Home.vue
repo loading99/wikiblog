@@ -322,11 +322,6 @@ export default defineComponent({
     }, 1000*58);
 
 
-
-
-
-
-
     const ebook=ref();
     ebook.value=[];
     const pagination = {
@@ -393,7 +388,7 @@ export default defineComponent({
         params:{
           page: 1,
           size: 100,
-          categoryId2: value.key
+          categoryid: value.key
         }
       }).then((response)=>{
         const data=response.data
