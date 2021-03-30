@@ -1,6 +1,8 @@
 package com.jiawa.wiki.utils;
 
 import com.alibaba.fastjson.JSON;
+import com.jiawa.wiki.exception.BusinessException;
+import com.jiawa.wiki.exception.BusinessExceptionCode;
 import com.jiawa.wiki.response.LoginResp;
 import com.jiawa.wiki.utils.LoginUserContext;
 import org.slf4j.Logger;
@@ -48,13 +50,13 @@ public class LoginInterceptor implements HandlerInterceptor {
         if (token == null || token.isEmpty()) {
             LOG.info( "token为空，请求被拦截" );
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
-            return false;
+            throw new BusinessException(BusinessExceptionCode.Permission_Denied);
         }
         Object object = redisTemplate.opsForValue().get(token);
         if (object == null) {
             LOG.warn( "token无效，请求被拦截" );
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
-            return false;
+            throw new BusinessException(BusinessExceptionCode.Permission_Denied);
         } else {
             LOG.info("已登录：{}", object);
             LoginUserContext.setUser(JSON.parseObject((String) object, LoginResp.class));

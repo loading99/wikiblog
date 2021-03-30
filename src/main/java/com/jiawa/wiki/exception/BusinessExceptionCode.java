@@ -6,6 +6,7 @@ public enum BusinessExceptionCode {
     USER_LOGIN_NAME_EXIST("Account Name already exists"),
     LOGIN_USER_ERROR("Account name doesn't exist or password mismatches"),
     VOTE_REPEAT("You already like the item"),
+    Permission_Denied("Your permission has been denied!")
     ;
 
     private String desc;
