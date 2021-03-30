@@ -232,17 +232,28 @@
         <a-menu-item :key="0">
           {{ $t('sider.allcategory') }}
         </a-menu-item>
-        <a-sub-menu v-for="item in level1" :key="item.id">
-          <template v-slot:title>
-            <span>
-              <MenuUnfoldOutlined />
-              {{item.name}}
-            </span>
+        <template v-for="item in level1" :key="item.id">
+          <template v-if="!item.children">
+            <a-menu-item :key="item.id">
+              <span>{{ item.name }}</span>
+            </a-menu-item>
           </template>
-          <a-menu-item v-for="child in item.children" :key="child.id">
-            <MailOutlined /><span>{{child.name}}</span>
-          </a-menu-item>
-        </a-sub-menu>
+          <template v-else>
+            <sub-menu :menu="item" :key="item.id" />
+          </template>
+        </template>
+
+<!--        <a-sub-menu v-for="item in level1" :key="item.id">-->
+<!--          <template v-slot:title>-->
+<!--            <span>-->
+<!--              <MenuUnfoldOutlined />-->
+<!--              {{item.name}}-->
+<!--            </span>-->
+<!--          </template>-->
+<!--          <a-menu-item v-for="child in item.children" :key="child.id">-->
+<!--            <MailOutlined /><span>{{child.name}}</span>-->
+<!--          </a-menu-item>-->
+<!--        </a-sub-menu>-->
       </a-menu>
     </a-layout-sider>
     <a-layout-content :style="{ padding: '0 24px', minHeight: '280px' }">
@@ -294,7 +305,13 @@ import {Tool} from "@/util/tools";
 import {useRoute} from "vue-router";
 import store from "@/store";
 import moment from 'moment';
-
+import {
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+  PieChartOutlined,
+  MailOutlined,
+} from '@ant-design/icons-vue';
+import SubMenu from "@/views/submenu.vue";
 
 export default defineComponent({
   name: 'Home',
@@ -320,7 +337,6 @@ export default defineComponent({
     setInterval(() => {
       now.value.hour = moment(Date.now()).format('HH:mm')
     }, 1000*58);
-
 
     const ebook=ref();
     ebook.value=[];
@@ -385,6 +401,7 @@ export default defineComponent({
     const handleClick=(value:any)=>{
       console.log("-----Handleclick 参数-----",value);
       axios.get("/ebook/search", {
+
         params:{
           page: 1,
           size: 100,
@@ -425,8 +442,13 @@ export default defineComponent({
 
     handleClick,
   }
-
-  }
+  },
+  components: {
+    'sub-menu': SubMenu,
+    MenuFoldOutlined,
+    MenuUnfoldOutlined,
+    PieChartOutlined,
+}
 });
 </script>
 
