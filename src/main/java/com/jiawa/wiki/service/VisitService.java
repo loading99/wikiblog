@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 
 
@@ -28,9 +29,6 @@ public class VisitService {
     private VisitsMapper visitmapper;
 
     @Resource
-    private ContentMapper contentmapper;
-
-    @Resource
     private SnowFlake snowflake;
 
     @Resource
@@ -39,6 +37,9 @@ public class VisitService {
     /**
      *
      */
+    public Long searchTotal(){
+        return visitmapper.countByExample(null);
+    }
 
 
     /**

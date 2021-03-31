@@ -3,7 +3,7 @@
     <a-card style="width: 100%">
           <a-row>
             <a-col :span="6">
-              <a-statistic title="total Views" :value="statistic.totalView">
+              <a-statistic title="total Visits" :value="statistic.totalView">
                 <template #prefix>
                   <arrow-up-outlined/>
                 </template>
@@ -43,6 +43,7 @@
 
 import {defineComponent,ref,onMounted} from "vue";
 import axios from 'axios';
+import {message} from "ant-design-vue";
 
 declare let echarts: any;
 export default defineComponent({
@@ -50,6 +51,18 @@ export default defineComponent({
   setup(){
     const statistic=ref();
     statistic.value={};
+
+    /**
+     * Get Total Web visits overall including doc+ homepage.
+     */
+    axios.get('/stats/list').then((response)=>{
+      const data=response.data;
+      if(data.success){
+        statistic.value.totalView=data.content;
+      }else{
+        message.error(data.message);
+      }
+    })
 
     axios.get('/ebook-snapshot/get-statistic').then((response)=>{
       const data =response.data;
