@@ -404,11 +404,21 @@ export default defineComponent({
           message.error(data.message);
         }
       });
+    };
+
+    /**
+     * 统计访问数据相关代码
+     */
+    const visit=()=>{
+      axios.post('/stats/add',{
+        web: "homepage"
+      })
     }
 
 
     // const ebook2=reactive({books:[]});
     onMounted(()=>{
+      visit();
       handleCategoryQuery();
 
     });

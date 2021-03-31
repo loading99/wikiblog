@@ -1,16 +1,16 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Home from '../views/Home.vue'
 
-import AdminEbook from '../views/admin/admin-ebook.vue'
-import AdminCategory from '../views/admin/admin-category.vue'
-import AdminDoc from '../views/admin/admin-doc.vue'
-import AdminUser from '../views/admin/admin-user.vue'
-import Login from '../views/login.vue'
-import DocPage from '../views/doc.vue'
-import About from '../views/about.vue'
-import Stats from '../views/stats.vue'
-import Page500 from '../views/error/500.vue'
-import Page404 from '../views/error/404.vue'
+import AdminEbook from '../views/admin/admin-ebook.vue';
+import AdminCategory from '../views/admin/admin-category.vue';
+import AdminDoc from '../views/admin/admin-doc.vue';
+import AdminUser from '../views/admin/admin-user.vue';
+import Login from '../views/login.vue';
+import DocPage from '../views/doc.vue';
+import About from '../views/about.vue';
+import Stats from '../views/stats.vue';
+import Page500 from '../views/error/500.vue';
+import Page404 from '../views/error/404.vue';
 import store from "@/store";
 import {Tool} from "@/util/tools";
 import {notification} from "ant-design-vue";

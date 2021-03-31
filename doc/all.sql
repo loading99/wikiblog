@@ -123,6 +123,15 @@ create table `ebook_snapshot` (
                                   unique key `ebook_id_date_unique` (`ebook_id`, `date`)
 ) engine=innodb default charset=utf8mb4 comment='电子书快照表';
 
+drop table if exists `visits`;
+create table `visits` (
+                        `id` bigint not null comment 'id',
+                        `ip` varchar(70) comment 'ip 字段',
+                        `web` varchar(20) comment '访问的是那个网页，主页，about，doc',
+                        `Date` date not null comment '访问日期',
+                        primary key (`id`)
+) engine=innodb default charset=utf8mb4 comment='拜访者访问表';
+
 
 drop table if exists `demo`;
 create table `demo` (
@@ -132,5 +141,7 @@ create table `demo` (
 ) engine=innodb default charset=utf8mb4 comment='测试';
 
 insert into `demo` (id, name) values (1, '测试');
+
+
 
 CREATE DATABASE IF NOT EXISTS wiki;
