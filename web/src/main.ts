@@ -2,7 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import Antd from 'ant-design-vue'
+import Antd, {notification} from 'ant-design-vue'
 import "ant-design-vue/dist/antd.css"
 import * as Icons from '@ant-design/icons-vue';
 import axios from 'axios';
@@ -29,6 +29,14 @@ axios.interceptors.response.use(function (response) {
     return response;
 }, error => {
     console.log("ERROR CODE",error.response.status);
+    if(error.response.status==401){
+        notification['error']({
+            message:i18n.global.t('message.invalid'),
+        });
+        console.log("-----Automatically sign out-------");
+        store.commit('setUser',{});
+        window.location.href='/login'
+    }
     router.push({name:"Page500"})
 });
 
