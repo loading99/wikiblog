@@ -5,6 +5,7 @@ export class Tool {
      */
     private static v: Set<number>;
 
+
     public static isEmpty(obj: any) {
         if ((typeof obj === 'string')) {
             return !obj || obj.replace(/\s+/g, "") === ""
@@ -78,6 +79,33 @@ export class Tool {
                 const child = node.children;
                 if (!Tool.isEmpty(child)) {
                     Tool.setDisable(child, id);
+                }
+            }
+        }
+    }
+
+    /**
+     * Recursively search the tree and add IDs in one entire branch
+     */
+
+    public static deleteIDs (tree: any, id: bigint,IDlist:Array<bigint>){
+
+        for (let i = 0; i < tree.length; i++) {
+            const node = tree[i];
+            if (node.id == id) {
+                const child = node.children;
+                IDlist.push(id);
+                if (Tool.isEmpty(child)) {
+                    continue;
+                }
+                for (let j = 0; j < child.length; j++) {
+                    const c = child[j];
+                    Tool.deleteIDs(child, c.id,IDlist);
+                }
+            } else {
+                const child = node.children;
+                if (!Tool.isEmpty(child)) {
+                    Tool.deleteIDs(child, id,IDlist);
                 }
             }
         }

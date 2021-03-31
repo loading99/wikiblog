@@ -261,36 +261,9 @@ export default defineComponent({
       },1000);
     }
 
-    /**
-     * Recursively search the tree and add IDs in one entire branch
-     */
     let IDlist:Array<bigint>=[];
-    const deleteIDs = (tree: any, id: bigint) => {
-      for (let i = 0; i < tree.length; i++) {
-        const node = tree[i];
-        if (node.id == id) {
-          const child = node.children;
-          IDlist.push(id);
-          if (Tool.isEmpty(child)) {
-            continue;
-          }
-          for (let j = 0; j < child.length; j++) {
-            const c = child[j];
-            deleteIDs(child, c.id);
-          }
-        } else {
-          const child = node.children;
-          if (!Tool.isEmpty(child)) {
-            deleteIDs(child, id);
-          }
-        }
-      }
-    }
-
-
-
     const handleDelete = (id:bigint) => {
-      deleteIDs(level1.value,id);
+      Tool.deleteIDs(level1.value,id,IDlist);
       console.log("-----IDs to be deleted------",IDlist);
       if(Tool.isEmpty(IDlist)){
         message.error("Deleting Empty records")

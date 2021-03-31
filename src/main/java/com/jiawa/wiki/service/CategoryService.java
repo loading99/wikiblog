@@ -1,9 +1,7 @@
 package com.jiawa.wiki.service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.jiawa.wiki.domain.Category;
-import com.jiawa.wiki.domain.CategoryExample;
-import com.jiawa.wiki.domain.Ebook;
+import com.jiawa.wiki.domain.*;
 import com.jiawa.wiki.mapper.CategoryMapper;
 import com.jiawa.wiki.req.CategoryReq;
 import com.jiawa.wiki.req.UpdateReq;
@@ -14,6 +12,7 @@ import com.jiawa.wiki.utils.SnowFlake;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
@@ -67,7 +66,18 @@ public class CategoryService {
             categorymapper.updateByPrimaryKey(copy);
         }
     }
-    public void delete(Long id){
-        categorymapper.deleteByPrimaryKey(id);
+
+    /**
+     * Recursively delete all categories under the parent categories
+     * @param IDlist
+     * @return None
+     */
+
+    @Transactional
+    public void delete(List<Long> IDlist){
+        CategoryExample categoryExample = new CategoryExample();
+        CategoryExample.Criteria criteria=categoryExample.createCriteria();
+        criteria.andIdIn(IDlist);
+        categorymapper.deleteByExample(categoryExample);
     }
 }

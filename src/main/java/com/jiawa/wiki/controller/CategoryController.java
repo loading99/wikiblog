@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -42,9 +44,15 @@ public class CategoryController {
         return resp;
     }
 
-    @DeleteMapping("/delete/{id}")
-    public CommonResp deleteCategory(@PathVariable Long id){
-        categoryService.delete(id);
+
+    @DeleteMapping("/delete/{str}")
+    public CommonResp deleteCategory(@PathVariable String str){
+        final List<String> ids = Arrays.asList(str.split(","));
+        List<Long> IDlist=new ArrayList<>();
+        for (String id : ids) {
+            IDlist.add(Long.parseLong(id));
+        }
+        categoryService.delete(IDlist);
         CommonResp resp = new CommonResp<>();
         return resp;
     }

@@ -242,14 +242,22 @@ export default defineComponent({
     /**
      * Delete
      */
-    const handleDelete = (id:number) => {
-      axios.delete("/category/delete/"+id).then(function (response){
-        const data=response.data;
-        if (data.success){
-          // reload
-          handleQuery();
-        }
-      })
+    let IDlist:Array<bigint>=[];
+    const handleDelete = (id:bigint) => {
+      Tool.deleteIDs(level1.value,id,IDlist);
+      console.log("-----IDs to be deleted------",IDlist);
+      if(Tool.isEmpty(IDlist)){
+        message.error("Deleting Empty records")
+      }else{
+        axios.delete("/category/delete/"+IDlist.join(',')).then(function (response){
+          const data=response.data;
+          if (data.success){
+            // reload
+            IDlist=[];
+            handleQuery();
+          }
+        })
+      }
     };
 
 
