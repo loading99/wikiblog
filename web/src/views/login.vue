@@ -647,8 +647,8 @@
           <g transform="rotate(45 700 0)">
             <ellipse class="comet-c" fill="url(#comet-gradient)" cx="700px" cy="0px" rx="150" ry="2"></ellipse>
           </g>
-          <g transform="rotate(-135)">
-            <ellipse class="comet-d" fill="url(#comet-gradient)" cx=400px cy=80px rx="150" ry="2"></ellipse>
+          <g transform="rotate(45 400 80)">
+            <ellipse class="comet-f comet-d" fill="url(#comet-gradient)" cx=400px cy=80px rx="150" ry="2"></ellipse>
           </g>
           <g transform="rotate(45 1000 0)">
             <ellipse class="comet-e" fill="url(#comet-gradient)" cx="1000px" cy="0px" rx="150" ry="2"></ellipse>

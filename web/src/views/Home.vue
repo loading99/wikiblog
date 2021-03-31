@@ -243,17 +243,6 @@
           </template>
         </template>
 
-<!--        <a-sub-menu v-for="item in level1" :key="item.id">-->
-<!--          <template v-slot:title>-->
-<!--            <span>-->
-<!--              <MenuUnfoldOutlined />-->
-<!--              {{item.name}}-->
-<!--            </span>-->
-<!--          </template>-->
-<!--          <a-menu-item v-for="child in item.children" :key="child.id">-->
-<!--            <MailOutlined /><span>{{child.name}}</span>-->
-<!--          </a-menu-item>-->
-<!--        </a-sub-menu>-->
       </a-menu>
     </a-layout-sider>
     <a-layout-content :style="{ padding: '0 24px', minHeight: '280px' }">

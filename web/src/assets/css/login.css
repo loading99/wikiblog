@@ -138,30 +138,30 @@
     animation-delay: 0.5s;
 }
 .comet-c {
-    -webkit-animation: comet-c 5s linear infinite;
-    animation: comet-c 5s linear infinite;
+    -webkit-animation: comet-c 9s linear infinite;
+    animation: comet-c 9s linear infinite;
     -webkit-animation-delay: 2s;
     animation-delay: 2s;
 }
 .comet-d {
-    -webkit-animation-delay: 3s;
-    animation-delay: 3s;
+    -webkit-animation-delay: 2s;
+    animation-delay: 2s;
 }
 .comet-e {
-    -webkit-animation: comet-c 5s linear infinite;
-    animation: comet-c 5s linear infinite;
+    -webkit-animation: comet-c 8s linear infinite;
+    animation: comet-c 8s linear infinite;
     -webkit-animation-delay: 2s;
     animation-delay: 2s;
 }
 .comet-f {
-    -webkit-animation: comet-c 5s linear infinite;
-    animation: comet-c 5s linear infinite;
+    -webkit-animation: comet-c 8s linear infinite;
+    animation: comet-c 8s linear infinite;
     -webkit-animation-delay: -1s;
     animation-delay: -1s;
 }
 .comet-g {
-    -webkit-animation: comet-c 5s linear infinite;
-    animation: comet-c 5s linear infinite;
+    -webkit-animation: comet-c 8s linear infinite;
+    animation: comet-c 8s linear infinite;
     -webkit-animation-delay: -2s;
     animation-delay: -2s;
 }
