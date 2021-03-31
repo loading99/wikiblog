@@ -199,32 +199,7 @@ export default defineComponent({
       })
     };
 
-    /**
-     * Recursively set node and children node as disabled
-     * cannot be chosen
-     */
-    const setDisable = (treeSelect: any, id: number) => {
-      for (let i = 0; i < treeSelect.length; i++) {
-        const node = treeSelect[i];
-        if (node.id == id) {
-          console.log("-----Disable Node-----",node.id);
-          node.disabled = true;
-          const child = node.children;
-          if(Tool.isEmpty(child)){
-            continue;
-          }
-          for (let j = 0; j < child.length; j++) {
-            const c = child[j];
-            setDisable(child, c.id);
-          }
-        } else {
-          const child = node.children;
-          if (!Tool.isEmpty(child)) {
-            setDisable(child, id);
-          }
-        }
-      }
-    }
+
     /**
      * Query Rich text from database.
      * @param id
@@ -248,9 +223,8 @@ export default defineComponent({
       editor.txt.html("");
       docform.value=Tool.copy(record);
       treeSelect.value=Tool.copy(level1.value);
-      setDisable(treeSelect.value,record.id);
+      Tool.setDisable(treeSelect.value,record.id);
       treeSelect.value.unshift({id:0,name:"None"});
-      console.log("-----Upgraded Tree------",treeSelect.value);
       //rich text editor show
       handleContent(docform.value.id);
       setTimeout(()=>{

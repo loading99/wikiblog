@@ -55,4 +55,31 @@ export class Tool {
         }
         return result;
     }
+
+    /**
+     * Recursively set node and children node as disabled
+     * cannot be chosen
+     */
+    public static setDisable (treeSelect: any, id: number) {
+        for (let i = 0; i < treeSelect.length; i++) {
+            const node = treeSelect[i];
+            if (node.id == id) {
+                console.log("-----Disable Node-----",node.id);
+                node.disabled = true;
+                const child = node.children;
+                if(Tool.isEmpty(child)){
+                    continue;
+                }
+                for (let j = 0; j < child.length; j++) {
+                    const c = child[j];
+                    Tool.setDisable(child, c.id);
+                }
+            } else {
+                const child = node.children;
+                if (!Tool.isEmpty(child)) {
+                    Tool.setDisable(child, id);
+                }
+            }
+        }
+    }
 }

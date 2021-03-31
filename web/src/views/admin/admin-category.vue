@@ -66,17 +66,17 @@
         <a-input v-model:value="categoryform.name" />
       </a-form-item>
       <a-form-item label="Parent Category">
-        <a-select
+        <a-tree-select
             v-model:value="categoryform.parent"
-            style="width: 120px"
-            ref="select"
+            tree-data-simple-mode
+            style="width: 100%"
+            :dropdown-style="{ maxHeight: '400px', overflow: 'auto' }"
+            :tree-data="treeSelect"
+            placeholder="Please select"
+            :replaceFields="{ title:'name', key: 'id', value: 'id' }"
         >
-          <a-select-option value="0">None</a-select-option>
-          <a-select-option v-for="c in level1" :key="c.id" :value="c.id" :disabled="categoryform.id==c.id">
-            {{c.name}}
-          </a-select-option>
+        </a-tree-select>
 
-        </a-select>
       </a-form-item>
       <a-form-item label="Order">
         <a-input v-model:value="categoryform.sort" type="textarea" />
@@ -191,12 +191,13 @@ export default defineComponent({
     /**
      * update确认框 and Form
      **/
-    const categoryform = ref ({});
+    const treeSelect=ref();
+    treeSelect.value={};
+    const categoryform = ref ();
     const modalVisible = ref(false);
     const modalLoading = ref(false);
     const handleModalOk = () => {
       modalLoading.value = true;
-
       axios.post("/category/save",categoryform.value).then(function (response){
         modalLoading.value=false;
         const data=response.data;
@@ -208,12 +209,16 @@ export default defineComponent({
           message.error(data.message);
         }
       })
+
     };
 
     /**
      * Edit
      */
     const edit = (record: any) => {
+      treeSelect.value=Tool.copy(level1.value);
+      Tool.setDisable(treeSelect.value,record.id);
+      treeSelect.value.unshift({id:0,name:"None"});
       modalVisible.value = true;
       categoryform.value=Tool.copy(record);
     };
@@ -224,6 +229,14 @@ export default defineComponent({
     const add=()=>{
       modalVisible.value=true;
       categoryform.value={};
+
+      treeSelect.value=Tool.copy(level1.value);
+      if(Tool.isEmpty(treeSelect.value)){
+        treeSelect.value=[{id:0,name:"None"}]
+        console.log("-----Manully add options if treeselect is empty-------")
+      }else{
+        treeSelect.value.unshift({id:0,name:"None"})
+      }
     }
 
     /**
@@ -251,6 +264,7 @@ export default defineComponent({
       param,
       // categorys,
       level1,
+      treeSelect,
 
       columns,
       loading,
@@ -264,7 +278,6 @@ export default defineComponent({
       handleSearch,
       handleModalOk,
       handleDelete,
-
 
     }
   }
