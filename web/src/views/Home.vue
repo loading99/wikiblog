@@ -1,5 +1,11 @@
 <template>
   <div class="background" v-show="showWelcome" @click="onClick">
+    <div class="message-welcome">
+      Hello
+    </div>
+    <div class="message-click">
+      click to start
+    </div>
     <div class="clock">
       <span class="hour">{{now.hour}}</span>
       <a-divider style="height: 2px"></a-divider>

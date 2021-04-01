@@ -13,6 +13,37 @@
     background-image: url("../images/winter.jpeg");
     background-size: 100% 100%;
 }
+.message-welcome{
+    font-size: 10em;
+    color: #cccccc;
+    bottom: 40%;
+    left:45%;
+    position: absolute;
+    font-weight: bolder;
+    font-family: Budding !important;
+}
+.message-click{
+    font-size: 7em;
+    color: #f2d480;
+    bottom: 5%;
+    left:35%;
+    position: absolute;
+    font-weight: bolder;
+    font-family: Budding !important;
+    animation: font-animation 5s infinite;
+    animation-delay: 0s ;
+}
+@keyframes font-animation {
+    0%{
+        opacity: 0%;
+    }
+    50%{
+        opacity: 100%;
+    }
+    100%{
+        opacity: 0%;
+    }
+}
 .GetStart{
     right: -50%;
     bottom: -50%;
@@ -23,7 +54,7 @@
     right: 6%;
     position: absolute;
     font-size: 28px;
-    font-family: "Adobe Garamond Pro";
+    /*font-family: "Adobe Garamond Pro";*/
 }
 .hour{
     font-size: 2.5em;
@@ -38,6 +69,7 @@
     fill: #e8e8e8;
     bottom: 0;
     animation: sf 10s linear infinite;
+
 }
 
 
