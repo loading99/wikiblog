@@ -10,9 +10,14 @@
       <a href="#skills">Skills</a>
       <a href="#story">Experience</a>
       <a href="#works">Design</a>
-      <a href="#team">Social Media</a>
-
+      <a href="#team">Team and Partners</a>
     </nav>
+    <p style="padding: 1em;
+      display: block;
+      text-align: center;">
+      <fa icon="weixin" type="fab" class="icons"></fa> &nbsp;&nbsp;
+      <fa icon="instagram" type="fab" class="icons"></fa>&nbsp;&nbsp; &nbsp;
+      <a href="https://www.linkedin.com/in/zhijian-hu-93a3ab130" target="_blank" style="color: white"><fa icon="linkedin" type="fab" class="icons" ></fa></a></p>
   </aside>
   <main>
     <section id="info">
@@ -51,6 +56,9 @@
           <p><strong class="title3"><fa icon="database" type="fas" class="icons"></fa> Database/Tools: </strong>
             <span>PostgreSQL, MySQL, HBase, Redis, AWS, IDEA, Docker, Git, Maven.</span>
           </p>
+          <p><strong class="title3"><fa icon="photo-video" type="fas" class="icons"></fa> Design Tools: </strong>
+            <span>Adobe PhotoShop, Illustrator, Premiere</span>
+          </p>
         </div>
       </div>
 
@@ -87,73 +95,43 @@
     </section>
     <section id="works">
       <div class="wrap">
-        <h2 class="title">个人作品</h2>
+        <h2 class="title">Designs</h2>
         <div class="row">
           <div class="col-s-6">
             <div class="works-item">
-              <img src="../assets/images/works/binkic-2017.jpg"/>
-              <p>缤奇团队 2017 官网</p>
+              <img src="../assets/images/works/wiki.png"/>
+              <p>Personal Web Blog @2021</p>
             </div>
           </div>
           <div class="col-s-6">
             <div class="works-item">
-              <img src="../assets/images/works/space.jpg"/>
-              <p>个人博客</p>
+              <img src="../assets/images/works/fisherbook.png"/>
+              <p>Fisher Book-A Book trading Website based on Python Flask</p>
             </div>
           </div>
           <div class="col-s-6">
             <div class="works-item">
-              <img src="../assets/images/works/dream.jpg"/>
-              <p>梦想主题班会</p>
+              <img src="../assets/images/works/Mnist.png"/>
+              <p>MNIST Digit Recognition MicroApp@2019</p>
             </div>
           </div>
           <div class="col-s-6">
             <div class="works-item">
-              <img src="../assets/images/works/kico-style.jpg"/>
-              <p>Kico Style 响应式框架</p>
+              <img src="../assets/images/works/spark.png"/>
+              <p>Data Analysis and Visualization based on spark streaming</p>
             </div>
           </div>
-          <div class="col-s-6">
-            <div class="works-item">
-              <img src="../assets/images/works/robots.jpg"/>
-              <p>小缤机器人</p>
-            </div>
-          </div>
-          <div class="col-s-6">
-            <div class="works-item">
-              <img src="../assets/images/works/single.jpg"/>
-              <p>Single 博客主题</p>
-            </div>
-          </div>
-          <div class="col-s-6">
-            <div class="works-item">
-              <img src="../assets/images/works/kico-player.jpg"/>
-              <p>Kico Player 播放器</p>
-            </div>
-          </div>
-          <div class="col-s-6">
-            <div class="works-item">
-              <img src="../assets/images/works/sweet.jpg"/>
-              <p>个人主页 Sweet</p>
-            </div>
-          </div>
-          <div class="col-s-6">
-            <div class="works-item">
-              <img src="../assets/images/works/binkic-2018.jpg"/>
-              <p>缤奇团队 2018 官网</p>
-            </div>
-          </div>
+
         </div>
       </div>
     </section>
     <section class="content-d" id="team">
       <div class="wrap">
-        <h2 class="title">我的团队</h2>
+        <h2 class="title">Team and Partners</h2>
         <div class="row">
           <div class="col-m-6">
-            <p>我的团队 - 缤奇团队由一群热爱科技创新的年轻人所组成，做到了“实际”与“创新”的结合。奇思妙想不乏真正落实。集思广益，生动有趣的创意，尽在缤奇。缤奇团队如今有超过30名成员，各个部门互帮互助，同为一个目标而努力进取着。</p>
-            <p>缤奇团队致力于开发原创游戏、动漫等项目。目前我们已完成项目有手机游戏“色块冲刺”、聊天娱乐项目“小缤机器人”等。正在创作项目有解密游戏“月亮湖的秘密”、VR 项目“梦想码头”等。缤奇官网 &amp; 社区已陆续开放。网站采用团队成员自主编写的 CSS3 自适应框架，针对移动设备有布局优化，缤奇团队有着丰富的网站建设技术能力、有独立的画师以及文编。</p>
-            <p>团队官网：<a href="XXX">XXX</a></p>
+            <p>I appreciate those friends who have either given helpful suggestions or engaged in testing.</p>
+            <p>KBSSAMA: Email: </p>
           </div>
           <div class="col-m-6 center">
             <img src="../assets/images/team.png"/>
@@ -189,7 +167,7 @@ i{
   font-size: 1.5em;
 }
 .icons{
-  width: 20px;
+  width: 22px;
 }
 .HOME{
   top: 18px;

@@ -12,12 +12,12 @@
             <a-input v-model:value="param.password" type="password" name="Password" :placeholder="$t('form.password')"
                      required></a-input>
 
-            <ul class="agileinfotickwthree">
-              <li>
-                <input type="checkbox" id="brand1" value="">
-                <a href="#">{{ $t('actions.forget') }}</a>
-              </li>
-            </ul>
+<!--            <ul class="agileinfotickwthree">-->
+<!--              <li>-->
+<!--                <input type="checkbox" id="brand1" value="">-->
+<!--                <a href="#">{{ $t('actions.forget') }}</a>-->
+<!--              </li>-->
+<!--            </ul>-->
             <div class="aitssendbuttonw3ls">
               <input type="button" :onclick="handleLogin" :value="$t('actions.login')">
               <div class="clear"></div>

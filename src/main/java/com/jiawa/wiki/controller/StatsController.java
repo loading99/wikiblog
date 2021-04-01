@@ -35,4 +35,5 @@ public class StatsController {
         resp.setContent(count);
         return resp;
     }
+
 }

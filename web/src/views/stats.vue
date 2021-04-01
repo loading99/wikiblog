@@ -17,7 +17,7 @@
               </a-statistic>
             </a-col>
             <a-col :span="6">
-              <a-statistic title="total Views" :value="statistic.viewCount">
+              <a-statistic title="Doc Views" :value="statistic.viewCount">
                   <UserOutlined />
               </a-statistic>
             </a-col>
@@ -150,7 +150,9 @@ export default defineComponent({
       })
     }
     onMounted(()=>{
-      get30DayStats()
+      get30DayStats();
+      statistic.value.docCount="20+";
+      //Temporarily set doc count as "20+"
     })
 
     return {

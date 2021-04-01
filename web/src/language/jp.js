@@ -10,7 +10,7 @@ module.exports={
         login: "ログイン",
         logout:"ログアウト",
         portal:"Admin",
-        stats:"Statistics"
+        stats:"Web データ"
     },
     footer:{
     },
