@@ -131,7 +131,9 @@
         <div class="row">
           <div class="col-m-6">
             <p>I appreciate those friends who have either given helpful suggestions or engaged in testing.</p>
-            <p>KBSSAMA: Email: </p>
+            <p>KBSSAMA: <br/><fa icon="envelope" type="fas" class="icons"></fa> &nbsp; kbsaama@gmail.com <br/>
+              <fa icon="github" type="fab" class="icons"></fa> &nbsp; https://github.com/sunny2012sha</p>
+
           </div>
           <div class="col-m-6 center">
             <img src="../assets/images/team.png"/>

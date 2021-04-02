@@ -275,7 +275,8 @@
               <img
                   width="272"
                   alt="logo"
-                  src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
+                  style="width:207.75px;height:137.25px"
+                  :src="item.cover || '/cover/emptyCover.png'"
               />
             </template>
             <a-list-item-meta :description="item.description">
