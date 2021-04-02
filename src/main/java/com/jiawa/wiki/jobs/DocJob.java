@@ -25,7 +25,7 @@ public class DocJob {
     /**
      * Update Ebook Info everyday 0:00 AM
      */
-    @Scheduled(cron = "0 0 0 * * ? ")
+    @Scheduled(cron = "0 0 0/2 * * ?")
     public void cron() {
         // 增加日志流水号
         MDC.put("LOG_ID", String.valueOf(snowFlake.nextId()));
