@@ -52,5 +52,10 @@ module.exports={
         logoutSuccess:"ログアウト成功",
         loginRequired:"ログインは必要",
         invalid:"タイムアウト, も一度ログインをお願いします。"
+    },
+    stats:{
+        stats30:"一ヶ月間トレンド",
+        docViews:"えつらんりょう",
+        voteCount:"好き量"
     }
 }

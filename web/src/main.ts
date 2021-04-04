@@ -25,7 +25,7 @@ axios.interceptors.request.use(function (config) {
     return Promise.reject(error);
 });
 axios.interceptors.response.use(function (response) {
-    console.log('Result：', response.data);
+    console.log('Result：', response.data.success);
     return response;
 }, error => {
     console.log("ERROR CODE",error.response.status);

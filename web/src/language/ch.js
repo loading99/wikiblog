@@ -53,5 +53,10 @@ module.exports={
         logoutSuccess:"退出成功",
         loginRequired:"此页面需要登录",
         invalid:"身份校验失败或登录超时，请重新登陆"
+    },
+    stats:{
+        stats30:"30天趋势图",
+        docViews:"文档阅读数",
+        voteCount:"点赞数"
     }
 }

@@ -52,5 +52,10 @@ module.exports={
         logoutSuccess:"Logout Success",
         loginRequired:"Login Required!",
         invalid:"Authentication failed, please login again"
+    },
+    stats:{
+        stats30:"Trends over last 30 days",
+        docViews:"Doc Views",
+        voteCount:"Likes"
     }
 }

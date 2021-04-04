@@ -44,6 +44,7 @@
 import {defineComponent,ref,onMounted} from "vue";
 import axios from 'axios';
 import {message} from "ant-design-vue";
+import i18n from "@/language/i18n";
 
 declare let echarts: any;
 export default defineComponent({
@@ -69,7 +70,7 @@ export default defineComponent({
       if(data.success){
         const statisticResp = data.content;
         //Today is index with 1
-        console.log("-----statisticResp-----",statisticResp);
+        // console.log("-----statisticResp-----",statisticResp);
         statistic.value.viewCount = statisticResp[1].viewCount;
         statistic.value.voteCount = statisticResp[1].voteCount;
       }
@@ -93,13 +94,13 @@ export default defineComponent({
 
       const option = {
         title: {
-          text: 'Data Over Last One Month'
+          text: i18n.global.t('stats.stats30')
         },
         tooltip: {
           trigger: 'axis'
         },
         legend: {
-          data: ['Doc Views','Total Likes']
+          data: [i18n.global.t('stats.docViews'),i18n.global.t('stats.voteCount')]
         },
         grid: {
           left: '1%',
@@ -122,13 +123,13 @@ export default defineComponent({
         },
         series: [
           {
-            name: '总阅读量',
+            name: i18n.global.t('stats.docViews'),
             type: 'line',
             data: seriesView,
             smooth: true
           },
           {
-            name: '总点赞量',
+            name: i18n.global.t('stats.voteCount'),
             type: 'line',
             data: seriesVote,
             smooth:true
