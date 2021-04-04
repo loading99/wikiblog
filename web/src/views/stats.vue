@@ -69,6 +69,7 @@ export default defineComponent({
       if(data.success){
         const statisticResp = data.content;
         //Today is index with 1
+        console.log("-----statisticResp-----",statisticResp);
         statistic.value.viewCount = statisticResp[1].viewCount;
         statistic.value.voteCount = statisticResp[1].voteCount;
       }
@@ -92,13 +93,13 @@ export default defineComponent({
 
       const option = {
         title: {
-          text: '30天趋势图'
+          text: 'Data Over Last One Month'
         },
         tooltip: {
           trigger: 'axis'
         },
         legend: {
-          data: ['总阅读量','总点赞量']
+          data: ['Doc Views','Total Likes']
         },
         grid: {
           left: '1%',
