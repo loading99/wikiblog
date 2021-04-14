@@ -71,6 +71,7 @@
         <div class="row">
           <div class="col-m-8">
             <ul class="timeline">
+              <li>2021.04: Passed CFA Exam, Level 1 </li>
               <li>2021.02: Graduated From Columbia University </li>
               <li>2021.01: Personal Web blog v1.0 Published </li>
               <li>2020.12: Implemented CNN Models to build projects: Neural Style Transfer</li>

@@ -34,7 +34,7 @@ module.exports={
         reset: "パスワード　リセット"
     },
     sider:{
-        allcategory: "All"
+        allcategory: "全部"
     },
     actions:{
         views:"Views",
