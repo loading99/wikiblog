@@ -9,6 +9,7 @@ import Login from '../views/login.vue';
 import DocPage from '../views/doc.vue';
 import About from '../views/about.vue';
 import Stats from '../views/stats.vue';
+import Design from '../views/design.vue';
 import Page500 from '../views/error/500.vue';
 import Page404 from '../views/error/404.vue';
 import store from "@/store";
@@ -70,6 +71,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/stats',
     name: 'Stats',
     component: Stats
+  },
+  {
+    path: '/design',
+    name: 'Design',
+    component: Design
   },
   {
     path: '/500',

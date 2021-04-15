@@ -10,7 +10,8 @@ module.exports={
         login: "Sign in",
         logout:" Sign out",
         portal:"Admin Portal",
-        stats:"Statistics"
+        stats:"Statistics",
+        design:"Designs"
     },
     footer:{
     },

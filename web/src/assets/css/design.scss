@@ -1,0 +1,124 @@
+@font-face {
+  font-family: 'Calulator';
+  src: url("../font/digifaw.ttf");
+}
+.CyberBack{
+  width: 99vw;
+  height: 100vh;
+  position: relative;
+  background: url("../images/Cyber.jpg") no-repeat;
+  background-size: 100% 100%;
+  //background: #333333;
+  box-sizing: border-box;
+
+}
+.CyberBack:after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  /* 从父元素继承 background 属性的设置 */
+  background: inherit;
+  filter: blur(2px);
+  -webkit-filter:blur(2px);
+  -moz-filter:blur(2px);
+  -ms-filter:blur(2px);
+  -o-filter:blur(2px);
+}
+.ui{
+  top:20vh;
+  left:20%;
+  height: 305px;
+  width: 614px;
+  position: absolute;
+}
+.ui p{
+  font-family: Calulator;
+  color: #d0e5f2;
+  font-size: 20px;
+  left:50%;
+  position: relative;
+  margin:0;
+  z-index: 2;
+
+}
+.loader-circle{
+  background-image: url("../images/resource9.png");
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  background-size: cover;
+  z-index: 1;
+}
+.loader-circle p{
+  font-family: Calulator;
+  color: #d0e5f2;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+}
+.CyberSVG {
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  z-index: 2;
+}
+.path {
+  stroke-dasharray: 400;
+  stroke-dashoffset: 0;
+  animation: dash 1.5s linear;
+}
+
+
+@keyframes dash {
+  0% {
+    opacity: 0%;
+    stroke-dashoffset: 320;
+  }
+  100% {
+    opacity: 100%;
+    stroke-dashoffset: 0;
+  }
+}
+
+.loader-bar{
+  top:25vh;
+  left:40%;
+  height: 400px;
+  width: 800px;
+  position: absolute;
+  z-index: 2;
+}
+#mask {
+  top:25vh;
+  left:40%;
+  position: absolute;
+  width: 0px;
+  height: 800px;
+  overflow: hidden;
+  transition:all 0.5s;
+  animation: move 5s infinite;
+}
+@keyframes move {
+  0%{
+    width: 0;
+  }
+  100%{
+    width: 100%;
+  }
+
+}
+
+.ant-carousel :deep(.slick-slide) {
+  text-align: center;
+  height: 1000px;
+  overflow: hidden;
+}
+
+
