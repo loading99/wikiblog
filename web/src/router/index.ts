@@ -9,7 +9,8 @@ import Login from '../views/login.vue';
 import DocPage from '../views/doc.vue';
 import About from '../views/about.vue';
 import Stats from '../views/stats.vue';
-import Design from '../views/design.vue';
+import CyberLoading from '../views/designs/cyber.vue';
+import CyberCity from '../views/designs/cybercity.vue';
 import Page500 from '../views/error/500.vue';
 import Page404 from '../views/error/404.vue';
 import store from "@/store";
@@ -73,9 +74,14 @@ const routes: Array<RouteRecordRaw> = [
     component: Stats
   },
   {
-    path: '/design',
-    name: 'Design',
-    component: Design
+    path: '/design/cyber',
+    name: 'CyberLoading',
+    component: CyberLoading
+  },
+  {
+    path: '/design/cybercity',
+    name: 'CyberCity',
+    component: CyberCity
   },
   {
     path: '/500',
