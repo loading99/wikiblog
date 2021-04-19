@@ -25,13 +25,11 @@
         <h2 class="title">Basic Information</h2>
         <div class="row">
           <div class="col-l-4">
-            <p>Name:Zhijian Hu</p>
-            <p>English Name：Calum</p>
-            <p>Gender: Male</p>
-            <p>Address: 400W 113th St. New York, NY</p>
+            <p>Name：Calum</p>
+            <p>Address: New York, NY</p>
           </div>
           <div class="col-l-4">
-            <p>Education: Masters</p>
+            <p>Who am I: A passionate Engineer/A Designer </p>
             <p>GitHub：<a href="/">Link</a></p>
             <p>Email: <a href="zhij311@gmail.com">zhij311@gmail.com</a></p>
           </div>
