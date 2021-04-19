@@ -1,7 +1,5 @@
 <template>
-  <a-layout-header class="header">
-
-  <div class="logo" />
+  <a-layout-header class="header" v-if="collapse">
     <a-row type="flex">
       <a-col :flex="16">
         <a-menu
@@ -77,11 +75,20 @@
       </a-col>
     </a-row>
 </a-layout-header>
+  <div id="CollapseBar" @click="toggle">
+    <ArrowUpOutlined
+        id="CollapseArrow"
+        style="left:50%;top:50%;
+        position: absolute;
+        transform: scale(2);
+        color: #e8e8e8;"
+        />
+  </div>
 </template>
 
 <script lang="ts">
-import {defineComponent, VNodeChild, ref, computed} from 'vue';
-import { DownOutlined } from '@ant-design/icons-vue';
+import {defineComponent, VNodeChild, computed,ref} from 'vue';
+import { DownOutlined,ArrowUpOutlined} from '@ant-design/icons-vue';
 import i18n from "@/language/i18n";
 import store from "@/store";
 import axios from "axios";
@@ -97,6 +104,11 @@ export default defineComponent({
   name: 'TheHeader',
 
   setup(){
+    const collapse=ref(true);
+    const toggle=()=>{
+      collapse.value=!collapse.value;
+    };
+
     /**
      * Header 显示栏目
      * 在About里面 栏目都不显示，在其他URL里都显示
@@ -129,9 +141,13 @@ export default defineComponent({
       show,
       logout,
       onClick,
+
+      toggle,
+      collapse,
     };
   },
   components: {
+    ArrowUpOutlined,
     DownOutlined,
   },
 });

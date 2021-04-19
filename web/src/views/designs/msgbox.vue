@@ -1,8 +1,9 @@
 <template>
   <div class="CyberBack">
-
     <Navigation></Navigation>
-    <div style="left:10%;top:55%;
+    <MsgBox03 v-show="errorbox"/>
+
+    <div style="left:12%;top:53%;
                 width: 500px;height:500px;
                 position: absolute;">
       <MsgBox02/>
@@ -855,8 +856,8 @@
           <path id="module46" fill-rule="evenodd"  fill="rgb(248, 12, 34)"
                 d="M362.915,245.879 L348.381,244.946 C348.901,235.828 347.610,226.790 344.544,218.085 C341.121,208.367 335.752,199.767 328.587,192.527 L338.851,182.156 C347.569,190.965 354.097,201.418 358.256,213.224 C361.980,223.798 363.547,234.784 362.915,245.879 Z"/>
         </g>
-        <g filter="url(#Filter_47)">
-          <path fill-rule="evenodd"  fill="rgb(248, 12, 34)"
+        <g filter="url(#Filter_47)" @click="expand03">
+          <path id="module47" fill-rule="evenodd"  fill="rgb(248, 12, 34)"
                 d="M263.517,147.984 L262.584,162.554 C253.460,162.032 244.416,163.326 235.705,166.400 C225.981,169.831 217.376,175.213 210.131,182.396 L199.753,172.107 C208.568,163.367 219.028,156.823 230.842,152.654 C241.423,148.921 252.416,147.350 263.517,147.984 Z"/>
         </g>
         <g filter="url(#Filter_48)">
@@ -873,10 +874,13 @@
         </g>
         <g filter="url(#Filter_51)" @click="expand02">
           <image class="wave"  x="104px" y="355px" width="48px" height="50px"  xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAyCAMAAAAtFKi+AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAABmFBMVEX/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD///8XTVm2AAAAh3RSTlMAAytbdYJyYFROTVFea3p8Y0AEC0l0biQBGDpphFcdOHdnSn5LDw1tEglVHCUuGYMGRigIVj5fBTd5cTN2EV0/EJcxmkyFmYcjMm9se0Efn5ioBw4paH2eLMjm+fbiwBWSNlllgJQCmzk7Uh5/E3MMG5BwlRoWozRajCFYF1xIgWQUakdFCkK4E8TNAAAAAWJLR0SH+9kLywAAAAd0SU1FB+UEEhUtKxO223EAAAHcSURBVEjHlZVXV8JAEIUHhBhBYwWCFQWNqAgCFuwFrGDvvXeNDXtvv9sgFshJmd2H2Zl77rclJ7sLkNw02hSdnkql0wzG9AwmMys7B5Rabp7JbLT8law1v6CwqFjeX2IrtYg1a5ndUS5tr+CoSindWcVUS+k1jEtu5lo37RFrbJ3OK79WX3qKWPL6WcXPUd/QmFQ3BRpBuRmaE6sWvZofwEEnFK1tqn4A6v+Tt3cg/NDZlfuTdfdg/ADB0E/SW40DoK//uxsYRPoBuO9oZ9HAUKcQ2DDaD8agEPwRPDA8IpyY0Qo8AGPjMNGrIQDoCEyG8HsG8FAwRRP4AaZhZpYIyIS5CUJgnsgvLGmBFFgkBZZIgeUVIsAOq2uEwPoGEbAJ1q1tAn+5GTw7TgIgdRfY0DDez44J99fePh442IrFQzwQjB1RaD5CA8d8LJ6cYv2+s3jvrkcC5xfxPnqJO9Z+0292dY3xV57yf7lZiwCY6H8evblVs7N3eYnlvV3tL3/ISt6oc+pecfzHoFiqCTjkb7QVTuL28m3QcjeO9ykiNZjGELqS0o+eGbk38+VV/8YnS9vadveewptsWQ9Q720f8YlyeJcxbPtUeZL53YfNgGmQ48yULXyWNile5Be5nT7FAPYGRgAAAABJRU5ErkJggg==" />
-          <path fill-rule="evenodd"  fill="rgb(255, 102, 0)"
-                d="M123.598,379.895 L127.789,375.704 L131.980,379.895 L127.789,384.085 L123.598,379.895 Z"/>
+          <circle id="module51" cx="128" cy="380" r="4" stroke="none"
+                  stroke-width="2" fill="rgb(255, 102, 0)"/>
+<!--          <path fill-rule="evenodd"  fill="rgb(255, 102, 0)"-->
+<!--                d="M123.598,379.895 L127.789,375.704 L131.980,379.895 L127.789,384.085 L123.598,379.895 Z"/>-->
         </g>
         <g filter="url(#Filter_52)">
+
           <path fill-rule="evenodd"  fill="rgb(255, 102, 0)"
                 d="M396.891,388.616 L401.082,384.425 L405.273,388.616 L401.082,392.807 L396.891,388.616 Z"/>
         </g>
@@ -922,10 +926,11 @@
 </template>
 <script lang="ts">
 
-import {defineComponent,onMounted} from "vue";
+import {defineComponent,onMounted,ref} from "vue";
 import Navigation from "@/components/Navigation.vue";
 import MsgBox01 from "@/components/MsgBox01.vue";
 import MsgBox02 from "@/components/MsgBox02.vue";
+import MsgBox03 from "@/components/MsgBox03.vue";
 export default defineComponent({
   name:'CyberMessage',
   setup(){
@@ -933,7 +938,6 @@ export default defineComponent({
     const status={
       block01: false,
       block02: false,
-
     };
     const expand01=()=>{
       if(status.block01){
@@ -968,6 +972,11 @@ export default defineComponent({
       }
       status.block02=!status.block02;
     };
+    const errorbox=ref(false);
+    const expand03=()=>{
+      errorbox.value=!errorbox.value;
+    };
+
 
     onMounted(()=>{
       expand01();
@@ -976,14 +985,17 @@ export default defineComponent({
 
     return{
       expand01,
-      expand02
+      expand02,
+      expand03,
+      errorbox,
     }
   },
 
   components:{
     Navigation,
     MsgBox01,
-    MsgBox02
+    MsgBox02,
+    MsgBox03
   }
 
 })
@@ -1001,12 +1013,12 @@ export default defineComponent({
 }
 @keyframes spread {
   0%{
-    opacity: 0.8;
+    opacity: 1;
     transform: scale(0.5);
 
   }
   100%{
-    opacity: 0.2;
+    opacity: 0.3;
     transform: scale(1.5);
   }
 
@@ -1016,6 +1028,15 @@ export default defineComponent({
   opacity: 1;
 }
 #module46:hover{
+  opacity: 0.5;
+}
+#module47:hover{
+  opacity: 0.5;
+}
+#module51:hover{
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scale(3);
   opacity: 0.5;
 }
 </style>

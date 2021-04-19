@@ -23,6 +23,7 @@ export default defineComponent({
     TheFooter,
   },
   setup() {
+
     return {
       selectedKeys1: ref<string[]>(['2']),
       selectedKeys2: ref<string[]>(['1']),
