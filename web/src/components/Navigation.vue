@@ -6,18 +6,18 @@
     <div class="design-menu" :style="styleObject">
       <li><router-link to="/design/cyber">Cyber</router-link></li>
       <li><router-link to="/design/cybercity">Cyber City</router-link></li>
-      <li><a href="#">Spring</a></li>
-      <li><a href="#">Spring</a></li>
+      <li id="Text"><router-link to="/design/cybermsg">Cyber Panel</router-link></li>
+      <li><a href="#">More</a></li>
     </div>
   </div>
 </template>
-
 <script lang="ts">
 
 import {defineComponent,ref} from "vue";
 import {MenuUnfoldOutlined} from '@ant-design/icons-vue';
 export default defineComponent({
   name:'Navigation',
+  props:["title"],
   setup(){
     const styleObject=ref(
         {width: '480px'
@@ -32,7 +32,8 @@ export default defineComponent({
         styleObject.value.width='480px';
       }
       openKeys.value=!openKeys.value;
-    }
+    };
+
 
     return{
       collapse,
@@ -46,6 +47,7 @@ export default defineComponent({
 </script>
 
 <style>
+
 .design-menu{
   display: flex;
   justify-content: center;

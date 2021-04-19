@@ -10,6 +10,7 @@ import i18n from './language/i18n';
 import { FontAwesomeIcon } from "../plugins/font-awesome";
 import {Tool} from "@/util/tools";
 
+
 axios.defaults.baseURL=process.env.VUE_APP_SERVER;
 /**
  * axios拦截器

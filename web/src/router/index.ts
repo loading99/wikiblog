@@ -11,6 +11,7 @@ import About from '../views/about.vue';
 import Stats from '../views/stats.vue';
 import CyberLoading from '../views/designs/cyber.vue';
 import CyberCity from '../views/designs/cybercity.vue';
+import CyberMessage from '../views/designs/msgbox.vue';
 import Page500 from '../views/error/500.vue';
 import Page404 from '../views/error/404.vue';
 import store from "@/store";
@@ -78,10 +79,15 @@ const routes: Array<RouteRecordRaw> = [
     name: 'CyberLoading',
     component: CyberLoading
   },
+  // {
+  //   path: '/design/cybercity',
+  //   name: 'CyberCity',
+  //   component: CyberCity
+  // },
   {
-    path: '/design/cybercity',
-    name: 'CyberCity',
-    component: CyberCity
+    path: '/design/cybermsg',
+    name: 'CyberMsg',
+    component: CyberMessage
   },
   {
     path: '/500',

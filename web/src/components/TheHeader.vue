@@ -27,7 +27,7 @@
 <!--          <a-menu-item key="stats" v-if="show">-->
 <!--            <router-link to="/stats">{{ $t('header.stats') }}</router-link>-->
 <!--          </a-menu-item>-->
-          <a-menu-item key="design">
+          <a-menu-item key="design" v-if="show">
             <router-link to="/design/cyber">{{ $t('header.design') }}</router-link>
           </a-menu-item>
           <a-menu-item key="Home" style="float:right;right: 30%;">

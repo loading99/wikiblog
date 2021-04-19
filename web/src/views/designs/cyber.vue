@@ -1,6 +1,6 @@
 <template>
       <div class="CyberBack">
-        <Navigation></Navigation>
+        <Navigation title="Sakura" @warn="prompt"/>
           <div class="ui">
             <p>Please wait...</p>
             <svg class="CyberSVG">
@@ -46,8 +46,20 @@
 
 import {defineComponent} from "vue";
 import Navigation from "@/components/Navigation.vue";
+import {message} from "ant-design-vue";
 export default defineComponent({
   name:'CyberLoading',
+
+  setup(){
+
+    const prompt=()=>{
+      message.success("SUCCESS");
+    }
+
+    return{
+      prompt
+    }
+  },
 
   components: {
     Navigation

@@ -2,9 +2,13 @@
   font-family: 'Calulator';
   src: url("../font/digifaw.ttf");
 }
+@font-face {
+  font-family: "Bebas Neue";
+  src:url("../font/BebasNeue-Regular.ttf")
+}
 .CyberBack{
   width: 99vw;
-  height: 100vh;
+  height: 120vh;
   position: relative;
   background: url("../images/Cyber.jpg") no-repeat;
   background-size: 100% 100%;
@@ -114,6 +118,11 @@
   }
 
 }
+
+tspan{
+  font-family: "Bebas Neue";
+}
+
 
 
 
