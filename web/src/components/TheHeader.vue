@@ -77,18 +77,26 @@
 </a-layout-header>
   <div id="CollapseBar" @click="toggle">
     <ArrowUpOutlined
-        id="CollapseArrow"
         style="left:50%;top:50%;
         position: absolute;
         transform: scale(2);
         color: #e8e8e8;"
-        />
+
+        v-if="collapse"
+    />
+    <ArrowDownOutlined
+        style="left:50%;top:50%;
+        position: absolute;
+        transform: scale(2);
+        color: #e8e8e8;"
+        v-if="!collapse"
+    />
   </div>
 </template>
 
 <script lang="ts">
 import {defineComponent, VNodeChild, computed,ref} from 'vue';
-import { DownOutlined,ArrowUpOutlined} from '@ant-design/icons-vue';
+import { DownOutlined,ArrowUpOutlined, ArrowDownOutlined} from '@ant-design/icons-vue';
 import i18n from "@/language/i18n";
 import store from "@/store";
 import axios from "axios";
@@ -149,6 +157,7 @@ export default defineComponent({
   components: {
     ArrowUpOutlined,
     DownOutlined,
+    ArrowDownOutlined
   },
 });
 </script>

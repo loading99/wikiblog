@@ -1,7 +1,7 @@
 <template>
   <div class="CyberBack">
     <Navigation></Navigation>
-    <MsgBox03 v-show="errorbox"/>
+    <MsgBox03 v-show="errorbox" @HideErrorBox="errorbox=!errorbox"/>
 
     <div style="left:12%;top:53%;
                 width: 500px;height:500px;
@@ -836,7 +836,7 @@
           <path fill-rule="evenodd"  opacity="0.2" fill="rgb(32, 197, 255)"
                 d="M330.297,311.243 C294.249,347.288 235.594,347.288 199.546,311.243 C163.497,275.198 163.497,216.549 199.546,180.504 C235.594,144.458 294.249,144.458 330.297,180.504 C366.346,216.549 366.346,275.198 330.297,311.243 ZM204.358,185.316 C170.964,218.707 170.964,273.039 204.358,306.430 C237.753,339.822 292.090,339.822 325.484,306.430 C358.879,273.039 358.879,218.707 325.484,185.316 C292.090,151.925 237.753,151.925 204.358,185.316 Z"/>
         </g>
-        <g filter="url(#Filter_42)">
+        <g filter="url(#Filter_42)" @click="expand04">
           <path id="module42" fill-rule="evenodd"  stroke="rgb(32, 197, 255)" stroke-width="30px" stroke-linecap="butt" stroke-linejoin="miter" opacity="0.302" fill="none"
                 d="M393.087,238.849 C393.087,288.238 365.584,331.214 325.032,353.346 C306.450,363.488 285.128,369.253 262.458,369.253 C236.457,369.253 212.231,361.670 191.877,348.599 "/>
         </g>
@@ -913,13 +913,20 @@
         <image class="wave" x="43px" y="172px" width="48px" height="50px"  xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAyCAMAAAAtFKi+AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAABmFBMVEX/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD///8XTVm2AAAAh3RSTlMAAytbdYJyYFROTVFea3p8Y0AEC0l0biQBGDpphFcdOHdnSn5LDw1tEglVHCUuGYMGRigIVj5fBTd5cTN2EV0/EJcxmkyFmYcjMm9se0Efn5ioBw4paH2eLMjm+fbiwBWSNlllgJQCmzk7Uh5/E3MMG5BwlRoWozRajCFYF1xIgWQUakdFCkK4E8TNAAAAAWJLR0SH+9kLywAAAAd0SU1FB+UEEhUtLI3STtIAAAHcSURBVEjHlZVXV8JAEIUHhBhBYwWCFQWNqAgCFuwFrGDvvXeNDXtvv9sgFshJmd2H2Zl77rclJ7sLkNw02hSdnkql0wzG9AwmMys7B5Rabp7JbLT8law1v6CwqFjeX2IrtYg1a5ndUS5tr+CoSindWcVUS+k1jEtu5lo37RFrbJ3OK79WX3qKWPL6WcXPUd/QmFQ3BRpBuRmaE6sWvZofwEEnFK1tqn4A6v+Tt3cg/NDZlfuTdfdg/ADB0E/SW40DoK//uxsYRPoBuO9oZ9HAUKcQ2DDaD8agEPwRPDA8IpyY0Qo8AGPjMNGrIQDoCEyG8HsG8FAwRRP4AaZhZpYIyIS5CUJgnsgvLGmBFFgkBZZIgeUVIsAOq2uEwPoGEbAJ1q1tAn+5GTw7TgIgdRfY0DDez44J99fePh442IrFQzwQjB1RaD5CA8d8LJ6cYv2+s3jvrkcC5xfxPnqJO9Z+0292dY3xV57yf7lZiwCY6H8evblVs7N3eYnlvV3tL3/ISt6oc+pecfzHoFiqCTjkb7QVTuL28m3QcjeO9ykiNZjGELqS0o+eGbk38+VV/8YnS9vadveewptsWQ9Q720f8YlyeJcxbPtUeZL53YfNgGmQ48yULXyWNile5Be5nT7FAPYGRgAAAABJRU5ErkJggg==" />
         <image class="wave" x="102px" y="81px" width="48px" height="50px"  xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAyCAMAAAAtFKi+AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAABmFBMVEX/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD///8XTVm2AAAAh3RSTlMAAytbdYJyYFROTVFea3p8Y0AEC0l0biQBGDpphFcdOHdnSn5LDw1tEglVHCUuGYMGRigIVj5fBTd5cTN2EV0/EJcxmkyFmYcjMm9se0Efn5ioBw4paH2eLMjm+fbiwBWSNlllgJQCmzk7Uh5/E3MMG5BwlRoWozRajCFYF1xIgWQUakdFCkK4E8TNAAAAAWJLR0SH+9kLywAAAAd0SU1FB+UEEhUtLI3STtIAAAHcSURBVEjHlZVXV8JAEIUHhBhBYwWCFQWNqAgCFuwFrGDvvXeNDXtvv9sgFshJmd2H2Zl77rclJ7sLkNw02hSdnkql0wzG9AwmMys7B5Rabp7JbLT8law1v6CwqFjeX2IrtYg1a5ndUS5tr+CoSindWcVUS+k1jEtu5lo37RFrbJ3OK79WX3qKWPL6WcXPUd/QmFQ3BRpBuRmaE6sWvZofwEEnFK1tqn4A6v+Tt3cg/NDZlfuTdfdg/ADB0E/SW40DoK//uxsYRPoBuO9oZ9HAUKcQ2DDaD8agEPwRPDA8IpyY0Qo8AGPjMNGrIQDoCEyG8HsG8FAwRRP4AaZhZpYIyIS5CUJgnsgvLGmBFFgkBZZIgeUVIsAOq2uEwPoGEbAJ1q1tAn+5GTw7TgIgdRfY0DDez44J99fePh442IrFQzwQjB1RaD5CA8d8LJ6cYv2+s3jvrkcC5xfxPnqJO9Z+0292dY3xV57yf7lZiwCY6H8evblVs7N3eYnlvV3tL3/ISt6oc+pecfzHoFiqCTjkb7QVTuL28m3QcjeO9ykiNZjGELqS0o+eGbk38+VV/8YnS9vadveewptsWQ9Q720f8YlyeJcxbPtUeZL53YfNgGmQ48yULXyWNile5Be5nT7FAPYGRgAAAABJRU5ErkJggg==" />
         <image class="wave" x="243px" y="23px" width="48px" height="50px"  xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAyCAMAAAAtFKi+AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAABmFBMVEX/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD/ZgD///8XTVm2AAAAh3RSTlMAAytbdYJyYFROTVFea3p8Y0AEC0l0biQBGDpphFcdOHdnSn5LDw1tEglVHCUuGYMGRigIVj5fBTd5cTN2EV0/EJcxmkyFmYcjMm9se0Efn5ioBw4paH2eLMjm+fbiwBWSNlllgJQCmzk7Uh5/E3MMG5BwlRoWozRajCFYF1xIgWQUakdFCkK4E8TNAAAAAWJLR0SH+9kLywAAAAd0SU1FB+UEEhUtLI3STtIAAAHcSURBVEjHlZVXV8JAEIUHhBhBYwWCFQWNqAgCFuwFrGDvvXeNDXtvv9sgFshJmd2H2Zl77rclJ7sLkNw02hSdnkql0wzG9AwmMys7B5Rabp7JbLT8law1v6CwqFjeX2IrtYg1a5ndUS5tr+CoSindWcVUS+k1jEtu5lo37RFrbJ3OK79WX3qKWPL6WcXPUd/QmFQ3BRpBuRmaE6sWvZofwEEnFK1tqn4A6v+Tt3cg/NDZlfuTdfdg/ADB0E/SW40DoK//uxsYRPoBuO9oZ9HAUKcQ2DDaD8agEPwRPDA8IpyY0Qo8AGPjMNGrIQDoCEyG8HsG8FAwRRP4AaZhZpYIyIS5CUJgnsgvLGmBFFgkBZZIgeUVIsAOq2uEwPoGEbAJ1q1tAn+5GTw7TgIgdRfY0DDez44J99fePh442IrFQzwQjB1RaD5CA8d8LJ6cYv2+s3jvrkcC5xfxPnqJO9Z+0292dY3xV57yf7lZiwCY6H8evblVs7N3eYnlvV3tL3/ISt6oc+pecfzHoFiqCTjkb7QVTuL28m3QcjeO9ykiNZjGELqS0o+eGbk38+VV/8YnS9vadveewptsWQ9Q720f8YlyeJcxbPtUeZL53YfNgGmQ48yULXyWNile5Be5nT7FAPYGRgAAAABJRU5ErkJggg==" />
-        <text kerning="auto" font-family="Myriad Pro" fill="rgb(0, 0, 0)" transform="matrix( 0.79025261482169, 0.28514692273502, -0.28514692273502, 0.79025261482169,339.071118662339, 204.187280368929) rotate(45)" font-size="20px"><tspan font-size="16px" font-family="Bebas Neue" fill="#FFFFFF">Click</tspan></text>
+        <text kerning="auto" font-family="Myriad Pro" fill="rgb(0, 0, 0)" transform="matrix( 0.79025261482169, 0.28514692273502, -0.28514692273502, 0.79025261482169,339.071118662339, 204.187280368929) rotate(47)" font-size="20px"><tspan font-size="18px" font-family="Bebas Neue" fill="#FFFFFF">Click</tspan></text>
+        <text kerning="auto" font-family="Myriad Pro" fill="rgb(0, 0, 0)" transform="matrix( 0.79025261482169, 0.28514692273502, -0.28514692273502, 0.79025261482169,210.071118662339, 177.87280368929) rotate(-50)" font-size="20px"><tspan font-size="18px" font-family="Bebas Neue" fill="rgb(0,0,0)">Error</tspan></text>
+
       </svg>
     </div>
     <div style="left:63%;top:5%;
                 width: 500px;height:500px;
                 position: absolute">
       <MsgBox01/>
+    </div>
+    <div style="left:63%;top:40%;
+                width: 500px;height:500px;
+                position: absolute">
+      <MsgBox04/>
     </div>
 
   </div>
@@ -931,6 +938,7 @@ import Navigation from "@/components/Navigation.vue";
 import MsgBox01 from "@/components/MsgBox01.vue";
 import MsgBox02 from "@/components/MsgBox02.vue";
 import MsgBox03 from "@/components/MsgBox03.vue";
+import MsgBox04 from "@/components/MsgBox04.vue";
 export default defineComponent({
   name:'CyberMessage',
   setup(){
@@ -938,6 +946,7 @@ export default defineComponent({
     const status={
       block01: false,
       block02: false,
+      block04: false
     };
     const expand01=()=>{
       if(status.block01){
@@ -977,16 +986,37 @@ export default defineComponent({
       errorbox.value=!errorbox.value;
     };
 
+    const expand04=()=>{
+      console.log("----Enter expand04-------");
+      if(status.block04){
+        const line4 = document.getElementById("msgbox04-line")!;
+        line4.style.animation="contract 2s";
+        line4.style.animationFillMode="forwards"
+        const frame4=document.getElementById("msgbox04-frame")!;
+        frame4.style.animation="contract 2s";
+      }else{
+        const line4 = document.getElementById("msgbox04-line")!;
+        line4.style.animation="down 2s";
+        line4.style.animationFillMode="forwards"
+        const frame4=document.getElementById("msgbox04-frame")!;
+        frame4.style.animation="move 4s";
+        frame4.style.animationFillMode="forwards"
+      }
+      status.block04=!status.block04;
+    };
+
 
     onMounted(()=>{
       expand01();
       expand02();
+      expand04();
     });
 
     return{
       expand01,
       expand02,
       expand03,
+      expand04,
       errorbox,
     }
   },
@@ -995,7 +1025,8 @@ export default defineComponent({
     Navigation,
     MsgBox01,
     MsgBox02,
-    MsgBox03
+    MsgBox03,
+    MsgBox04
   }
 
 })

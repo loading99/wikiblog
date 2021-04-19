@@ -19,6 +19,7 @@
     "axios": "^0.21.0",
     "lottie-vuejs": "^0.4.0",
     "lottie-web": "^5.7.8",
+    "theaterjs": "^3.2.0",
     "vue": "^3.0.0",
     "vue-i18n": "^9.0.0",
     "vue-lottie": "^0.2.1",

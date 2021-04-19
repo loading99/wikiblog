@@ -1,6 +1,6 @@
 
 <template>
-  <div class="ErrorBack">
+  <div class="ErrorBack" @click="$emit('HideErrorBox')">
   <div id="msgbox03-frame"></div>
   </div>
 
