@@ -1,8 +1,8 @@
 <template>
+
     <div id="msgbox04-line">
       <svg
           xmlns="http://www.w3.org/2000/svg"
-
           width="159px" height="380.5px">
         <defs>
           <filter filterUnits="userSpaceOnUse" id="Filter_0msg04" x="25.5px" y="238px" width="82px" height="140px"  >
@@ -72,10 +72,7 @@ import {defineComponent} from "vue";
 declare let theaterJS:any;
 export default defineComponent({
   name:'MsgBox04',
-  setup(){
-    const theater = theaterJS();
-    console.log("----Theater-----",theater);
-  }
+
 })
 </script>
 

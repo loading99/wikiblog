@@ -10,8 +10,7 @@ import DocPage from '../views/doc.vue';
 import About from '../views/about.vue';
 import Stats from '../views/stats.vue';
 import CyberLoading from '../views/designs/cyber.vue';
-import CyberCity from '../views/designs/cybercity.vue';
-import MsgBox03 from '../components/MsgBox03.vue';
+import Theater from '../components/Theater.vue';
 import CyberMessage from '../views/designs/msgbox.vue';
 import Page500 from '../views/error/500.vue';
 import Page404 from '../views/error/404.vue';
@@ -82,8 +81,8 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/design/error',
-    name: 'MsgBox03',
-    component: MsgBox03
+    name: 'Theater',
+    component: Theater
   },
   {
     path: '/design/cybermsg',

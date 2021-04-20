@@ -33,9 +33,6 @@
             <p>GitHub：<a href="/">Link</a></p>
             <p>Email: <a href="zhij311@gmail.com">zhij311@gmail.com</a></p>
           </div>
-<!--          <div class="col-l-4">-->
-<!--            <p>我是一个热爱钻研计算机技术的青少年，从小开始对计算机有极大的兴趣。目前我专注网站开发领域。我还自己发起建立了一个制作游戏的团队，希望能和大家合作，一同创造出属于我们自己的原创作品。</p>-->
-<!--          </div>-->
         </div>
       </div>
     </section>
