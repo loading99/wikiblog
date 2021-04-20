@@ -5,9 +5,8 @@
     />
     <div class="design-menu" :style="styleObject">
       <li><router-link to="/design/cyber">Cyber</router-link></li>
-      <li><router-link to="/design/cybercity">Cyber City</router-link></li>
       <li id="Text"><router-link to="/design/cybermsg">Cyber Panel</router-link></li>
-      <li><a href="/design/error" @click="$emit(error)">More</a></li>
+      <li><a href="/design/error" @click="$emit(error)">An automatic Printer</a></li>
     </div>
   </div>
 </template>

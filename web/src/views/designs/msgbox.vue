@@ -926,9 +926,9 @@
     <div style="left:63%;top:40%;
                 width: 500px;height:500px;
                 position: absolute">
+
       <MsgBox04/>
     </div>
-
   </div>
 </template>
 <script lang="ts">
@@ -965,7 +965,6 @@ export default defineComponent({
       status.block01=!status.block01;
     };
     const expand02=()=>{
-      console.log("----Enter expand02-------");
       if(status.block02){
         const line2 = document.getElementById("msgbox02-line")!;
         line2.style.animation="contract 2s";
@@ -986,8 +985,9 @@ export default defineComponent({
       errorbox.value=!errorbox.value;
     };
 
+
+
     const expand04=()=>{
-      console.log("----Enter expand04-------");
       if(status.block04){
         const line4 = document.getElementById("msgbox04-line")!;
         line4.style.animation="contract 2s";
@@ -1020,7 +1020,6 @@ export default defineComponent({
       errorbox,
     }
   },
-
   components:{
     Navigation,
     MsgBox01,

@@ -1,6 +1,6 @@
 <template>
-  <div id="pinter">
-    {{text}}
+  <div id="printer">
+{{text}}
   </div>
 </template>
 <script lang="ts">
@@ -23,9 +23,6 @@ export default defineComponent({
       text.value=text.value+s.charAt(index);
       index=index+1;
     },200);
-
-
-
     return{
       text
     }
@@ -36,6 +33,15 @@ export default defineComponent({
 
 
 <style>
+#printer{
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  background: black;
+  font-family: "Bebas Neue Bold" !important;
+  font-size: 16px;
+  color: #e8e8e8;
+}
 .ityped-cursor{
   font-size: 2.2rem;
   opacity: 1;
