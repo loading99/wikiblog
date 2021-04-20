@@ -143,9 +143,10 @@
 
 <script lang="ts">
 
-import {defineComponent} from "vue";
+import {defineComponent, onMounted} from "vue";
 import {useRoute} from "vue-router";
 import store from "@/store";
+import axios from "axios";
 export default defineComponent({
   name:'About',
   setup(){
@@ -155,6 +156,16 @@ export default defineComponent({
      */
     const route=useRoute();
     store.commit("setPage",route.path);
+
+    const visit=()=>{
+      axios.post('/stats/add',{
+        web: "about"
+      });
+      console.log("---send visit info-----");
+    }
+    onMounted(()=>{
+      visit();
+    });
   }
 })
 </script>

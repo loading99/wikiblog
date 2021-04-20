@@ -16,7 +16,6 @@ import {defineComponent,ref} from "vue";
 import {MenuUnfoldOutlined} from '@ant-design/icons-vue';
 export default defineComponent({
   name:'Navigation',
-  props:["title"],
   setup(){
     const styleObject=ref(
         {width: '480px'
@@ -32,7 +31,6 @@ export default defineComponent({
       }
       openKeys.value=!openKeys.value;
     };
-
 
     return{
       collapse,

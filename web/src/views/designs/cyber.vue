@@ -1,6 +1,6 @@
 <template>
       <div class="CyberBack">
-        <Navigation title="Sakura" @warn="prompt"/>
+        <Navigation title="Sakura"/>
           <div class="ui">
             <p>Please wait...</p>
             <svg class="CyberSVG">
@@ -44,21 +44,22 @@
 </template>
 <script lang="ts">
 
-import {defineComponent} from "vue";
+import {defineComponent,onMounted} from "vue";
 import Navigation from "@/components/Navigation.vue";
-import {message} from "ant-design-vue";
+import axios from "axios";
 export default defineComponent({
   name:'CyberLoading',
 
   setup(){
-
-    const prompt=()=>{
-      message.success("SUCCESS");
+    const visit=()=>{
+      axios.post('/stats/add',{
+        web: "design"
+      });
+      console.log("---send visit info-----");
     }
-
-    return{
-      prompt
-    }
+    onMounted(()=>{
+      visit();
+    });
   },
 
   components: {
