@@ -273,9 +273,8 @@
             </template>
             <template #extra>
               <img
-                  width="272"
                   alt="logo"
-                  style="width:207.75px;height:137.25px"
+                  style="width:120px;height:180px"
                   :src="item.cover || '/cover/emptyCover.png'"
               />
             </template>
