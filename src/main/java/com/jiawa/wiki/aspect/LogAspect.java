@@ -35,7 +35,7 @@ public class LogAspect {
     @Resource
     private SnowFlake snowFlake;
 
-    /** 定义一个切点 */
+    /** Define A Point Cut */
     @Pointcut("execution(public * com.jiawa.*.controller..*Controller.*(..))")
     public void controllerPointcut() {}
 
@@ -43,7 +43,7 @@ public class LogAspect {
     @Before("controllerPointcut()")
     public void doBefore(JoinPoint joinPoint) throws Throwable {
         MDC.put("LOG_ID",String.valueOf(snowFlake.nextId()));
-        // 开始打印请求日志
+        // Print Request log
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
         Signature signature = joinPoint.getSignature();
@@ -51,13 +51,13 @@ public class LogAspect {
 
         // 打印请求信息
         LOG.info("------------- AOP -------------");
-        LOG.info("请求地址: {} {}", request.getRequestURL().toString(), request.getMethod());
-        LOG.info("类名方法: {}.{}", signature.getDeclaringTypeName(), name);
-        LOG.info("远程地址: {}", request.getRemoteAddr());
+        LOG.info("Request Address: {} {}", request.getRequestURL().toString(), request.getMethod());
+        LOG.info("Class Name: {}.{}", signature.getDeclaringTypeName(), name);
+        LOG.info("Remote Address: {}", request.getRemoteAddr());
 
         RequestContext.setRemoteAddr(getRemoteIp(request));
 
-        // 打印请求参数
+        // Print Request Parameter
         Object[] args = joinPoint.getArgs();
 
 

@@ -69,7 +69,23 @@
   >
     <a-form :model="formbook" :label-col="{ span: 6 }" :wrapper-col="{ span: 18 }">
       <a-form-item label="Cover">
-        <a-input v-model:value="formbook.cover" />
+        <a-upload
+            v-model:file-list="fileList"
+            name="cover"
+            list-type="picture-card"
+            class="avatar-uploader"
+            :show-upload-list="false"
+            :action="SERVER+'/ebook/upload/cover'"
+            :before-upload="beforeUpload"
+            @change="handleImage"
+        >
+          <img v-if="imageUrl" :src="imageUrl" alt="cover" />
+          <div v-else>
+            <loading-outlined v-if="ImageLoading"></loading-outlined>
+            <plus-outlined v-else></plus-outlined>
+            <div class="ant-upload-text">Upload</div>
+          </div>
+        </a-upload>
       </a-form-item>
       <a-form-item label="Name">
         <a-input v-model:value="formbook.name" />
@@ -96,10 +112,20 @@ import { message } from 'ant-design-vue';
 import {Tool} from "@/util/tools";
 import {useRoute} from "vue-router";
 import store from "@/store";
+import {LoadingOutlined, PlusOutlined} from "@ant-design/icons-vue";
 
+function getBase64(img: Blob, callback: (base64Url: string) => void) {
+  const reader = new FileReader();
+  reader.addEventListener('load', () => callback(reader.result as string));
+  reader.readAsDataURL(img);
+}
 
 export default defineComponent({
   name: 'AdminEbook',
+  components: {
+    LoadingOutlined,
+    PlusOutlined,
+  },
   setup() {
     /**
      * First Get route information
@@ -107,6 +133,7 @@ export default defineComponent({
      */
     const route=useRoute();
     store.commit("setPage",route.path);
+    const SERVER=axios.defaults.baseURL
 
     /**
      * search Keyword
@@ -186,22 +213,19 @@ export default defineComponent({
     };
 
     /**
-     * 表格点击页码时触发
+     * Click pagination, jump to another page
      */
     const handleTableChange = (pagination: any) => {
-      console.log("看看自带的分页参数都有啥：" + pagination);
+      console.log("Pagination Parameters" + pagination);
       handleQuery({
         page: pagination.current,
         size: pagination.pageSize
       });
     };
 
-
-
     /**
      * 查询数据Category，在修改或增加图书分类时调用，默认当前书的categories，如果没有就显示Please select
      **/
-
     const level1=ref();
     const categorys=ref();
     categorys.value={};
@@ -214,13 +238,12 @@ export default defineComponent({
           categorys.value=data.content
           level1.value=[];
           level1.value=Tool.array2Tree(categorys.value,0)
-          // 重置分页按钮
+          // reset pagination
         } else {
           message.error(data.message);
         }
       });
     };
-
 
     /**
      * update确认框 and Form
@@ -231,7 +254,6 @@ export default defineComponent({
     const modalLoading = ref(false);
     const handleModalOk = () => {
       modalLoading.value = true;
-
       //cascader will select all levels of categories as a list, so select the last one
       // console.log("------formbook parameters-------",arr.value.pop());
       formbook.value.categoryid=arr.value.pop();
@@ -286,6 +308,44 @@ export default defineComponent({
       })
     };
 
+    /**
+     * UPload Image Block
+     */
+    const fileList = ref([]);
+    const ImageLoading = ref<boolean>(false);
+    const imageUrl = ref<string>('');
+
+    const handleImage = (info: any) => {
+      console.log('start to upload')
+      if (info.file.status === 'uploading') {
+        ImageLoading.value = true;
+        return;
+      }
+      if (info.file.status === 'done') {
+        // Get this url from response in real world.
+        getBase64(info.file.originFileObj, (base64Url: string) => {
+          imageUrl.value = base64Url;
+          ImageLoading.value = false;
+        });
+      }
+      if (info.file.status === 'error') {
+        ImageLoading.value = false;
+        message.error('upload error');
+      }
+    };
+
+    const beforeUpload = (file: any) => {
+      console.log("Execute beforeUpload")
+      const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+      if (!isJpgOrPng) {
+        message.error('You can only upload JPG file!');
+      }
+      const isLt2M = file.size / 1024 / 1024 < 2;
+      if (!isLt2M) {
+        message.error('Image must smaller than 2MB!');
+      }
+      return isJpgOrPng && isLt2M;
+    };
 
     onMounted(() => {
       handleQuery({
@@ -317,6 +377,15 @@ export default defineComponent({
       //categories
       level1,
       arr,
+
+      //Image
+      handleImage,
+      fileList,
+      ImageLoading,
+      imageUrl,
+      beforeUpload,
+
+      SERVER
     }
   }
 });
