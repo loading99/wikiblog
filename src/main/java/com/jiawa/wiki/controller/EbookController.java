@@ -23,7 +23,7 @@ public class EbookController {
     @Resource
     private EbookService ebookService;
 
-    @Value("{image.baseURL}")
+    @Value("${image.baseURL}")
     String baseURL;
 
     private static final Logger LOG = LoggerFactory.getLogger(EbookController.class);
@@ -65,6 +65,7 @@ public class EbookController {
         LOG.info("文件大小：{}", cover.getSize());
 
         // 保存文件到本地
+        LOG.info(baseURL);
         String fileName = cover.getOriginalFilename();
         String fullPath = baseURL + fileName;
         File dest = new File(fullPath);
