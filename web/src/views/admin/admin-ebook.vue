@@ -74,7 +74,9 @@
             name="cover"
             list-type="picture-card"
             class="avatar-uploader"
+            :multiple="false"
             :show-upload-list="false"
+            :disabled="ImageLoading"
             :before-upload="beforeUpload"
             @change="handleImage"
         >
@@ -343,6 +345,7 @@ export default defineComponent({
     };
 
     const AllowUpload = ()=>{
+      ImageLoading.value = true;
       const formdata = new FormData();
       formdata.append('id',formbook.value.id);
       formdata.append('file', fileList.value.pop());
@@ -354,9 +357,12 @@ export default defineComponent({
         const data = response.data;
         if(data.success){
           message.success("successfully upload!");
+          fileList.value = [];
         }else{
           message.error(data.message)
         }
+
+        ImageLoading.value = false;
       })
     }
 

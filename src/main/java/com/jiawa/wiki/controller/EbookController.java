@@ -9,6 +9,7 @@ import com.jiawa.wiki.service.EbookService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -59,19 +60,21 @@ public class EbookController {
     }
 
     @RequestMapping("/upload/cover")
+    @Transactional
     public CommonResp upload(@RequestParam("file") MultipartFile cover,
                              @RequestParam("id") Long id) throws IOException {
         LOG.info("上传文件开始：{}", cover);
         LOG.info("文件名：{}", cover.getOriginalFilename());
         LOG.info("文件大小：{}", cover.getSize());
-        // 保存文件到本地
+        // Save to local
         LOG.info(baseURL);
         String fileName = cover.getOriginalFilename();
         String fullPath = baseURL + fileName;
         File dest = new File(fullPath);
         cover.transferTo(dest);
         LOG.info(dest.getAbsolutePath());
-
+        // Save to database
+        ebookService.UploadCover(dest.getAbsolutePath(), id);
         return new CommonResp();
     }
 }

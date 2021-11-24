@@ -72,8 +72,14 @@ public class EbookService {
             copy.setId(snowflake.nextId());
             ebookmapper.insert(copy);
         }else{
-            ebookmapper.updateByPrimaryKey(copy);
+            ebookmapper.updateByPrimaryKeySelective(copy);
         }
+    }
+    public void UploadCover(String url, Long id){
+        Ebook ebook = new Ebook();
+        ebook.setCover(url);
+        ebook.setId(id);
+        ebookmapper.updateByPrimaryKeySelective(ebook);
     }
     public void delete(Long id){
         ebookmapper.deleteByPrimaryKey(id);
