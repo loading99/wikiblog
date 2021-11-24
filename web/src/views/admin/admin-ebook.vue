@@ -75,7 +75,6 @@
             list-type="picture-card"
             class="avatar-uploader"
             :show-upload-list="false"
-            :action="SERVER+'/ebook/upload/cover'"
             :before-upload="beforeUpload"
             @change="handleImage"
         >
@@ -86,6 +85,14 @@
             <div class="ant-upload-text">Upload</div>
           </div>
         </a-upload>
+        <a-button
+            type="primary"
+            :disabled="fileList.length ==0"
+            :loading="ImageLoading"
+            @click="AllowUpload"
+        >
+          {{ ImageLoading ? 'Uploading' : 'Start Upload' }}
+        </a-button>
       </a-form-item>
       <a-form-item label="Name">
         <a-input v-model:value="formbook.name" />
@@ -309,30 +316,49 @@ export default defineComponent({
     };
 
     /**
-     * UPload Image Block
+     * Upload Image Block
      */
-    const fileList = ref([]);
+    const fileList = ref();
+    fileList.value=[];
     const ImageLoading = ref<boolean>(false);
     const imageUrl = ref<string>('');
 
     const handleImage = (info: any) => {
       console.log('start to upload')
-      if (info.file.status === 'uploading') {
+      if (info.file.status == 'uploading') {
         ImageLoading.value = true;
         return;
       }
-      if (info.file.status === 'done') {
+      if (info.file.status == 'done') {
         // Get this url from response in real world.
         getBase64(info.file.originFileObj, (base64Url: string) => {
           imageUrl.value = base64Url;
           ImageLoading.value = false;
         });
       }
-      if (info.file.status === 'error') {
+      if (info.file.status == 'error') {
         ImageLoading.value = false;
         message.error('upload error');
       }
     };
+
+    const AllowUpload = ()=>{
+      const formdata = new FormData();
+      formdata.append('id',formbook.value.id);
+      formdata.append('file', fileList.value.pop());
+      axios.post("/ebook/upload/cover", formdata, {
+        headers:{
+          "Content-type": "multipart/form-data"
+        }
+      }).then((response)=>{
+        const data = response.data;
+        if(data.success){
+          message.success("successfully upload!");
+        }else{
+          message.error(data.message)
+        }
+      })
+    }
 
     const beforeUpload = (file: any) => {
       console.log("Execute beforeUpload")
@@ -340,11 +366,12 @@ export default defineComponent({
       if (!isJpgOrPng) {
         message.error('You can only upload JPG file!');
       }
-      const isLt2M = file.size / 1024 / 1024 < 2;
-      if (!isLt2M) {
+      else if(file.size / 1024 / 1024 > 2) {
         message.error('Image must smaller than 2MB!');
+      }else {
+        fileList.value.push(file)
       }
-      return isJpgOrPng && isLt2M;
+      return false
     };
 
     onMounted(() => {
@@ -353,7 +380,6 @@ export default defineComponent({
         size: pagination.value.pageSize
       });
       listCategory();
-
     });
 
     return {
@@ -385,6 +411,7 @@ export default defineComponent({
       imageUrl,
       beforeUpload,
 
+      AllowUpload,
       SERVER
     }
   }

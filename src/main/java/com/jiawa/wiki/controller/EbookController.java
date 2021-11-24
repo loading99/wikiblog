@@ -59,11 +59,11 @@ public class EbookController {
     }
 
     @RequestMapping("/upload/cover")
-    public CommonResp upload(@RequestParam MultipartFile cover) throws IOException {
+    public CommonResp upload(@RequestParam("file") MultipartFile cover,
+                             @RequestParam("id") Long id) throws IOException {
         LOG.info("上传文件开始：{}", cover);
         LOG.info("文件名：{}", cover.getOriginalFilename());
         LOG.info("文件大小：{}", cover.getSize());
-
         // 保存文件到本地
         LOG.info(baseURL);
         String fileName = cover.getOriginalFilename();
