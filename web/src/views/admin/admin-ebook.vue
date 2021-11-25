@@ -255,14 +255,55 @@ export default defineComponent({
     };
 
     /**
+     * Upload Image Block
+     */
+    const formbook = ref ();
+    const fileList = ref();
+    fileList.value=[];
+    const ImageLoading = ref<boolean>(false);
+    const imageUrl = ref<string>('');
+
+    const handleImage = (info: any) => {
+      // Get this url from response in real world.
+      getBase64(info.file, (base64Url: string) => {
+        imageUrl.value = base64Url;
+        ImageLoading.value = false;
+      });
+    };
+
+    const AllowUpload = ()=>{
+      ImageLoading.value = true;
+      const formdata = new FormData();
+      formdata.append('id',formbook.value.id);
+      formdata.append('file', fileList.value.pop());
+      axios.post("/ebook/upload/cover", formdata, {
+        headers:{
+          "Content-type": "multipart/form-data"
+        }
+      }).then((response)=>{
+        const data = response.data;
+        if(data.success){
+          message.success("successfully upload!");
+          fileList.value = [];
+        }else{
+          message.error(data.message)
+        }
+
+        ImageLoading.value = false;
+      })
+    }
+
+    /**
      * update确认框 and Form
      **/
     const arr=ref<string[]>([]);
-    const formbook = ref ();
     const modalVisible = ref(false);
     const modalLoading = ref(false);
     const handleModalOk = () => {
       modalLoading.value = true;
+      // clear image while clicking ok
+      fileList.value = [];
+      imageUrl.value = '';
       //cascader will select all levels of categories as a list, so select the last one
       // console.log("------formbook parameters-------",arr.value.pop());
       formbook.value.categoryid=arr.value.pop();
@@ -297,7 +338,6 @@ export default defineComponent({
     const add=()=>{
       modalVisible.value=true;
       formbook.value={};
-
     }
 
     /**
@@ -317,54 +357,6 @@ export default defineComponent({
       })
     };
 
-    /**
-     * Upload Image Block
-     */
-    const fileList = ref();
-    fileList.value=[];
-    const ImageLoading = ref<boolean>(false);
-    const imageUrl = ref<string>('');
-
-    const handleImage = (info: any) => {
-      console.log('start to upload')
-      if (info.file.status == 'uploading') {
-        ImageLoading.value = true;
-        return;
-      }
-      if (info.file.status == 'done') {
-        // Get this url from response in real world.
-        getBase64(info.file.originFileObj, (base64Url: string) => {
-          imageUrl.value = base64Url;
-          ImageLoading.value = false;
-        });
-      }
-      if (info.file.status == 'error') {
-        ImageLoading.value = false;
-        message.error('upload error');
-      }
-    };
-
-    const AllowUpload = ()=>{
-      ImageLoading.value = true;
-      const formdata = new FormData();
-      formdata.append('id',formbook.value.id);
-      formdata.append('file', fileList.value.pop());
-      axios.post("/ebook/upload/cover", formdata, {
-        headers:{
-          "Content-type": "multipart/form-data"
-        }
-      }).then((response)=>{
-        const data = response.data;
-        if(data.success){
-          message.success("successfully upload!");
-          fileList.value = [];
-        }else{
-          message.error(data.message)
-        }
-
-        ImageLoading.value = false;
-      })
-    }
 
     const beforeUpload = (file: any) => {
       console.log("Execute beforeUpload")
