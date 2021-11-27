@@ -32,8 +32,8 @@
           :loading="loading"
           @change="handleTableChange"
       >
-        <template #cover="{ cover }">
-          <img v-if="cover" :src="cover" alt="avatar" />
+        <template>
+          <img v-if= "record.cover" :src="record.cover" alt="avatar" />
         </template>
         <template v-slot:action="{record}">
           <a-space size="small">
@@ -280,15 +280,15 @@ export default defineComponent({
         headers:{
           "Content-type": "multipart/form-data"
         }
-      }).then((response)=>{
+      }).then(response=>{
         const data = response.data;
         if(data.success){
+          console.log("successfully upload!");
           message.success("successfully upload!");
           fileList.value = [];
         }else{
           message.error(data.message)
         }
-
         ImageLoading.value = false;
       })
     }
@@ -307,6 +307,7 @@ export default defineComponent({
       //cascader will select all levels of categories as a list, so select the last one
       // console.log("------formbook parameters-------",arr.value.pop());
       formbook.value.categoryid=arr.value.pop();
+      formbook.value.cover = null;
       axios.post("/ebook/save",formbook.value).then(function (response){
         modalLoading.value=false;
         const data=response.data;

@@ -6,6 +6,7 @@ import com.jiawa.wiki.req.UpdateReq;
 import com.jiawa.wiki.response.PageResp;
 import com.jiawa.wiki.response.CommonResp;
 import com.jiawa.wiki.service.EbookService;
+import com.jiawa.wiki.utils.SnowFlake;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,6 +27,9 @@ public class EbookController {
 
     @Value("${image.baseURL}")
     String baseURL;
+
+    @Resource
+    SnowFlake snowflake;
 
     private static final Logger LOG = LoggerFactory.getLogger(EbookController.class);
 
@@ -59,22 +63,22 @@ public class EbookController {
         return resp;
     }
 
-    @RequestMapping("/upload/cover")
+    @PostMapping("/upload/cover")
     @Transactional
     public CommonResp upload(@RequestParam("file") MultipartFile cover,
                              @RequestParam("id") Long id) throws IOException {
-        LOG.info("上传文件开始：{}", cover);
-        LOG.info("文件名：{}", cover.getOriginalFilename());
-        LOG.info("文件大小：{}", cover.getSize());
+        LOG.info("Start to Upload file：{}", cover);
+        LOG.info("FileName：{}", cover.getOriginalFilename());
+        LOG.info("Size：{}", cover.getSize());
         // Save to local
-        LOG.info(baseURL);
-        String fileName = cover.getOriginalFilename();
+        //Ensure the uniqueness of image name
+        String fileName = snowflake.nextId() + cover.getOriginalFilename() ;
         String fullPath = baseURL + fileName;
         File dest = new File(fullPath);
         cover.transferTo(dest);
-        LOG.info(dest.getAbsolutePath());
+        LOG.info("Successfully save file to local!");
         // Save to database
-        ebookService.UploadCover(dest.getAbsolutePath(), id);
-        return new CommonResp();
+        ebookService.UploadCover("/cover/" + fileName, id);
+        return new CommonResp<>();
     }
 }
