@@ -78,7 +78,10 @@
             </a-col>
             <a-col :span="14">
               <a-form-item>
-                <div id="content"></div>
+                <QuillEditor
+                    v-model= "text"
+                    :options="editoroption"
+                />
               </a-form-item>
             </a-col>
           </a-row>
@@ -96,12 +99,17 @@ import axios from 'axios';
 import { message } from 'ant-design-vue';
 import {Tool} from "@/util/tools";
 import {useRoute} from "vue-router";
-import E from 'wangeditor'
 import store from "@/store";
+import {QuillEditor} from "@vueup/vue-quill";
+import '@vueup/vue-quill/dist/vue-quill.snow.css';
 
+declare let katex: any
 
 export default defineComponent({
   name: 'AdminDoc',
+  components:{
+    QuillEditor
+  },
   setup() {
     /**
      * First Get route information
@@ -140,16 +148,28 @@ export default defineComponent({
         slots: { customRender: 'action' }
       }
     ];
+
     //Category Tree Strucutre
     const level1=ref();
     level1.value=[];
 
-    /**
-     * Rich text Edit
-     */
-    const editor = new E('#content');
-
-
+    //Quill-Vue Editor settings
+    const editoroption = {
+      palceholder: "请输入",
+      modules: {
+        formula: true,
+        toolbar: {
+          container: [
+            [{ 'header': [] }],
+            [{ 'font': [] }],
+            ['formula'],
+            ['bold', 'italic', 'underline', 'strike'],
+            [{'align': []}],
+            [{'color': []}]
+          ]
+        }
+      }
+    }
 
     /**
      * 数据查询
@@ -171,12 +191,12 @@ export default defineComponent({
       });
     };
 
-
-
-
     /**
      * update确认框 and Form
      **/
+    const text = ref();
+    text.value = '';
+
     const treeSelect= ref();
     treeSelect.value={};
     const docform = ref ();
@@ -185,7 +205,7 @@ export default defineComponent({
     const modalLoading = ref(false);
     const handleModalOk = () => {
       modalLoading.value = true;
-      docform.value.content=editor.txt.html();
+      docform.value.content=text.value;
       axios.post("/doc/save",docform.value).then(function (response){
         modalLoading.value=false;
         const data=response.data;
@@ -208,7 +228,7 @@ export default defineComponent({
       axios.get("/doc/content/"+id).then((response)=>{
         const data=response.data;
         if (data.success){
-          editor.txt.html(data.content);
+          text.value = data.content;
         }else{
           message.error(data.message);
         }
@@ -220,17 +240,12 @@ export default defineComponent({
      */
     const edit = (record: any) => {
       modalVisible.value = true;
-      editor.txt.html("");
       docform.value=Tool.copy(record);
       treeSelect.value=Tool.copy(level1.value);
       Tool.setDisable(treeSelect.value,record.id);
       treeSelect.value.unshift({id:0,name:"None"});
       //rich text editor show
       handleContent(docform.value.id);
-      setTimeout(()=>{
-        editor.create();
-      },1000);
-
     };
 
     /**
@@ -249,16 +264,6 @@ export default defineComponent({
       }else{
         treeSelect.value.unshift({id:0,name:"None"})
       }
-
-      /**
-       * Online Rich Text editor Rendering class content
-       * Note the scripts within the function may run asynchronously
-       * So The content tag may not show on the screen when the function begins,
-       * Setting a timeout solves this issue.
-       */
-      setTimeout(()=>{
-        editor.create();
-      },1000);
     }
 
     let IDlist:Array<bigint>=[];
@@ -283,8 +288,6 @@ export default defineComponent({
     const drawerVisible = ref(false);
     const previewHtml = ref();
     const handlePreviewContent = () => {
-      const html = editor.txt.html();
-      previewHtml.value = html;
       drawerVisible.value = true;
     };
     const onDrawerClose = () => {
@@ -319,9 +322,10 @@ export default defineComponent({
       handlePreviewContent,
       onDrawerClose,
       drawerVisible,
-      previewHtml
+      previewHtml,
 
-
+      text,
+      editoroption
     }
   }
 });
