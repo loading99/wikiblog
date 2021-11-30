@@ -79,8 +79,9 @@
             <a-col :span="14">
               <a-form-item>
                 <QuillEditor
-                    v-model= "text"
+                    ref="editor"
                     :options="editoroption"
+                    contentType="html"
                 />
               </a-form-item>
             </a-col>
@@ -194,9 +195,7 @@ export default defineComponent({
     /**
      * update确认框 and Form
      **/
-    const text = ref();
-    text.value = '';
-
+    const editor = ref();
     const treeSelect= ref();
     treeSelect.value={};
     const docform = ref ();
@@ -205,7 +204,7 @@ export default defineComponent({
     const modalLoading = ref(false);
     const handleModalOk = () => {
       modalLoading.value = true;
-      docform.value.content=text.value;
+      docform.value.content=editor.value.getHTML();
       axios.post("/doc/save",docform.value).then(function (response){
         modalLoading.value=false;
         const data=response.data;
@@ -228,7 +227,7 @@ export default defineComponent({
       axios.get("/doc/content/"+id).then((response)=>{
         const data=response.data;
         if (data.success){
-          text.value = data.content;
+          editor.value.setHTML(data.content);
         }else{
           message.error(data.message);
         }
@@ -324,8 +323,8 @@ export default defineComponent({
       drawerVisible,
       previewHtml,
 
-      text,
-      editoroption
+      editoroption,
+      editor
     }
   }
 });
