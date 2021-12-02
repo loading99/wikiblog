@@ -341,4 +341,7 @@ export default defineComponent({
   flex: 0 0 100%;
   max-width: 100%;
 }
+/deep/.ant-form-item-control{
+  line-height: 20px;
+}
 </style>
