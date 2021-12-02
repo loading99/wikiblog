@@ -77,7 +77,7 @@
               </a-form-item>
             </a-col>
             <a-col :span="14">
-              <a-form-item>
+              <a-form-item class="custom-col">
                 <QuillEditor
                     ref="editor"
                     :options="editoroption"
@@ -103,6 +103,7 @@ import {useRoute} from "vue-router";
 import store from "@/store";
 import {QuillEditor} from "@vueup/vue-quill";
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
+
 
 declare let katex: any
 
@@ -161,12 +162,12 @@ export default defineComponent({
         formula: true,
         toolbar: {
           container: [
-            [{ 'header': [] }],
-            [{ 'font': [] }],
-            ['formula'],
-            ['bold', 'italic', 'underline', 'strike'],
-            [{'align': []}],
-            [{'color': []}]
+            [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+            ['bold', 'italic', 'underline'],
+            [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'align': [] }],
+            ['blockquote', 'code-block', 'link'],
+            [{ 'color': [] }, 'clean'],
+            ['formula']
           ]
         }
       }
@@ -334,5 +335,10 @@ export default defineComponent({
 <style lang='less' scoped>
 .a-layout{
   font-size: @font-size-base;
+}
+.custom-col /deep/.ant-col.ant-col-18.ant-form-item-control-wrapper{
+  display: block;
+  flex: 0 0 100%;
+  max-width: 100%;
 }
 </style>

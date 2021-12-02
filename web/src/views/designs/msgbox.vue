@@ -1032,7 +1032,7 @@ export default defineComponent({
 </script>
 
 
-<style>
+<style scoped>
 
 /*圆圈扩散动画*/
 .wave{

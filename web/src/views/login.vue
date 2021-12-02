@@ -722,6 +722,6 @@ export default defineComponent({
 <style src="../assets/css/logform.css" scoped>
 </style>
 
-<style>
+<style scoped>
 @import "../assets/css/login.css";
 </style>

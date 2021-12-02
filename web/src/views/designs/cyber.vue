@@ -69,7 +69,7 @@ export default defineComponent({
 </script>
 
 
-<style>
+<style scoped>
 
 @import "../../assets/css/cyberloading.scss";
 </style>
