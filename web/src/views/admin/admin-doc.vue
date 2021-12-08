@@ -164,6 +164,8 @@ export default defineComponent({
           container: [
             [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
             ['bold', 'italic', 'underline'],
+            [{'font':[]}],
+            [{'size':[]}],
             [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'align': [] }],
             ['blockquote', 'code-block', 'link'],
             [{ 'color': [] }, 'clean'],
