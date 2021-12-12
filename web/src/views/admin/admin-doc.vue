@@ -79,7 +79,8 @@
             <a-col :span="14">
               <a-form-item class="custom-col">
                 <ckeditor
-                    content="editorData"
+                    :content="txt"
+                    @sendContent = 'updateContent'
                 />
               </a-form-item>
             </a-col>
@@ -209,10 +210,12 @@ export default defineComponent({
      * @param id
      */
     const handleContent=(id:bigint)=>{
+      console.log("---start to retrive data-----");
       axios.get("/doc/content/"+id).then((response)=>{
         const data=response.data;
+        console.log('value',data.content);
         if (data.success){
-          txt.value = 'this is a test';
+          txt.value = data.content;
         }else{
           message.error(data.message);
         }
@@ -278,6 +281,10 @@ export default defineComponent({
       drawerVisible.value = false;
     };
 
+    const updateContent = (val: any)=>{
+      txt.value = val;
+    }
+
     onMounted(() => {
       handleQuery();
       console.log("-------Tree 结构------", level1);
@@ -310,7 +317,9 @@ export default defineComponent({
 
       editoroption,
       editor,
-      editorData: "<p>this is a test</p>"
+      txt,
+      editorData: '<p>test</p>',
+      updateContent
     }
   }
 });

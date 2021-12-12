@@ -5,17 +5,26 @@
 </template>
 <script lang="ts">
 
-import {defineComponent, onMounted, ref} from "vue";
+import {defineComponent, onMounted, ref,toRef} from "vue";
 declare const window: any;
 export default defineComponent({
   name:'ckeditor',
   props:["content"],
-  setup(props){
-    const content = ref(props.content);
-    let ckEditor;
+  setup(props,{emit}){
+    console.log("---start child component----")
+    let ckEditor: any;
     onMounted(()=>{
       ckEditor = window.CKEDITOR.replace("editor1");
-      ckEditor.setData(content.value)
+      console.log('----start to set data-------')
+      setTimeout(()=>{
+        const t = ref(props.content);
+        console.log('props',props.content)
+        ckEditor.setData(t.value)
+      }, 1000);
+
+      ckEditor.on('change', ()=>{
+        emit('sendContent', ckEditor.getData())
+      })
     })
   }
 })
