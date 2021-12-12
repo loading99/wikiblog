@@ -78,10 +78,8 @@
             </a-col>
             <a-col :span="14">
               <a-form-item class="custom-col">
-                <QuillEditor
-                    ref="editor"
-                    :options="editoroption"
-                    contentType="html"
+                <ckeditor
+                    content="editorData"
                 />
               </a-form-item>
             </a-col>
@@ -101,16 +99,13 @@ import { message } from 'ant-design-vue';
 import {Tool} from "@/util/tools";
 import {useRoute} from "vue-router";
 import store from "@/store";
-import {QuillEditor} from "@vueup/vue-quill";
-import '@vueup/vue-quill/dist/vue-quill.snow.css';
-
-
+import ckeditor from './ckeditor4.vue';
 declare let katex: any
 
 export default defineComponent({
   name: 'AdminDoc',
   components:{
-    QuillEditor
+    ckeditor
   },
   setup() {
     /**
@@ -157,22 +152,6 @@ export default defineComponent({
 
     //Quill-Vue Editor settings
     const editoroption = {
-      palceholder: "请输入",
-      modules: {
-        formula: true,
-        toolbar: {
-          container: [
-            [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-            ['bold', 'italic', 'underline'],
-            [{'font':[]}],
-            [{'size':[]}],
-            [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'align': [] }],
-            ['blockquote', 'code-block', 'link'],
-            [{ 'color': [] }, 'clean'],
-            ['formula']
-          ]
-        }
-      }
     }
 
     /**
@@ -205,9 +184,12 @@ export default defineComponent({
     docform.value={};
     const modalVisible = ref(false);
     const modalLoading = ref(false);
+
+    const txt = ref();
+    txt.value = '';
     const handleModalOk = () => {
       modalLoading.value = true;
-      docform.value.content=editor.value.getHTML();
+      docform.value.content=txt.value;
       axios.post("/doc/save",docform.value).then(function (response){
         modalLoading.value=false;
         const data=response.data;
@@ -230,7 +212,7 @@ export default defineComponent({
       axios.get("/doc/content/"+id).then((response)=>{
         const data=response.data;
         if (data.success){
-          editor.value.setHTML(data.content);
+          txt.value = 'this is a test';
         }else{
           message.error(data.message);
         }
@@ -327,7 +309,8 @@ export default defineComponent({
       previewHtml,
 
       editoroption,
-      editor
+      editor,
+      editorData: "<p>this is a test</p>"
     }
   }
 });
