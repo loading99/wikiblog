@@ -80,6 +80,7 @@
               <a-form-item class="custom-col">
                 <ckeditor
                     :content="txt"
+                    :flag = 'dataFlag'
                     @sendContent = 'updateContent'
                 />
               </a-form-item>
@@ -94,7 +95,7 @@
 </template>
 <TheFooter></TheFooter>
 <script lang="ts">
-import { defineComponent, onMounted, ref } from 'vue';
+import { defineComponent, onMounted, ref} from 'vue';
 import axios from 'axios';
 import { message } from 'ant-design-vue';
 import {Tool} from "@/util/tools";
@@ -209,22 +210,26 @@ export default defineComponent({
      * Query Rich text from database.
      * @param id
      */
-    const handleContent=(id:bigint)=>{
-      console.log("---start to retrive data-----");
-      axios.get("/doc/content/"+id).then((response)=>{
-        const data=response.data;
-        console.log('value',data.content);
-        if (data.success){
-          txt.value = data.content;
-        }else{
-          message.error(data.message);
-        }
-      })
+    const handleContent=(id:bigint)=> { return new Promise((resolve,reject)=>{
+        console.log("---start to retrive data-----");
+        axios.get("/doc/content/" + id).then((response) => {
+          const data = response.data;
+          if (data.success) {
+            txt.value = data.content;
+            resolve("success")
+          } else {
+            message.error(data.message);
+            reject("error")
+          }
+        })
     }
-
+    )
+    }
     /**
      * Edit
      */
+    const dataFlag = ref();
+    dataFlag.value=[];
     const edit = (record: any) => {
       modalVisible.value = true;
       docform.value=Tool.copy(record);
@@ -232,7 +237,7 @@ export default defineComponent({
       Tool.setDisable(treeSelect.value,record.id);
       treeSelect.value.unshift({id:0,name:"None"});
       //rich text editor show
-      handleContent(docform.value.id);
+      dataFlag.value.push(handleContent(docform.value.id));
     };
 
     /**
@@ -314,12 +319,13 @@ export default defineComponent({
       onDrawerClose,
       drawerVisible,
       previewHtml,
+      handleContent,
 
       editoroption,
       editor,
       txt,
-      editorData: '<p>test</p>',
-      updateContent
+      updateContent,
+      dataFlag
     }
   }
 });

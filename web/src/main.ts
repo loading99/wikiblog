@@ -17,7 +17,6 @@ axios.defaults.baseURL=process.env.VUE_APP_SERVER;
  */
 axios.interceptors.request.use(function (config) {
     console.log('Request Parameters：', config);
-    console.log("Version", 2);
     const token=store.state.userstatus.token;
     if(Tool.isNotEmpty(token)){
         config.headers.token=token;
