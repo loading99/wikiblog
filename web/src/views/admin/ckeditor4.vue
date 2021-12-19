@@ -4,7 +4,7 @@
 </template>
 <script lang="ts">
 
-import {defineComponent, onMounted, ref,} from "vue";
+import {defineComponent, onMounted, onUpdated, ref,} from "vue";
 declare const window: any;
 export default defineComponent({
   name:'ckeditor',
@@ -25,6 +25,16 @@ export default defineComponent({
       ckEditor.on('change', ()=>{
         emit('sendContent', ckEditor.getData())
       })
+    })
+
+    onUpdated(()=>{
+      const fun = async ()=>{
+        await props.flag[0];
+        const t = ref(props.content);
+        console.log('----start to set data-------')
+        ckEditor.setData(t.value)
+      }
+      fun();
     })
   }
 })
