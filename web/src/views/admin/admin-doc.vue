@@ -152,9 +152,6 @@ export default defineComponent({
     const level1=ref();
     level1.value=[];
 
-    //Quill-Vue Editor settings
-    const editoroption = {
-    }
 
     /**
      * 数据查询
@@ -179,7 +176,6 @@ export default defineComponent({
     /**
      * update确认框 and Form
      **/
-    const editor = ref();
     const treeSelect= ref();
     treeSelect.value={};
     const docform = ref ();
@@ -231,6 +227,7 @@ export default defineComponent({
     const dataFlag = ref();
     dataFlag.value=[];
     const edit = (record: any) => {
+      dataFlag.value = []
       modalVisible.value = true;
       docform.value=Tool.copy(record);
       treeSelect.value=Tool.copy(level1.value);
@@ -321,8 +318,6 @@ export default defineComponent({
       previewHtml,
       handleContent,
 
-      editoroption,
-      editor,
       txt,
       updateContent,
       dataFlag

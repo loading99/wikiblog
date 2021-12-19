@@ -1,12 +1,10 @@
 <template>
   <textarea id = 'editor1' name="editor1">
-
   </textarea>
 </template>
 <script lang="ts">
 
-import {defineComponent, onMounted, reactive, ref,} from "vue";
-import {message} from "ant-design-vue";
+import {defineComponent, onMounted, ref,} from "vue";
 declare const window: any;
 export default defineComponent({
   name:'ckeditor',
@@ -26,7 +24,6 @@ export default defineComponent({
       fun();
       ckEditor.on('change', ()=>{
         emit('sendContent', ckEditor.getData())
-
       })
     })
   }
