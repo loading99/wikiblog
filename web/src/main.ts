@@ -16,7 +16,6 @@ axios.defaults.baseURL=process.env.VUE_APP_SERVER;
  * axios拦截器
  */
 axios.interceptors.request.use(function (config) {
-    console.log('Request Parameters：', config);
     const token=store.state.userstatus.token;
     if(Tool.isNotEmpty(token)){
         config.headers.token=token;
@@ -53,4 +52,3 @@ for (const i in icons){
 }
 
 console.log('Env: ',process.env.NODE_ENV)
-console.log('Server: ',process.env.VUE_APP_SERVER)

@@ -119,7 +119,6 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   // 要不要对meta.loginRequired属性做监控拦截
   if (to.matched.some(function (item) {
-    console.log(item, "是否需要登录校验：", item.meta.loginRequired);
     return item.meta.loginRequired
   })) {
     const loginUser = store.state.userstatus;
@@ -127,7 +126,6 @@ router.beforeEach((to, from, next) => {
       notification['error']({
         message:i18n.global.t('message.loginRequired'),
       })
-      console.log("用户未登录!");
       next('/login');
     } else {
       next();

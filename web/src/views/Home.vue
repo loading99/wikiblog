@@ -316,7 +316,6 @@ export default defineComponent({
      * check if menu item is showed
      */
     const route=useRoute();
-    console.log("----Curent----",route.path)
     store.commit("setPage",route.path);
 
     /**
@@ -341,12 +340,6 @@ export default defineComponent({
       },
       pageSize: 8,
     };
-    // const actions: Record<string, string>[] = [
-    //   { type: 'StarOutlined', text: '156' },
-    //   { type: 'LikeOutlined', text: '156' },
-    //   { type: 'MessageOutlined', text: '2' },
-    // ];
-
     /**
      * Query Ebook Data
      * Put Behind the handleCategoryQuery to avoid async error
@@ -389,12 +382,10 @@ export default defineComponent({
     };
 
     const onClick=()=>{
-      console.log("-------欢迎页面进入书籍分类页面--------")
       showWelcome.value=false;
     }
 
     const handleClick=(value:any)=>{
-      console.log("-----Handleclick 参数-----",value);
       axios.get("/ebook/search", {
 
         params:{

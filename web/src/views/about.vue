@@ -161,7 +161,6 @@ export default defineComponent({
       axios.post('/stats/add',{
         web: "about"
       });
-      console.log("---send visit info-----");
     }
     onMounted(()=>{
       visit();

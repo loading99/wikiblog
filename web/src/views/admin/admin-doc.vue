@@ -81,7 +81,8 @@
                 <ckeditor
                     :content="txt"
                     :flag = 'dataFlag'
-                    @sendContent = 'updateContent'
+                    :save="save"
+                    @sendContent = "updateContent"
                 />
               </a-form-item>
             </a-col>
@@ -95,7 +96,7 @@
 </template>
 <TheFooter></TheFooter>
 <script lang="ts">
-import { defineComponent, onMounted, ref} from 'vue';
+import {defineComponent, nextTick, onMounted, ref} from 'vue';
 import axios from 'axios';
 import { message } from 'ant-design-vue';
 import {Tool} from "@/util/tools";
@@ -173,6 +174,8 @@ export default defineComponent({
       });
     };
 
+
+
     /**
      * update确认框 and Form
      **/
@@ -185,8 +188,17 @@ export default defineComponent({
 
     const txt = ref();
     txt.value = '';
-    const handleModalOk = () => {
+
+    const save = ref();
+    save.value = false;
+
+    const handleModalOk = async () => {
+      save.value = true;
+      console.log("save",save.value)
       modalLoading.value = true;
+      console.log("waiting For changes")
+      await nextTick();
+      console.log("执行赋值操作")
       docform.value.content=txt.value;
       axios.post("/doc/save",docform.value).then(function (response){
         modalLoading.value=false;
@@ -207,7 +219,6 @@ export default defineComponent({
      * @param id
      */
     const handleContent=(id:bigint)=> { return new Promise((resolve,reject)=>{
-        console.log("---start to retrive data-----");
         axios.get("/doc/content/" + id).then((response) => {
           const data = response.data;
           if (data.success) {
@@ -227,6 +238,7 @@ export default defineComponent({
     const dataFlag = ref();
     dataFlag.value=[];
     const edit = (record: any) => {
+      save.value= false
       dataFlag.value = []
       modalVisible.value = true;
       docform.value=Tool.copy(record);
@@ -249,7 +261,6 @@ export default defineComponent({
       treeSelect.value=Tool.copy(level1.value);
       if(Tool.isEmpty(treeSelect.value)){
         treeSelect.value=[{id:0,name:"None"}]
-        console.log("-----Manully add options if treeselect is empty-------")
       }else{
         treeSelect.value.unshift({id:0,name:"None"})
       }
@@ -258,7 +269,6 @@ export default defineComponent({
     let IDlist:Array<bigint>=[];
     const handleDelete = (id:bigint) => {
       Tool.deleteIDs(level1.value,id,IDlist);
-      console.log("-----IDs to be deleted------",IDlist);
       if(Tool.isEmpty(IDlist)){
         message.error("Deleting Empty records")
       }else{
@@ -283,13 +293,15 @@ export default defineComponent({
       drawerVisible.value = false;
     };
 
+
     const updateContent = (val: any)=>{
-      txt.value = val;
+        txt.value = val;
+        console.log("update!", val)
     }
+
 
     onMounted(() => {
       handleQuery();
-      console.log("-------Tree 结构------", level1);
     });
 
     return {
@@ -320,7 +332,10 @@ export default defineComponent({
 
       txt,
       updateContent,
-      dataFlag
+      dataFlag,
+
+
+      save
     }
   }
 });

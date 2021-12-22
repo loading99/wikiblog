@@ -689,7 +689,6 @@ export default defineComponent({
     const param=ref();
     param.value={};
     const handleLogin=()=>{
-      console.log("----Start to log in----")
       param.value.password=hexMd5(param.value.password+KEY);
       axios.post('user/login',{
         account:param.value.acc,
@@ -702,7 +701,6 @@ export default defineComponent({
           notification['success']({
             message:i18n.global.t('message.loginSuccess')
           })
-          console.log("----Set global value by vuex----");
           store.commit("setUser",data.content);
         }else{
           message.error(data.message);

@@ -4,37 +4,33 @@
 </template>
 <script lang="ts">
 
-import {defineComponent, onMounted, onUpdated, ref,} from "vue";
+import {defineComponent, onMounted, onUpdated, ref, watch} from "vue";
 declare const window: any;
 export default defineComponent({
   name:'ckeditor',
-  props:["content", 'flag'],
+  props:["content", 'flag','save'],
+  emits:["sendContent"],
   setup(props,{emit}){
-    console.log("---start child component----")
     let ckEditor: any;
     onMounted(()=>{
       console.log(props.flag)
       ckEditor = window.CKEDITOR.replace("editor1");
-      const fun = async ()=>{
-        const res = await props.flag[0];
-        const t = ref(props.content);
-        console.log('----start to set data-------')
-        ckEditor.setData(t.value)
-      }
-      fun();
-      ckEditor.on('change', ()=>{
-        emit('sendContent', ckEditor.getData())
-      })
     })
-
     onUpdated(()=>{
-      const fun = async ()=>{
+      const fun = async ()=> {
+        console.log("执行setData！")
         await props.flag[0];
         const t = ref(props.content);
-        console.log('----start to set data-------')
         ckEditor.setData(t.value)
       }
       fun();
+      console.log("take a look",props.save)
+      const s = ref(props.save);
+
+      if(s.value){
+        console.log("emit!")
+        emit("sendContent",ckEditor.getData())
+      }
     })
   }
 })
