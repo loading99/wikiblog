@@ -18,17 +18,14 @@ export default defineComponent({
     })
     onUpdated(()=>{
       const fun = async ()=> {
-        console.log("执行setData！")
         await props.flag[0];
         const t = ref(props.content);
         ckEditor.setData(t.value)
       }
       fun();
-      console.log("take a look",props.save)
       const s = ref(props.save);
 
       if(s.value){
-        console.log("emit!")
         emit("sendContent",ckEditor.getData())
       }
     })

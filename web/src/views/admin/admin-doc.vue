@@ -70,11 +70,6 @@
               <a-form-item :label="$t('form.order')">
                 <a-input v-model:value="docform.sort" type="textarea"/>
               </a-form-item>
-              <a-form-item>
-                <a-button type="primary" @click="handlePreviewContent()">
-                  <EyeOutlined /> {{ $t('preview') }}
-                </a-button>
-              </a-form-item>
             </a-col>
             <a-col :span="14">
               <a-form-item class="custom-col">
@@ -90,9 +85,6 @@
         </a-form>
   </a-modal>
 
-  <a-drawer width="1000" placement="right" :closable="false" :visible="drawerVisible" @close="onDrawerClose">
-    <div class="wangeditor" :innerHTML="previewHtml"></div>
-  </a-drawer>
 </template>
 <TheFooter></TheFooter>
 <script lang="ts">
@@ -194,11 +186,8 @@ export default defineComponent({
 
     const handleModalOk = async () => {
       save.value = true;
-      console.log("save",save.value)
       modalLoading.value = true;
-      console.log("waiting For changes")
       await nextTick();
-      console.log("执行赋值操作")
       docform.value.content=txt.value;
       axios.post("/doc/save",docform.value).then(function (response){
         modalLoading.value=false;
@@ -283,20 +272,8 @@ export default defineComponent({
       }
     };
 
-    // ----------------富文本预览--------------
-    const drawerVisible = ref(false);
-    const previewHtml = ref();
-    const handlePreviewContent = () => {
-      drawerVisible.value = true;
-    };
-    const onDrawerClose = () => {
-      drawerVisible.value = false;
-    };
-
-
     const updateContent = (val: any)=>{
         txt.value = val;
-        console.log("update!", val)
     }
 
 
@@ -323,18 +300,11 @@ export default defineComponent({
 
       treeSelect,
 
-      //Preview
-      handlePreviewContent,
-      onDrawerClose,
-      drawerVisible,
-      previewHtml,
       handleContent,
 
       txt,
       updateContent,
       dataFlag,
-
-
       save
     }
   }
